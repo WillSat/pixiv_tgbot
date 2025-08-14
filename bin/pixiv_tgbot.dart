@@ -1,159 +1,176 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:path/path.dart' as p;
 
 import 'utils.dart';
-import 'lib/getranking.dart' as getRanking;
-import 'lib/getpages.dart' as getPages;
+import 'lib/fetch_ranking.dart';
+import 'lib/fetch_ugoira_ranking.dart';
+import 'lib/get_ugoira_ranking_mp4.dart';
 import 'lib/tgbot.dart' as tgbot;
 
 final proxy = File('in/imgProxy.key').readAsStringSync();
-const uploadDelay = Duration(seconds: 15);
-const punishDelay = Duration(seconds: 30);
+const aDelay = Duration(seconds: 8);
+const bDelay = Duration(seconds: 25);
+const cDelay = Duration(seconds: 4);
 final d = Dio();
 
-class RankingElement {
-  RankingElement({
-    required this.name,
-    required this.author,
-    required this.pageCount,
-    required this.illustId,
-  });
+void main() async {
+  // ranking
+  final (String, List<RankingElement>)? r1 = await fetchRanking(d);
+  if (r1 != null) {
+    await startUploadingRanking(r1.$1, r1.$2);
+  } else {
+    wrn('Failed to fetch ranking!');
+  }
 
-  final String name, author;
-  final int illustId, pageCount;
-  List<String> originalPageUriList = [],
-      regulurPageUriList = [],
-      smallPageUriList = [],
-      miniPageUriList = [];
-  bool gotPagesUri = false;
+  // ugoira ranking
+  final (String, List<UgoiraRankingElement>)? r2 = await fetchUgoiraRanking(d);
+  if (r2 != null) {
+    // final eleList = r2.$2.sublist(0, 2);
+    final eleList = r2.$2;
+    final List<String?> paths = [];
+    for (final ure in eleList) {
+      paths.add(await downloadUgoiraAsMp4(ure.illustId.toString()));
+    }
 
-  Future<bool> getPagesUri(Dio d) async {
-    final r = await getPages.getPages(d, illustId);
-    if (r == null) return false;
-    originalPageUriList = (r['body'] as List)
-        .map((m) => m['urls']['original'])
-        .whereType<String>()
-        .toList();
+    await startUploadingUgoiraRanking(r2.$1, eleList, paths);
 
-    regulurPageUriList = (r['body'] as List)
-        .map((m) => m['urls']['regular'])
-        .whereType<String>()
-        .toList();
-
-    smallPageUriList = (r['body'] as List)
-        .map((m) => m['urls']['small'])
-        .whereType<String>()
-        .toList();
-
-    miniPageUriList = (r['body'] as List)
-        .map((m) => m['urls']['thumb_mini'])
-        .whereType<String>()
-        .toList();
-
-    return pageCount == originalPageUriList.length;
+    cleanupTmpDirs();
+  } else {
+    wrn('Failed to fetch ugoira ranking!');
   }
 }
 
-void main() async {
-  final rankingMap = await getRanking.getRanking(d);
+Future<void> startUploadingRanking(
+  String date,
+  List<RankingElement> eles,
+) async {
+  await tgbot.sendTextMessage('综合排行榜日期：$date');
 
-  final List? eleList = rankingMap?['contents'];
-  final String rankingDate = rankingMap!['date'];
-  if (eleList == null || eleList.isEmpty) {
-    wrn('Get ranking failed: empty ranking list!');
-    return;
-  }
-
-  final List<RankingElement> objList = eleList
-      .map(
-        (e) => RankingElement(
-          name: e['title'],
-          author: e['user_name'],
-          pageCount: int.parse(e['illust_page_count']),
-          illustId: e['illust_id'],
-        ),
-      )
-      .toList();
-
-  await tgbot.sendTextMessage('排行榜日期：$rankingDate');
-
-  /// proxy url update [√]
-  //
-  for (int i = 0; i < objList.length; i++) {
-    final obj = objList[i];
+  // proxy url update
+  for (int i = 0; i < eles.length; i++) {
+    final obj = eles[i];
     await obj.getPagesUri(d);
 
-    int resCode = 0;
     // [original: 0, regular: 1, small: 2, thumb_mini: 3]
     int size = 0;
+    int resCode = 0;
+
+    final mdCaption =
+        '\\#综合 \\#NO${i + 1}\n'
+        '**${escapeMarkdownV2(obj.title)}**\n'
+        '\\#${escapeMarkdownV2(obj.author)}\n'
+        '> ${obj.tags.map(escapeMarkdownV2).join(' ')}\n'
+        '[PIXIV 链接](https://www.pixiv.net/artworks/${obj.illustId})';
 
     while (resCode != 1) {
-      resCode = await tgbot.sendPhotoUrls(
+      resCode = await tgbot.sendPhotoViaUrls(
         obj.originalPageUriList.map((uri) => proxy + uri).toList(),
-        caption:
-            '（原图显示）\n$rankingDate #No${i + 1}\n\n> ${obj.name}\n> #${obj.author}\n> ${obj.illustId}\nhttps://www.pixiv.net/artworks/${obj.illustId}',
+        caption: mdCaption,
       );
 
+      // Punishment
+      if (resCode != 1) sleep(bDelay);
+
       // Handle errors
-      if (resCode == 429) {
-        // Delay punishment
-        sleep(punishDelay);
-      } else if (resCode == 400) {
-        if (size == 0) {
+      if (resCode == 400) {
+        if (size < 3) {
+          // original: try again
+          resCode = await tgbot.sendPhotoViaUrls(
+            obj.regularPageUriList.map((uri) => proxy + uri).toList(),
+            caption: mdCaption,
+          );
+        } else if (size < 5) {
           // regular
-          size = 1;
-          resCode = await tgbot.sendPhotoUrls(
-            obj.regulurPageUriList.map((uri) => proxy + uri).toList(),
-            caption:
-                '（因图片过大，有压缩）\n$rankingDate #No${i + 1}\n\n> ${obj.name}\n> #${obj.author}\n> ${obj.illustId}\nhttps://www.pixiv.net/artworks/${obj.illustId}',
+          resCode = await tgbot.sendPhotoViaUrls(
+            obj.regularPageUriList.map((uri) => proxy + uri).toList(),
+            caption: mdCaption,
           );
-        } else if (size == 1) {
+        } else if (size < 6) {
           // small
-          size = 2;
-          resCode = await tgbot.sendPhotoUrls(
+          resCode = await tgbot.sendPhotoViaUrls(
             obj.smallPageUriList.map((uri) => proxy + uri).toList(),
-            caption:
-                '（因图片过大，有较大压缩）\n$rankingDate #No${i + 1}\n\n> ${obj.name}\n> #${obj.author}\n> ${obj.illustId}\nhttps://www.pixiv.net/artworks/${obj.illustId}',
+            caption: mdCaption,
           );
-        } else if (size == 2) {
+        } else if (size < 7) {
           // thumb_mini
-          size = 3;
-          resCode = await tgbot.sendPhotoUrls(
+          resCode = await tgbot.sendPhotoViaUrls(
             obj.miniPageUriList.map((uri) => proxy + uri).toList(),
-            caption:
-                '（因图片过大，显示缩略图）\n$rankingDate #No${i + 1}\n\n> ${obj.name}\n> #${obj.author}\n> ${obj.illustId}\nhttps://www.pixiv.net/artworks/${obj.illustId}',
+            caption: '（因图片过大，显示缩略图）\n$mdCaption',
           );
         } else {
-          // Image too too big
-          await tgbot.sendTextMessage(
-            '（图片无法上传）\n$rankingDate #No${i + 1}\n\n> ${obj.name}\n> #${obj.author}\n> ${obj.illustId}\nhttps://www.pixiv.net/artworks/${obj.illustId}',
-          );
+          // Image too much big
+          await tgbot.sendTextMessage('（此图片无法上传）\n$mdCaption');
           break;
+        }
+        size++;
+      }
+    }
+
+    sleep(aDelay);
+  }
+
+  log('Ranking Done.');
+}
+
+Future<void> startUploadingUgoiraRanking(
+  String date,
+  List<UgoiraRankingElement> eles,
+  List<String?> paths,
+) async {
+  await tgbot.sendTextMessage('动图排行榜日期：$date');
+
+  // proxy url update
+  for (int i = 0; i < eles.length; i++) {
+    final obj = eles[i];
+    final path = paths[i];
+
+    final mdCaption =
+        '\\#动图 \\#NO${i + 1}\n'
+        '**${escapeMarkdownV2(obj.title)}**\n'
+        '\\#${escapeMarkdownV2(obj.author)}\n'
+        '> ${obj.tags.map(escapeMarkdownV2).join(' ')}\n'
+        '[PIXIV 链接](https://www.pixiv.net/artworks/${obj.illustId})';
+
+    if (path == null || File(path).existsSync()) {
+      // has no mp4
+      await tgbot.sendTextMessage('（此动图无法上传）\n$mdCaption');
+    } else {
+      int tried = 0;
+      int resCode = 0;
+      while (resCode != 1) {
+        resCode = await tgbot.sendVideo(path, caption: mdCaption);
+
+        // Punishment
+        if (resCode != 1) sleep(bDelay);
+
+        // Handle errors
+        if (resCode == 400) {
+          if (tried > 2) {
+            await tgbot.sendTextMessage('（动图无法上传）\n$mdCaption');
+            break;
+          }
+          tried++;
         }
       }
     }
 
-    sleep(uploadDelay);
+    sleep(cDelay);
   }
 
-  log('Done.');
+  log('Ugoira Ranking Done.');
+}
 
-  /// download -> upload [X]
-  //
-  // for (var obj in objList) {
-  //   await obj.getPagesUri(d);
-
-  //   // downloadImages
-  //   final pathList = await downloadImages(
-  //     obj.pageUriList,
-  //     obj.illustId.toString(),
-  //   );
-
-  //   await tgbot.sendLocalPhotos(
-  //     pathList,
-  //     caption: '${obj.name}-${obj.author}-${obj.illustId}',
-  //   );
-  //   sleep(uploadDelay);
-  // }
+void cleanupTmpDirs() {
+  for (var entity in Directory.current.listSync()) {
+    if (entity is Directory && p.basename(entity.path).startsWith('temp_')) {
+      try {
+        entity.deleteSync(recursive: true);
+        log('Temp dir deleted: ${entity.path}');
+      } catch (e) {
+        wrn('Failed to delete old temp dir: ${entity.path}\n$e');
+      }
+    }
+  }
 }
