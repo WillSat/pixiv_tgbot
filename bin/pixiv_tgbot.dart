@@ -133,7 +133,7 @@ Future<void> startUploadingUgoiraRanking(
         '> ${obj.tags.map(escapeMarkdownV2).join(' ')}\n'
         '[PIXIV 链接](https://www.pixiv.net/artworks/${obj.illustId})';
 
-    if (path == null || File(path).existsSync()) {
+    if (path == null || !File(path).existsSync()) {
       // has no mp4
       await tgbot.sendTextMessage('（此动图无法上传）\n$mdCaption');
     } else {
