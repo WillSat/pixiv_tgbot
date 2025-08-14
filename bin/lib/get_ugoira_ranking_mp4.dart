@@ -18,6 +18,11 @@ final dio = Dio(
   ),
 );
 
+/// 下载指定 Pixiv ugoira 并合成为 MP4 文件
+///
+/// [pid] Pixiv 插画 ID
+///
+/// 返回：生成的 MP4 文件路径（绝对路径），失败时返回 null
 Future<String?> downloadUgoiraAsMp4(String pid) async {
   try {
     // 1. 获取动图元数据

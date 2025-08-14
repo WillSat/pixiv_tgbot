@@ -10,8 +10,6 @@ final chatID = File('in/chatID.key').readAsStringSync();
 
 final dio = Dio();
 
-int finishedMsgCount = 0;
-
 // Future<void> sendTextMessage(dynamic text)
 Future<void> sendTextMessage(text) async {
   try {
@@ -33,57 +31,42 @@ Future<void> sendTextMessage(text) async {
 
 /// [urls] 图片链接（网络）
 Future<int> sendPhotoViaUrls(List<String> urls, {String? caption}) async {
-  const int maxBatchSize = 10;
+  List<Map<String, dynamic>> media = [];
 
-  for (
-    int start = finishedMsgCount * maxBatchSize;
-    start < urls.length;
-    start += maxBatchSize
-  ) {
-    if (start > 0) sleep(Duration(seconds: 8));
+  for (int i = 0; i < urls.length; i++) {
+    media.add({
+      'type': 'photo',
+      'media': urls[i],
+      if (caption != null && i == 0) "caption": caption,
+      if (caption != null && i == 0) "parse_mode": "MarkdownV2",
+    });
+  }
 
-    final end = (start + maxBatchSize) > urls.length
-        ? urls.length
-        : (start + maxBatchSize);
+  final formMap = {'chat_id': chatID, 'media': jsonEncode(media)};
 
-    final batch = urls.sublist(start, end);
+  final url = 'https://api.telegram.org/bot$botToken/sendMediaGroup';
 
-    List<Map<String, dynamic>> media = [];
+  try {
+    final response = await dio.post(url, data: formMap);
 
-    for (int i = 0; i < batch.length; i++) {
-      media.add({
-        'type': 'photo',
-        'media': batch[i],
-        if (caption != null && i == 0) "caption": caption,
-        if (caption != null && i == 0) "parse_mode": "MarkdownV2",
-      });
-    }
-
-    final formMap = {'chat_id': chatID, 'media': jsonEncode(media)};
-
-    final url = 'https://api.telegram.org/bot$botToken/sendMediaGroup';
-
-    try {
-      final response = await dio.post(url, data: formMap);
-
-      if (response.statusCode != 200) {
-        wrn(
-          'Failed to send photos batch [${response.statusCode}:${response.statusMessage}]: ${response.data}',
-        );
-        return 0;
-      } else {
-        log('Batch sent successfully: photos ${start + 1} to $end');
-        finishedMsgCount++;
-      }
-    } catch (e) {
+    if (response.statusCode != 200) {
       wrn(
-        'Failed to send photos batch: ${(e as DioException).response?.statusCode}',
+        'Failed to send photos batch [${response.statusCode}:${response.statusMessage}]: ${response.data}',
       );
+      return 0;
+    } else {
+      log('${urls.length} images message sent successfully.');
+      return 1;
+    }
+  } catch (e) {
+    if (e is DioException) {
+      wrn('Failed to send photos batch: ${e.response?.statusCode}');
       return e.response?.statusCode ?? 0;
+    } else {
+      wrn('Unhandled exception: $e');
+      return 0;
     }
   }
-  finishedMsgCount = 0;
-  return 1;
 }
 
 /// 发送视频到指定 chat_id

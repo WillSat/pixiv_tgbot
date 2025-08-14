@@ -7,6 +7,7 @@ import 'utils.dart';
 import 'lib/fetch_ranking.dart';
 import 'lib/fetch_ugoira_ranking.dart';
 import 'lib/get_ugoira_ranking_mp4.dart';
+import 'lib/telegraph.dart';
 import 'lib/tgbot.dart' as tgbot;
 
 final proxy = File('in/imgProxy.key').readAsStringSync();
@@ -14,6 +15,20 @@ const aDelay = Duration(seconds: 8);
 const bDelay = Duration(seconds: 25);
 const cDelay = Duration(seconds: 4);
 final d = Dio();
+
+/// test
+// void main() async {
+// print(
+// await parseAndPublish('test123435', [
+// '${proxy}https://i.pximg.net/img-original/img/2025/08/07/00/00/43/133571574_p0.jpg',
+// '${proxy}https://i.pximg.net/img-original/img/2025/08/07/00/00/43/133571574_p1.jpg',
+// '${proxy}https://i.pximg.net/img-original/img/2025/08/07/00/00/43/133571574_p2.jpg',
+// '${proxy}https://i.pximg.net/img-original/img/2025/08/07/00/00/43/133571574_p3.jpg',
+// '${proxy}https://i.pximg.net/img-original/img/2025/08/07/00/00/43/133571574_p4.jpg',
+// '${proxy}https://i.pximg.net/img-original/img/2025/08/07/00/00/43/133571574_p5.jpg',
+// ]),
+//   );
+// }
 
 void main() async {
   // ranking
@@ -53,10 +68,6 @@ Future<void> startUploadingRanking(
     final obj = eles[i];
     await obj.getPagesUri(d);
 
-    // [original: 0, regular: 1, small: 2, thumb_mini: 3]
-    int size = 0;
-    int resCode = 0;
-
     final mdCaption =
         '\\#综合 \\#NO${i + 1}\n'
         '**${escapeMarkdownV2(obj.title)}**\n'
@@ -64,47 +75,73 @@ Future<void> startUploadingRanking(
         '> ${obj.tags.map(escapeMarkdownV2).join(' ')}\n'
         '[PIXIV 链接](https://www.pixiv.net/artworks/${obj.illustId})';
 
-    while (resCode != 1) {
-      resCode = await tgbot.sendPhotoViaUrls(
-        obj.originalPageUriList.map((uri) => proxy + uri).toList(),
-        caption: mdCaption,
+    // [original: 0, regular: 1, small: 2, thumb_mini: 3]
+    int size = 0;
+    int resCode = 0;
+
+    if (obj.originalPageUriList.length > 10) {
+      // Upload to telegraph
+      final telegraphUrl = await parseAndPublishTelegraph(
+        '${obj.title} - ${obj.author}',
+        obj.originalPageUriList.map((e) => proxy + e).toList(),
       );
 
-      // Punishment
-      if (resCode != 1) sleep(bDelay);
+      if (telegraphUrl != null) {
+        final caption =
+            '\\#综合 \\#长篇 \\#NO${i + 1}\n'
+            '**${escapeMarkdownV2(obj.title)}**\n'
+            '\\#${escapeMarkdownV2(obj.author)}\n'
+            '> ${obj.tags.map(escapeMarkdownV2).join(' ')}\n'
+            '**[Telegraph 链接]($telegraphUrl)**\n'
+            '[PIXIV 链接](https://www.pixiv.net/artworks/${obj.illustId})';
+        await tgbot.sendTextMessage(caption);
+      }
+    } else {
+      // Upload to telegram
+      while (resCode != 1) {
+        resCode = await tgbot.sendPhotoViaUrls(
+          obj.originalPageUriList.map((uri) => proxy + uri).toList(),
+          caption: mdCaption,
+        );
 
-      // Handle errors
-      if (resCode == 400) {
-        if (size < 3) {
-          // original: try again
-          resCode = await tgbot.sendPhotoViaUrls(
-            obj.regularPageUriList.map((uri) => proxy + uri).toList(),
-            caption: mdCaption,
-          );
-        } else if (size < 5) {
-          // regular
-          resCode = await tgbot.sendPhotoViaUrls(
-            obj.regularPageUriList.map((uri) => proxy + uri).toList(),
-            caption: mdCaption,
-          );
-        } else if (size < 6) {
-          // small
-          resCode = await tgbot.sendPhotoViaUrls(
-            obj.smallPageUriList.map((uri) => proxy + uri).toList(),
-            caption: mdCaption,
-          );
-        } else if (size < 7) {
-          // thumb_mini
-          resCode = await tgbot.sendPhotoViaUrls(
-            obj.miniPageUriList.map((uri) => proxy + uri).toList(),
-            caption: '（因图片过大，显示缩略图）\n$mdCaption',
-          );
-        } else {
-          // Image too much big
-          await tgbot.sendTextMessage('（此图片无法上传）\n$mdCaption');
-          break;
+        // Punishment
+        if (resCode != 1) sleep(bDelay);
+
+        // Handle errors
+        if (resCode == 400) {
+          if (size < 3) {
+            // original: try again
+            resCode = await tgbot.sendPhotoViaUrls(
+              obj.regularPageUriList.map((uri) => proxy + uri).toList(),
+              caption: mdCaption,
+            );
+          } else if (size < 5) {
+            // regular
+            resCode = await tgbot.sendPhotoViaUrls(
+              obj.regularPageUriList.map((uri) => proxy + uri).toList(),
+              caption: mdCaption,
+            );
+          } else if (size < 6) {
+            // Too big, upload to telegraph
+            final telegraphUrl = await parseAndPublishTelegraph(
+              '${obj.title} - ${obj.author}',
+              obj.originalPageUriList.map((uri) => proxy + uri).toList(),
+            );
+
+            if (telegraphUrl != null) {
+              final caption =
+                  '\\#综合 \\#NO${i + 1}\n'
+                  '**${escapeMarkdownV2(obj.title)}**\n'
+                  '\\#${escapeMarkdownV2(obj.author)}\n'
+                  '> ${obj.tags.map(escapeMarkdownV2).join(' ')}\n'
+                  '**[Telegraph 链接]($telegraphUrl)**\n'
+                  '[PIXIV 链接](https://www.pixiv.net/artworks/${obj.illustId})';
+              await tgbot.sendTextMessage(caption);
+              break;
+            }
+          }
+          size++;
         }
-        size++;
       }
     }
 

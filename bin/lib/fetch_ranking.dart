@@ -17,8 +17,6 @@ class RankingElement {
 
   List<String> originalPageUriList = [];
   List<String> regularPageUriList = [];
-  List<String> smallPageUriList = [];
-  List<String> miniPageUriList = [];
 
   bool gotPagesUri = false;
 
@@ -30,8 +28,6 @@ class RankingElement {
 
     originalPageUriList = _extractUrls(body, 'original');
     regularPageUriList = _extractUrls(body, 'regular');
-    smallPageUriList = _extractUrls(body, 'small');
-    miniPageUriList = _extractUrls(body, 'thumb_mini');
 
     gotPagesUri = true;
     return pageCount == originalPageUriList.length;
