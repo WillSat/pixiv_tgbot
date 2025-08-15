@@ -52,7 +52,7 @@ Future<void> handleUgoiraRanking() async {
 
   // 同时下载动图（限制并发量）
   final paths = <String?>[];
-  final concurrency = 3;
+  final concurrency = 5;
   final queue = List.of(elements);
 
   while (queue.isNotEmpty) {
@@ -89,7 +89,7 @@ Future<void> fetchTagsInParallel(
           final filtered = tags.where((t) => t != 'R-18' && t != '动图').map((t) {
             // 替换特殊字符为下划线
             final sanitized = t.replaceAll(
-              RegExp(r'[\/（）()：:\-+=,，。.·\s]'),
+              RegExp(r'[\\\/（）\(\)：\:\-+=,，。\.·・\s&#]'),
               '_',
             );
             return '#$sanitized';
@@ -253,12 +253,12 @@ String buildCaption({
     ..write('`${type}` _\\#NO${rank}_\n')
     ..write('**${escapeMarkdownV2(title)}**\n')
     ..write('\\#${escapeMarkdownV2(author)}\n')
-    ..write('> ${tags.map(escapeMarkdownV2).join(' ')}\n\n');
+    ..write('>${tags.map(escapeMarkdownV2).join(' ')}\n\n');
 
   if (telegraphUrl != null) {
-    buffer.write('> [Telegraph 链接]($telegraphUrl)\n\n');
+    buffer.write('>[Telegraph 链接]($telegraphUrl)\n\n');
   }
-  buffer.write('> [PIXIV 链接](https://www.pixiv.net/artworks/$pixivId)');
+  buffer.write('>[PIXIV 链接](https://www.pixiv.net/artworks/$pixivId)');
 
   return buffer.toString();
 }
