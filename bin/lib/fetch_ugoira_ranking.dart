@@ -2,17 +2,17 @@ import 'package:dio/dio.dart';
 import '../utils.dart';
 
 class UgoiraRankingElement {
-  final String title;
-  final String author;
-  final List<String> tags;
-  final int illustId;
-
   UgoiraRankingElement({
     required this.title,
     required this.tags,
     required this.illustId,
     required this.author,
   });
+
+  final String title;
+  final String author;
+  List<String> tags;
+  final int illustId;
 
   @override
   String toString() {

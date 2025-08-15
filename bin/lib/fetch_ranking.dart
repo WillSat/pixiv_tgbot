@@ -13,7 +13,7 @@ class RankingElement {
 
   final String title, author;
   final int illustId, pageCount;
-  final List<String> tags;
+  List<String> tags;
 
   List<String> originalPageUriList = [];
   List<String> regularPageUriList = [];
