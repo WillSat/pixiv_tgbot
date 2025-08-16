@@ -11,8 +11,8 @@ import 'lib/get_tags_translated.dart';
 import 'lib/tgbot.dart' as tgbot;
 
 const aDelay = Duration(seconds: 8);
-const bDelay = Duration(seconds: 25);
-const cDelay = Duration(seconds: 4);
+const bDelay = Duration(seconds: 30);
+const cDelay = Duration(seconds: 3);
 final proxy = File('in/imgProxy.key').readAsStringSync();
 final dio = Dio();
 
@@ -52,7 +52,7 @@ Future<void> handleUgoiraRanking() async {
 
   // 同时下载动图（限制并发量）
   final paths = <String?>[];
-  final concurrency = 5;
+  final concurrency = 3;
   final queue = List.of(elements);
 
   while (queue.isNotEmpty) {
@@ -89,7 +89,7 @@ Future<void> fetchTagsInParallel(
           final filtered = tags.where((t) => t != 'R-18' && t != '动图').map((t) {
             // 替换特殊字符为下划线
             final sanitized = t.replaceAll(
-              RegExp(r'[\\\/（）\(\)：\:\-+=,，。\.·・\s&#]'),
+              RegExp(r'''['"\\\/\(\)（）：\:×!！\-+=,，。.·・\s&#?？<>*~]'''),
               '_',
             );
             return '#$sanitized';
