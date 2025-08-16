@@ -89,7 +89,7 @@ Future<void> fetchTagsInParallel(
           final filtered = tags.where((t) => t != 'R-18' && t != '动图').map((t) {
             // 替换特殊字符为下划线
             final sanitized = t.replaceAll(
-              RegExp(r'''['"\\\/\(\)（）：\:×!！\-+=,，。.·・\s&#?？<>*~]'''),
+              RegExp(r'''['"\\\/\(\)（）：\:×!！\-+=,，。.、·・&#?？<>*~❤♡☆★\s]'''),
               '_',
             );
             return '#$sanitized';
