@@ -4,6 +4,8 @@ import '../utils.dart';
 import 'package:path/path.dart' as p;
 import 'package:archive/archive_io.dart';
 
+const crf = 26;
+
 final proxy = File('in/imgProxy.key').readAsStringSync();
 final cookie = File('in/phpsessid.key').readAsStringSync();
 
@@ -18,7 +20,7 @@ final dio = Dio(
   ),
 );
 
-/// 下载指定 Pixiv ugoira 并合成为 MP4 文件
+/// 下载指定 Pixiv ugoira 并合成为 MP4 文件 (HEVC/H.265)
 ///
 /// [pid] Pixiv 插画 ID
 ///
@@ -69,25 +71,35 @@ Future<String?> downloadUgoiraAsMp4(String pid) async {
     // 4. 生成 concat 列表文件（ffmpeg 合成用）
     final concatFile = File(p.join(tmpDir.path, 'concat.txt'));
     final sb = StringBuffer();
-    for (final frame in frames) {
-      // delay ms → s
+    for (var i = 0; i < frames.length; i++) {
+      final frame = frames[i];
       final delaySec = frame.delay / 1000.0;
       sb.writeln(
         "file '${p.join(extractDir.path, frame.file).replaceAll("\\", "/")}'",
       );
-      sb.writeln('duration $delaySec');
+      if (i < frames.length - 1) {
+        sb.writeln('duration $delaySec');
+      }
     }
+    // 最后一帧重复一次（无 duration）
+    final lastFrame = frames.last;
+    sb.writeln(
+      "file '${p.join(extractDir.path, lastFrame.file).replaceAll("\\", "/")}'",
+    );
     concatFile.writeAsStringSync(sb.toString());
 
-    // 5. 调用 ffmpeg 合成 mp4
-    final outputPath = '${tmpDir.path}/$pid.mp4';
+    // 5. 调用 ffmpeg 合成 mp4 (H.265)
+    final outputPath = '${tmpDir.path}/$pid-$crf.mp4';
     final ffmpegArgs = [
       '-y',
       '-f', 'concat',
       '-safe', '0',
       '-i', concatFile.path,
+      '-vsync', 'vfr',
       '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2', // 保证偶数宽高
-      '-c:v', 'libx265', // hevc 编码器
+      '-c:v', 'libx265',
+      '-preset', 'fast',
+      '-crf', crf.toString(), // 码率控制：值越小画质越好（推荐 23-28）
       '-pix_fmt', 'yuv420p',
       outputPath,
     ];
@@ -95,7 +107,7 @@ Future<String?> downloadUgoiraAsMp4(String pid) async {
 
     if (result.exitCode == 0) {
       log('MP4 file successfully created: $outputPath');
-      return '${tmpDir.path}/$pid.mp4';
+      return outputPath;
     } else {
       wrn('Something wrong with ffmpeg:\n${result.stderr}');
       return null;

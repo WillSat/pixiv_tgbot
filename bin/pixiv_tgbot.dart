@@ -11,8 +11,8 @@ import 'lib/get_tags_translated.dart';
 import 'lib/tgbot.dart' as tgbot;
 
 const aDelay = Duration(seconds: 8);
-const bDelay = Duration(seconds: 30);
-const cDelay = Duration(seconds: 3);
+const bDelay = Duration(seconds: 35);
+const cDelay = Duration(seconds: 1);
 final proxy = File('in/imgProxy.key').readAsStringSync();
 final dio = Dio();
 
@@ -46,13 +46,15 @@ Future<void> handleUgoiraRanking() async {
     return;
   }
 
+  // var (date, elements) = ugoiraData;
+  // elements = [elements[20]];
   final (date, elements) = ugoiraData;
 
   await fetchTagsInParallel(elements);
 
   // 同时下载动图（限制并发量）
   final paths = <String?>[];
-  final concurrency = 3;
+  const concurrency = 2;
   final queue = List.of(elements);
 
   while (queue.isNotEmpty) {
@@ -85,15 +87,17 @@ Future<void> fetchTagsInParallel(
       futures.add(() async {
         final tags = await getTagsTranslated(dio, re.illustId);
         if (tags != null) {
-          // 过滤掉 "R-18" 和 "动图"
-          final filtered = tags.where((t) => t != 'R-18' && t != '动图').map((t) {
-            // 替换特殊字符为下划线
-            final sanitized = t.replaceAll(
-              RegExp(r'''['"\\\/\(\)（）：\:×!！\-+=,，。.、·・&#?？<>*~❤♡☆★\s]'''),
-              '_',
-            );
-            return '#$sanitized';
-          }).toList();
+          final filtered = tags
+              .where((t) => t != 'R-18' && t != '动图' && t != 'Ugoira')
+              .map((t) {
+                // 替换特殊字符为下划线
+                final sanitized = t.replaceAll(
+                  RegExp(r'''['"\\\/\(\)（）：\:×!！\-+=,，。.、·・&#?？<>*~❤♡☆★\s]'''),
+                  '_',
+                );
+                return '#$sanitized';
+              })
+              .toList();
 
           re.tags = filtered;
         }
