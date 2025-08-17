@@ -11,7 +11,7 @@ import 'lib/get_tags_translated.dart';
 import 'lib/tgbot.dart' as tgbot;
 
 const aDelay = Duration(seconds: 8);
-const bDelay = Duration(seconds: 35);
+const bDelay = Duration(seconds: 30);
 const cDelay = Duration(seconds: 1);
 final proxy = File('in/imgProxy.key').readAsStringSync();
 final dio = Dio();
@@ -119,19 +119,19 @@ Future<void> startUploadingRanking(
     final obj = eles[i];
     await obj.getPagesUri(dio);
 
-    final mdCaption = buildCaption(
-      type: '综合',
-      rank: i + 1,
-      title: obj.title,
-      author: obj.author,
-      tags: obj.tags,
-      pixivId: obj.illustId,
-    );
-
     if (obj.originalPageUriList.length > 10) {
       // 图片太多 -> Telegraph
       await sendToTelegraph(obj, i + 1, '综合', obj.tags);
     } else {
+      final mdCaption = buildCaption(
+        type: '综合',
+        rank: i + 1,
+        title: obj.title,
+        author: obj.author,
+        tags: obj.tags,
+        pixivId: obj.illustId,
+      );
+
       await trySendPhotos(obj, i + 1, mdCaption);
     }
 
@@ -165,7 +165,7 @@ Future<void> UploadUgoiraRanking(
     if (path == null || !File(path).existsSync()) {
       await tgbot.sendTextMessage('（此动图无法上传）\n$mdCaption');
     } else {
-      await trySendVideo(path, mdCaption);
+      await trySendVideo(path, i + 1, mdCaption);
     }
 
     sleep(cDelay);
@@ -191,6 +191,7 @@ Future<void> trySendPhotos(RankingElement obj, int rank, String caption) async {
       );
 
       if (resCode == 1) {
+        log('Photo message sent successfully. rank[$rank]');
         return;
       } else {
         sleep(bDelay);
@@ -199,16 +200,19 @@ Future<void> trySendPhotos(RankingElement obj, int rank, String caption) async {
   }
 
   // 如果 original + regular 都失败 -> Telegraph
+  wrn('Failed to send photo message, trying to send to Telegraph. rank[$rank]');
   await sendToTelegraph(obj, rank, '综合', obj.tags);
 }
 
 /// 尝试发送视频到 TG
-Future<void> trySendVideo(String path, String caption) async {
+Future<void> trySendVideo(String path, int rank, String caption) async {
   const maxTries = 3;
   for (int attempt = 0; attempt < maxTries; attempt++) {
     final resCode = await tgbot.sendVideo(path, caption: caption);
-    if (resCode == 1) return;
-    if (resCode == 400 && attempt < maxTries - 1) {
+    if (resCode == 1) {
+      log('Video message sent. rank[$rank]');
+      return;
+    } else if (resCode == 400 && attempt < maxTries - 1) {
       sleep(bDelay);
     } else {
       await tgbot.sendTextMessage('（动图无法上传）\n$caption');
@@ -240,6 +244,7 @@ Future<void> sendToTelegraph(
       telegraphUrl: telegraphUrl,
     );
     await tgbot.sendTextMessage(caption);
+    log('Telegraph message sent. rank[$rank]');
   }
 }
 
@@ -254,15 +259,15 @@ String buildCaption({
   String? telegraphUrl,
 }) {
   final buffer = StringBuffer()
-    ..write('`${type}` _\\#NO${rank}_\n')
-    ..write('**${escapeMarkdownV2(title)}**\n')
+    ..write('${type} _\\#NO${rank}_\n')
+    ..write('*${escapeMarkdownV2(title)}*\n')
     ..write('\\#${escapeMarkdownV2(author)}\n')
     ..write('>${tags.map(escapeMarkdownV2).join(' ')}\n\n');
 
   if (telegraphUrl != null) {
-    buffer.write('>[Telegraph 链接]($telegraphUrl)\n\n');
+    buffer.write('>*[Telegraph 链接]($telegraphUrl)*\n\n');
   }
-  buffer.write('>[PIXIV 链接](https://www.pixiv.net/artworks/$pixivId)');
+  buffer.write('>*[PIXIV 链接](https://www.pixiv.net/artworks/$pixivId)*');
 
   return buffer.toString();
 }

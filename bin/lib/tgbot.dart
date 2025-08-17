@@ -22,11 +22,11 @@ Future<void> sendTextMessage(text) async {
 
     if (response.statusCode != 200) {
       wrn(
-        'Failed to send message [${response.statusCode}:${response.statusMessage}]: ${response.data}',
+        'Failed to send text message [${response.statusCode}:${response.statusMessage}]: ${response.data}',
       );
     }
   } catch (e) {
-    wrn('Failed to send message: $e');
+    wrn('Failed to send text message: $e');
   }
 }
 
@@ -45,23 +45,25 @@ Future<int> sendPhotoViaUrls(List<String> urls, {String? caption}) async {
 
   final formMap = {'chat_id': chatID, 'media': jsonEncode(media)};
 
-  final url = 'https://api.telegram.org/bot$botToken/sendMediaGroup';
-
   try {
-    final response = await dio.post(url, data: formMap);
+    final response = await dio.post(
+      'https://api.telegram.org/bot$botToken/sendMediaGroup',
+      data: formMap,
+    );
 
     if (response.statusCode != 200) {
       wrn(
-        'Failed to send photos batch [${response.statusCode}:${response.statusMessage}]: ${response.data}',
+        'Failed to send photos. [${response.statusCode}:${response.statusMessage}]\n${response.data}',
       );
       return 0;
     } else {
-      log('${urls.length} images message sent successfully.');
       return 1;
     }
   } catch (e) {
     if (e is DioException) {
-      wrn('Failed to send photos batch: ${e.response?.statusCode}');
+      wrn(
+        'Failed to send photos! [${e.response?.statusCode}:${e.response?.data}]\n$e',
+      );
       return e.response?.statusCode ?? 0;
     } else {
       wrn('Unhandled exception: $e');
