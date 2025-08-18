@@ -8,11 +8,11 @@ import 'lib/fetch_ugoira_ranking.dart';
 import 'lib/get_ugoira_ranking_mp4.dart';
 import 'lib/telegraph.dart';
 import 'lib/get_tags_translated.dart';
-import 'lib/tgbot.dart' as tgbot;
+import 'lib/tgbot.dart';
 
-const aDelay = Duration(seconds: 8);
-const bDelay = Duration(seconds: 30);
-const cDelay = Duration(seconds: 1);
+const aDelay = Duration(seconds: 4);
+const bDelay = Duration(seconds: 15);
+const cDelay = Duration(seconds: 2);
 final proxy = File('in/imgProxy.key').readAsStringSync();
 final dio = Dio();
 
@@ -113,7 +113,7 @@ Future<void> startUploadingRanking(
   String date,
   List<RankingElement> eles,
 ) async {
-  await tgbot.sendTextMessage('综合排行榜日期：$date');
+  await sendTextMessage('综合排行榜日期：$date');
 
   for (int i = 0; i < eles.length; i++) {
     final obj = eles[i];
@@ -135,7 +135,7 @@ Future<void> startUploadingRanking(
       await trySendPhotos(obj, i + 1, mdCaption);
     }
 
-    sleep(aDelay);
+    await Future.delayed(aDelay);
   }
 
   log('Ranking Done.');
@@ -147,7 +147,7 @@ Future<void> UploadUgoiraRanking(
   List<UgoiraRankingElement> eles,
   List<String?> paths,
 ) async {
-  await tgbot.sendTextMessage('动图排行榜日期：$date');
+  await sendTextMessage('动图排行榜日期：$date');
 
   for (int i = 0; i < eles.length; i++) {
     final obj = eles[i];
@@ -163,59 +163,84 @@ Future<void> UploadUgoiraRanking(
     );
 
     if (path == null || !File(path).existsSync()) {
-      await tgbot.sendTextMessage('（此动图无法上传）\n$mdCaption');
+      await sendTextMessage('（此动图无法上传）\n$mdCaption');
     } else {
       await trySendVideo(path, i + 1, mdCaption);
     }
 
-    sleep(cDelay);
+    await Future.delayed(cDelay);
   }
 
   log('Ugoira Ranking Done.');
 }
 
-/// 尝试发送图片到 TG（带重试逻辑）
+/// 尝试发送图片到 TG
 Future<void> trySendPhotos(RankingElement obj, int rank, String caption) async {
-  final List<List<String>> sizes = [
-    obj.originalPageUriList,
-    obj.regularPageUriList,
-  ];
+  final originalUrls = obj.originalPageUriList
+      .map((uri) => proxy + uri)
+      .toList();
+  final regularUrls = obj.regularPageUriList.map((uri) => proxy + uri).toList();
 
-  for (final sizeList in sizes) {
-    const tries = 3;
+  const knownFailCodes = [429, 400, -1, -2];
+  const maxRetries = 5;
+  var sendFn = sendPhotoViaUrls;
+  var currentUrls = originalUrls;
+  final attemptResults = <int>[];
 
-    for (int attempt = 1; attempt <= tries; attempt++) {
-      final resCode = await tgbot.sendPhotoViaUrls(
-        sizeList.map((uri) => proxy + uri).toList(),
-        caption: caption,
-      );
+  for (int attempt = 1; attempt <= maxRetries; attempt++) {
+    final resCode = await sendFn(currentUrls, caption: caption);
+    attemptResults.add(resCode);
 
-      if (resCode == 1) {
-        log('Photo message sent successfully. rank[$rank]');
-        return;
-      } else {
-        sleep(bDelay);
-      }
+    if (resCode == 1) break;
+
+    if (!knownFailCodes.contains(resCode)) {
+      wrn('Unknown resCode: $attemptResults, turn to Telegraph!');
+      break;
+    }
+
+    if (attemptResults.where((i) => i == -2).length == 2) {
+      wrn('Photos too big: $attemptResults, turn to Telegraph!');
+      break;
+    }
+
+    switch (resCode) {
+      case 429:
+        await Future.delayed(bDelay);
+        break;
+      case 400:
+        await Future.delayed(aDelay);
+        break;
+      case -1:
+        sendFn = sendPhotoViaDownload;
+        break;
+      case -2:
+        currentUrls = regularUrls;
+        break;
     }
   }
 
-  // 如果 original + regular 都失败 -> Telegraph
-  wrn('Failed to send photo message, trying to send to Telegraph. rank[$rank]');
-  await sendToTelegraph(obj, rank, '综合', obj.tags);
+  if (attemptResults.last == 1) {
+    log('Photo message sent successfully. rank[$rank]');
+  } else {
+    wrn(
+      'Failed to send photo message, trying to send to Telegraph. rank[$rank]',
+    );
+    await sendToTelegraph(obj, rank, '综合', obj.tags);
+  }
 }
 
 /// 尝试发送视频到 TG
 Future<void> trySendVideo(String path, int rank, String caption) async {
   const maxTries = 3;
   for (int attempt = 0; attempt < maxTries; attempt++) {
-    final resCode = await tgbot.sendVideo(path, caption: caption);
+    final resCode = await sendVideo(path, caption: caption);
     if (resCode == 1) {
       log('Video message sent. rank[$rank]');
       return;
     } else if (resCode == 400 && attempt < maxTries - 1) {
-      sleep(bDelay);
+      await Future.delayed(bDelay);
     } else {
-      await tgbot.sendTextMessage('（动图无法上传）\n$caption');
+      await sendTextMessage('（动图无法上传）\n$caption');
       return;
     }
   }
@@ -243,7 +268,7 @@ Future<void> sendToTelegraph(
       pixivId: obj.illustId,
       telegraphUrl: telegraphUrl,
     );
-    await tgbot.sendTextMessage(caption);
+    await sendTextMessage(caption);
     log('Telegraph message sent. rank[$rank]');
   }
 }

@@ -5,9 +5,9 @@ import 'package:dio/dio.dart';
 import '../utils.dart';
 
 final botToken = File('in/botToken.key').readAsStringSync();
-final chatID = File('in/chatID.key').readAsStringSync();
+// final chatID = File('in/chatID.key').readAsStringSync();
 // For test
-// final chatID = File('in/chatID-test.key').readAsStringSync();
+final chatID = File('in/chatID-test.key').readAsStringSync();
 
 final dio = Dio();
 
@@ -53,21 +53,102 @@ Future<int> sendPhotoViaUrls(List<String> urls, {String? caption}) async {
 
     if (response.statusCode != 200) {
       wrn(
-        'Failed to send photos. [${response.statusCode}:${response.statusMessage}]\n${response.data}',
+        'Failed to send photos. [${response.statusCode}:${response.data}:${response.statusMessage}]',
       );
-      return 0;
+      return 400;
     } else {
       return 1;
     }
   } catch (e) {
     if (e is DioException) {
       wrn(
-        'Failed to send photos! [${e.response?.statusCode}:${e.response?.data}]\n$e',
+        'Failed to send photos! [${e.response?.statusCode}:${e.response?.data}]',
       );
-      return e.response?.statusCode ?? 0;
+
+      final data = e.response?.data['description'] as String;
+
+      if (data.contains('WEBPAGE_MEDIA_EMPTY')) {
+        // TG bot bug
+        return -1;
+      } else if (data.contains('10485760')) {
+        // Over 10MB
+        return -2;
+      } else {
+        return e.response?.statusCode ?? 0;
+      }
     } else {
       wrn('Unhandled exception: $e');
-      return 0;
+      return 400;
+    }
+  }
+}
+
+/// [urls] 上传图片（本地）
+Future<int> sendPhotoViaDownload(List<String> urls, {String? caption}) async {
+  List<Map<String, dynamic>> media = [];
+
+  try {
+    FormData formData = FormData.fromMap({'chat_id': chatID});
+
+    for (int i = 0; i < urls.length; i++) {
+      String fileName = 'photo_$i.jpg';
+
+      Response<List<int>> downloadResponse = await dio.get<List<int>>(
+        urls[i],
+        options: Options(responseType: ResponseType.bytes),
+      );
+
+      if (downloadResponse.statusCode != 200) {
+        throw Exception(
+          'Failed to download photo $i: ${downloadResponse.statusCode}',
+        );
+      }
+
+      media.add({
+        'type': 'photo',
+        'media': 'attach://$fileName',
+        if (caption != null && i == 0) "caption": caption,
+        if (caption != null && i == 0) "parse_mode": "MarkdownV2",
+      });
+
+      formData.files.add(
+        MapEntry(
+          fileName,
+          MultipartFile.fromBytes(downloadResponse.data!, filename: fileName),
+        ),
+      );
+    }
+
+    formData.fields.add(MapEntry('media', jsonEncode(media)));
+
+    final response = await dio.post(
+      'https://api.telegram.org/bot$botToken/sendMediaGroup',
+      data: formData,
+    );
+
+    if (response.statusCode != 200) {
+      wrn(
+        'Failed to send photos. [${response.statusCode}:${response.data}:${response.statusMessage}]',
+      );
+      return 400;
+    } else {
+      return 1;
+    }
+  } catch (e) {
+    if (e is DioException) {
+      wrn(
+        'Failed to send photos! [${e.response?.statusCode}:${e.response?.data}]',
+      );
+
+      // Over 10MB
+      if ((e.response?.data['description'] as String).contains('10485760')) {
+        return -2;
+      } else {
+        return e.response?.statusCode ?? 0;
+      }
+    } else {
+      wrn('Unhandled exception: $e');
+      return 400;
     }
   }
 }
