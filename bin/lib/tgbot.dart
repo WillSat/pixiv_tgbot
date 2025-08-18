@@ -5,9 +5,9 @@ import 'package:dio/dio.dart';
 import '../utils.dart';
 
 final botToken = File('in/botToken.key').readAsStringSync();
-// final chatID = File('in/chatID.key').readAsStringSync();
+final chatID = File('in/chatID.key').readAsStringSync();
 // For test
-final chatID = File('in/chatID-test.key').readAsStringSync();
+// final chatID = File('in/chatID-test.key').readAsStringSync();
 
 final dio = Dio();
 
