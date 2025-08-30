@@ -94,7 +94,9 @@ Future<void> fetchTagsInParallel(
               .map((t) {
                 // 替换特殊字符为下划线
                 final sanitized = t.replaceAll(
-                  RegExp(r'''['"\\\/\(\)（）：\:×!！\-+=,，。.、·・&#?？<>*~❤♡☆★\s]'''),
+                  RegExp(
+                    r'''['"\\\/\(\)（）「」『』：\:×!！\-+=,，。.、·・&#?？<>*~❤♡☆★\s]''',
+                  ),
                   '_',
                 );
                 return '#$sanitized';
