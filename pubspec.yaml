@@ -10,6 +10,7 @@ environment:
 dependencies:
   dio: ^5.9.0
   archive: ^4.0.7
+  image: ^4.5.4
   # path: ^1.8.0
 
 dev_dependencies:

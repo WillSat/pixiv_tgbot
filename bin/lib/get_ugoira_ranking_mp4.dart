@@ -4,7 +4,7 @@ import '../utils.dart';
 import 'package:path/path.dart' as p;
 import 'package:archive/archive_io.dart';
 
-const crf = 26;
+const crf = 18;
 
 final proxy = File('in/imgProxy.key').readAsStringSync();
 final cookie = File('in/phpsessid.key').readAsStringSync();
