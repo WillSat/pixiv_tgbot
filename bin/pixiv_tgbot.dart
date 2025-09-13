@@ -1,3 +1,5 @@
+// waitwill@2025
+
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:path/path.dart' as p;
@@ -92,7 +94,9 @@ Future<void> fetchTagsInParallel(
               .map((t) {
                 // 替换特殊字符为下划线
                 final sanitized = t.replaceAll(
-                  RegExp(r'''['"\\\/\(\)（）：\:×!！\-+=,，。.、·・&#?？<>*~❤♡☆★\s]'''),
+                  RegExp(
+                    r'''['"\\\/\(\)（）「」『』：\:×!！\-+=,，。.、·・&#?？<>*~❤♡☆★\s]''',
+                  ),
                   '_',
                 );
                 return '#$sanitized';
@@ -287,10 +291,10 @@ String buildCaption({
     ..write('${type} _\\#NO${rank}_\n')
     ..write('*${escapeMarkdownV2(title)}*\n')
     ..write('\\#${escapeMarkdownV2(author)}\n')
-    ..write('>${tags.map(escapeMarkdownV2).join(' ')}\n\n');
+    ..write('>${tags.map(escapeMarkdownV2).join(' ')}\n');
 
   if (telegraphUrl != null) {
-    buffer.write('>*[Telegraph 链接]($telegraphUrl)*\n\n');
+    buffer.write('>*[Telegraph 链接]($telegraphUrl)*\n');
   }
   buffer.write('>*[PIXIV 链接](https://www.pixiv.net/artworks/$pixivId)*');
 
