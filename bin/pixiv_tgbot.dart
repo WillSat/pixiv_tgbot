@@ -11,6 +11,7 @@ import 'lib/get_ugoira_ranking_mp4.dart';
 import 'lib/telegraph.dart';
 import 'lib/get_tags_translated.dart';
 import 'lib/tgbot.dart';
+import 'lib/notify.dart';
 
 const aDelay = Duration(seconds: 4);
 const bDelay = Duration(seconds: 15);
@@ -22,6 +23,7 @@ Future<void> main() async {
   await handleRanking();
   await handleUgoiraRanking();
   cleanupTmpDirs();
+  await barkSuccess();
 }
 
 /// 处理静态图排行榜
@@ -30,6 +32,7 @@ Future<void> handleRanking() async {
   final rankingData = await fetchRanking(dio);
   if (rankingData == null) {
     wrn('Failed to fetch ranking!');
+    await barkFail();
     return;
   }
 
@@ -45,6 +48,7 @@ Future<void> handleUgoiraRanking() async {
   final ugoiraData = await fetchUgoiraRanking(dio);
   if (ugoiraData == null) {
     wrn('Failed to fetch ugoira ranking!');
+    await barkFail();
     return;
   }
 
