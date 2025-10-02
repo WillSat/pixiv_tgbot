@@ -100,3 +100,8 @@ String escapeMarkdownV2(String text) {
     (Match m) => '\\${m[0]}',
   );
 }
+
+bool isNumeric(String str) {
+  if (str.isEmpty) return false;
+  return RegExp(r'^\d+$').hasMatch(str);
+}

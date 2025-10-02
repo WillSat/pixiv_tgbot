@@ -81,6 +81,51 @@ Future<void> fetchTagsInParallel(
   List<dynamic> elements, {
   int concurrency = 10,
 }) async {
+  const Set<String> excludedTags = {'GIF', 'R18', 'R-18', '动图', 'Ugoira'};
+  const Set<String> excludedChars = {
+    "'",
+    '"',
+    '\\',
+    '/',
+    '(',
+    ')',
+    '（',
+    '）',
+    '「',
+    '」',
+    '『',
+    '』',
+    '：',
+    ':',
+    '×',
+    '!',
+    '！',
+    '-',
+    '+',
+    '=',
+    ',',
+    '，',
+    '。',
+    '.',
+    '、',
+    '·',
+    '・',
+    '&',
+    '#',
+    '?',
+    '？',
+    '<',
+    '>',
+    '*',
+    '~',
+    '❤',
+    '♡',
+    '☆',
+    '★',
+    '♂',
+    '♀',
+  };
+
   final queue = List.of(elements);
   final futures = <Future>[];
 
@@ -92,22 +137,26 @@ Future<void> fetchTagsInParallel(
     for (final re in batch) {
       futures.add(() async {
         final tags = await getTagsTranslated(dio, re.illustId);
-        if (tags != null) {
-          final filtered = tags
-              .where((t) => t != 'R-18' && t != '动图' && t != 'Ugoira')
-              .map((t) {
-                // 替换特殊字符为下划线
-                final sanitized = t.replaceAll(
-                  RegExp(
-                    r'''['"\\\/\(\)（）「」『』：\:×!！\-+=,，。.、·・&#?？<>*~❤♡☆★\s]''',
-                  ),
-                  '_',
-                );
-                return '#$sanitized';
-              })
-              .toList();
 
-          re.tags = filtered;
+        if (tags != null) {
+          re.tags = tags.where((t) => !excludedTags.contains(t)).map((input) {
+            if (isNumeric(input)) {
+              // 纯数字
+              return '#TAG_${input.toString()}';
+            } else {
+              // 剔除特殊字符
+              final buffer = StringBuffer();
+              for (final char in input.runes) {
+                final charStr = String.fromCharCode(char);
+                if (charStr.trim().isEmpty || excludedChars.contains(charStr)) {
+                  buffer.write('_');
+                } else {
+                  buffer.write(charStr);
+                }
+              }
+              return '#${buffer.toString()}';
+            }
+          }).toList();
         }
       }());
     }
