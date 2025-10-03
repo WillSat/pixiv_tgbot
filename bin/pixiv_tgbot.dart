@@ -12,11 +12,15 @@ import 'lib/telegraph.dart';
 import 'lib/get_tags_translated.dart';
 import 'lib/tgbot.dart';
 import 'lib/notify.dart';
+// import 'lib/make_zip.dart';
 
 const aDelay = Duration(seconds: 4);
 const bDelay = Duration(seconds: 15);
 const cDelay = Duration(seconds: 2);
+
+// https://******.workers.dev/?url=
 final proxy = File('in/imgProxy.key').readAsStringSync();
+
 final dio = Dio();
 
 Future<void> main() async {
@@ -38,8 +42,19 @@ Future<void> handleRanking() async {
 
   final (date, elements) = rankingData;
 
+  for (int i = 0; i < elements.length; i++) {
+    final obj = elements[i];
+    await obj.getPagesUri(dio);
+  }
+
   await fetchTagsInParallel(elements);
   await startUploadingRanking(date, elements);
+
+  // final rankingZipPath = await makeRankingZip(dio, elements);
+  // final String? toGoFileUrl = await uploadToGofile(rankingZipPath);
+  // if (toGoFileUrl != null) {
+  //   await sendTextMessage('原图压缩包链接🔗：$toGoFileUrl');
+  // }
 }
 
 /// 处理动图排行榜
@@ -52,8 +67,6 @@ Future<void> handleUgoiraRanking() async {
     return;
   }
 
-  // var (date, elements) = ugoiraData;
-  // elements = [elements[20]];
   final (date, elements) = ugoiraData;
 
   await fetchTagsInParallel(elements);
@@ -174,7 +187,6 @@ Future<void> startUploadingRanking(
 
   for (int i = 0; i < eles.length; i++) {
     final obj = eles[i];
-    await obj.getPagesUri(dio);
 
     if (obj.originalPageUriList.length > 10) {
       // 图片太多 -> Telegraph
@@ -357,12 +369,13 @@ String buildCaption({
 /// 清理临时目录
 void cleanupTmpDirs() {
   for (var entity in Directory.current.listSync()) {
-    if (entity is Directory && p.basename(entity.path).startsWith('temp_')) {
+    if (p.basename(entity.path).startsWith('temp_') ||
+        p.basename(entity.path).startsWith('PixivRanking_')) {
       try {
         entity.deleteSync(recursive: true);
-        log('Temp dir deleted: ${entity.path}');
+        log('Temp deleted: ${entity.path}');
       } catch (e) {
-        wrn('Failed to delete old temp dir: ${entity.path}\n$e');
+        wrn('Failed to delete temp: ${entity.path}\n$e');
       }
     }
   }
