@@ -1,4 +1,4 @@
-// waitwill@2025
+// waitwill@2025-2026
 
 import 'dart:io';
 import 'package:dio/dio.dart';
@@ -12,7 +12,6 @@ import 'lib/telegraph.dart';
 import 'lib/get_tags_translated.dart';
 import 'lib/tgbot.dart';
 import 'lib/notify.dart';
-// import 'lib/make_zip.dart';
 
 const aDelay = Duration(seconds: 4);
 const bDelay = Duration(seconds: 15);
@@ -24,18 +23,25 @@ final proxy = File('in/imgProxy.key').readAsStringSync();
 final dio = Dio();
 
 Future<void> main() async {
-  await handleRanking();
+  // 插画
+  await handleIllustrationRanking();
+  // 动图
   await handleUgoiraRanking();
+
+  // 清理临时文件
   cleanupTmpDirs();
   await barkSuccess();
 }
 
-/// 处理静态图排行榜
-/// ###############
-Future<void> handleRanking() async {
+/*
+  -----------
+  处理插画排行榜
+  -----------
+*/
+Future<void> handleIllustrationRanking() async {
   final rankingData = await fetchRanking(dio);
   if (rankingData == null) {
-    wrn('Failed to fetch ranking!');
+    wrn('Failed to fetch illustration ranking!');
     await barkFail();
     return;
   }
@@ -48,17 +54,124 @@ Future<void> handleRanking() async {
   }
 
   await fetchTagsInParallel(elements);
-  await startUploadingRanking(date, elements);
 
-  // final rankingZipPath = await makeRankingZip(dio, elements);
-  // final String? toGoFileUrl = await uploadToGofile(rankingZipPath);
-  // if (toGoFileUrl != null) {
-  //   await sendTextMessage('原图压缩包链接🔗：$toGoFileUrl');
-  // }
+  await sendTextMessage('插画排行榜日期：$date');
+  await uploadPhotoMessagesList(elements, '插画');
+  log('Ranking Done.');
 }
 
-/// 处理动图排行榜
-/// #############
+/// 上传插画排行榜
+Future<void> uploadPhotoMessagesList(
+  List<PixivIllustrationElement> eles,
+  String kind, {
+  bool ifShowRankingNumber = true,
+  String? comment,
+}) async {
+  for (int i = 0; i < eles.length; i++) {
+    final obj = eles[i];
+
+    // 发布到 Telegraph 获取返回链接
+    final telegraphUrl = await parseAndPublishTelegraph(
+      '${obj.title} - ${obj.artist}',
+      obj.originalPageUriList.map((uri) => proxy + uri).toList(),
+    );
+
+    // 构建文案
+    final mdCaption = buildCaption(
+      kind: kind,
+      rank: ifShowRankingNumber ? i + 1 : null,
+      title: obj.title,
+      artist: obj.artist,
+      tags: obj.tags,
+      telegraphUrl: telegraphUrl,
+      pixivId: obj.illustId,
+      comment: comment,
+    );
+
+    // 发送图片消息
+    await trySendPhotos(obj, i + 1, mdCaption);
+
+    // 如果列表中存在下一个执行 delay
+    if (i + 1 < eles.length) {
+      await Future.delayed(aDelay);
+    }
+  }
+}
+
+/// 发送图片
+Future<void> trySendPhotos(
+  PixivIllustrationElement obj,
+  int rank,
+  String caption,
+) async {
+  // 作品拥有十张及以下照片，尝试将原图发送到 Telegram
+  if (obj.originalPageUriList.length <= 10) {
+    // 发送 Telegram 逻辑
+    final originalUrls = obj.originalPageUriList
+        .map((uri) => proxy + uri)
+        .toList();
+    final regularUrls = obj.regularPageUriList
+        .map((uri) => proxy + uri)
+        .toList();
+
+    const knownFailCodes = [429, 400, -1, -2];
+    const maxRetries = 5;
+    var sendFn = sendPhotoViaUrls;
+    var currentUrls = originalUrls;
+    final attemptResults = <int>[];
+
+    for (int attempt = 1; attempt <= maxRetries; attempt++) {
+      final resCode = await sendFn(currentUrls, caption: caption);
+      attemptResults.add(resCode);
+
+      if (resCode == 1) break;
+
+      if (!knownFailCodes.contains(resCode)) {
+        wrn('Unknown resCode: $attemptResults, turn to Telegraph!');
+        break;
+      }
+
+      if (attemptResults.where((i) => i == -2).length == 2) {
+        wrn('Photos too big: $attemptResults, turn to Telegraph!');
+        break;
+      }
+
+      switch (resCode) {
+        case 429:
+          await Future.delayed(bDelay);
+          break;
+        case 400:
+          await Future.delayed(aDelay);
+          break;
+        case -1:
+          sendFn = sendPhotoViaDownload;
+          break;
+        case -2:
+          currentUrls = regularUrls;
+          break;
+      }
+    }
+
+    if (attemptResults.last == 1) {
+      // 成功
+      log('Photo message sent successfully. rank[$rank]');
+      return null;
+    } else {
+      // 发送失败，只发布到 Telegraph（if {} 外逻辑）
+      wrn('Failed to send photos to Telegram. rank[$rank]');
+    }
+  }
+
+  // 图片过多 or 发送失败
+  await sendTextMessage(caption);
+  log('Only Telegraph message sent. rank[$rank]');
+}
+
+/*
+  -----------
+  处理动图排行榜
+  -----------
+*/
 Future<void> handleUgoiraRanking() async {
   final ugoiraData = await fetchUgoiraRanking(dio);
   if (ugoiraData == null) {
@@ -178,38 +291,6 @@ Future<void> fetchTagsInParallel(
   }
 }
 
-/// 上传静态图排行榜
-Future<void> startUploadingRanking(
-  String date,
-  List<RankingElement> eles,
-) async {
-  await sendTextMessage('综合排行榜日期：$date');
-
-  for (int i = 0; i < eles.length; i++) {
-    final obj = eles[i];
-
-    if (obj.originalPageUriList.length > 10) {
-      // 图片太多 -> Telegraph
-      await sendToTelegraph(obj, i + 1, '综合', obj.tags);
-    } else {
-      final mdCaption = buildCaption(
-        type: '综合',
-        rank: i + 1,
-        title: obj.title,
-        author: obj.author,
-        tags: obj.tags,
-        pixivId: obj.illustId,
-      );
-
-      await trySendPhotos(obj, i + 1, mdCaption);
-    }
-
-    await Future.delayed(aDelay);
-  }
-
-  log('Ranking Done.');
-}
-
 /// 上传动图排行榜
 Future<void> UploadUgoiraRanking(
   String date,
@@ -223,10 +304,10 @@ Future<void> UploadUgoiraRanking(
     final path = paths[i];
 
     final mdCaption = buildCaption(
-      type: '动图',
+      kind: '动图',
       rank: i + 1,
       title: obj.title,
-      author: obj.author,
+      artist: obj.author,
       tags: obj.tags,
       pixivId: obj.illustId,
     );
@@ -241,61 +322,6 @@ Future<void> UploadUgoiraRanking(
   }
 
   log('Ugoira Ranking Done.');
-}
-
-/// 尝试发送图片到 TG
-Future<void> trySendPhotos(RankingElement obj, int rank, String caption) async {
-  final originalUrls = obj.originalPageUriList
-      .map((uri) => proxy + uri)
-      .toList();
-  final regularUrls = obj.regularPageUriList.map((uri) => proxy + uri).toList();
-
-  const knownFailCodes = [429, 400, -1, -2];
-  const maxRetries = 5;
-  var sendFn = sendPhotoViaUrls;
-  var currentUrls = originalUrls;
-  final attemptResults = <int>[];
-
-  for (int attempt = 1; attempt <= maxRetries; attempt++) {
-    final resCode = await sendFn(currentUrls, caption: caption);
-    attemptResults.add(resCode);
-
-    if (resCode == 1) break;
-
-    if (!knownFailCodes.contains(resCode)) {
-      wrn('Unknown resCode: $attemptResults, turn to Telegraph!');
-      break;
-    }
-
-    if (attemptResults.where((i) => i == -2).length == 2) {
-      wrn('Photos too big: $attemptResults, turn to Telegraph!');
-      break;
-    }
-
-    switch (resCode) {
-      case 429:
-        await Future.delayed(bDelay);
-        break;
-      case 400:
-        await Future.delayed(aDelay);
-        break;
-      case -1:
-        sendFn = sendPhotoViaDownload;
-        break;
-      case -2:
-        currentUrls = regularUrls;
-        break;
-    }
-  }
-
-  if (attemptResults.last == 1) {
-    log('Photo message sent successfully. rank[$rank]');
-  } else {
-    wrn(
-      'Failed to send photo message, trying to send to Telegraph. rank[$rank]',
-    );
-    await sendToTelegraph(obj, rank, '综合', obj.tags);
-  }
 }
 
 /// 尝试发送视频到 TG
@@ -315,53 +341,31 @@ Future<void> trySendVideo(String path, int rank, String caption) async {
   }
 }
 
-/// 发送到 Telegraph
-Future<void> sendToTelegraph(
-  RankingElement obj,
-  int rank,
-  String type,
-  List<String> tags,
-) async {
-  final telegraphUrl = await parseAndPublishTelegraph(
-    '${obj.title} - ${obj.author}',
-    obj.originalPageUriList.map((uri) => proxy + uri).toList(),
-  );
-
-  if (telegraphUrl != null) {
-    final caption = buildCaption(
-      type: type,
-      rank: rank,
-      title: obj.title,
-      author: obj.author,
-      tags: tags,
-      pixivId: obj.illustId,
-      telegraphUrl: telegraphUrl,
-    );
-    await sendTextMessage(caption);
-    log('Telegraph message sent. rank[$rank]');
-  }
-}
-
 /// 构建 MarkdownV2 caption
 String buildCaption({
-  required String type,
-  required int rank,
+  required String kind,
   required String title,
-  required String author,
+  required String artist,
   required List<String> tags,
   required int pixivId,
+  int? rank,
   String? telegraphUrl,
+  String? comment,
 }) {
   final buffer = StringBuffer()
-    ..write('${type} _\\#NO${rank}_\n')
-    ..write('*${escapeMarkdownV2(title)}*\n')
-    ..write('\\#${escapeMarkdownV2(author)}\n')
+    ..write(rank == null ? '\\#${kind}\n' : '${kind} _`NO${rank}`_\n')
+    ..write('🆃 *${escapeMarkdownV2(title)}*\n')
+    ..write('🅰 \\#${escapeMarkdownV2(artist)}\n')
     ..write('>${tags.map(escapeMarkdownV2).join(' ')}\n');
 
   if (telegraphUrl != null) {
-    buffer.write('>*[Telegraph 链接]($telegraphUrl)*\n');
+    buffer.write('>🅻 *[Telegraph链接]($telegraphUrl)*\n');
   }
-  buffer.write('>*[PIXIV 链接](https://www.pixiv.net/artworks/$pixivId)*');
+  buffer.write('>🅻 *[Pixiv链接](https://www.pixiv.net/artworks/$pixivId)*');
+
+  if (comment != null) {
+    buffer.write('\n\n$comment');
+  }
 
   return buffer.toString();
 }

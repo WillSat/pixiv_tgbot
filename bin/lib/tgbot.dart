@@ -10,8 +10,6 @@ final chatID = File('in/chatID.key').readAsStringSync();
 // For test
 // final chatID = File('in/chatID-test.key').readAsStringSync();
 
-final goFileToken = File('in/GoFile.key').readAsStringSync();
-
 final dio = Dio();
 
 // Future<void> sendTextMessage(dynamic text)
@@ -186,73 +184,5 @@ Future<int> sendVideo(String videoPath, {String? caption}) async {
       'Failed to send video message! ${e.response?.statusCode}: ${e.response?.data}',
     );
     return e.response?.statusCode ?? 0;
-  }
-}
-
-/// 发送文件到指定 chat_id
-/// [zipPath] 本地文件路径
-Future<void> uploadZip(String zipPath) async {
-  final dio = Dio();
-  final url = "https://api.telegram.org/bot$botToken/sendDocument";
-
-  final formData = FormData.fromMap({
-    "chat_id": chatID,
-    "document": await MultipartFile.fromFile(zipPath),
-  });
-
-  try {
-    final response = await dio.post(url, data: formData);
-    if (response.statusCode == 200 && response.data["ok"] == true) {
-      log("ZIP file uploaded.");
-    } else {
-      wrn("Failed to upload ZIP file");
-    }
-  } catch (e) {
-    wrn("Unhandled error: $e");
-  }
-}
-
-/// 上传文件到 GoFile (东京节点)
-/// 返回直链 URL
-Future<String?> uploadToGofile(String filePath) async {
-  final dio = Dio();
-  final file = File(filePath);
-
-  if (!file.existsSync()) {
-    wrn("File not found: $filePath");
-    return null;
-  }
-
-  final url = "https://upload-ap-tyo.gofile.io/uploadfile";
-
-  final formData = FormData.fromMap({
-    "file": MultipartFile.fromStream(
-      file.openRead,
-      await file.length(),
-      filename: file.uri.pathSegments.last,
-    ),
-  });
-
-  try {
-    final response = await dio.post(
-      url,
-      data: formData,
-      options: Options(
-        contentType: "multipart/form-data",
-        headers: {'Authorization': 'Bearer $goFileToken'},
-      ),
-    );
-
-    if (response.statusCode == 200 && response.data["status"] == "ok") {
-      final directLink = response.data["data"]["downloadPage"] ?? "";
-      log("ZIP Uploaded.");
-      return directLink;
-    } else {
-      wrn("Upload failed: ${response.data}");
-      return null;
-    }
-  } catch (e) {
-    wrn("Error uploading: $e");
-    return null;
   }
 }

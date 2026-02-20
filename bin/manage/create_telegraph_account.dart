@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 
-Future<void> createAccount() async {
+Future<void> main() async {
   final dio = Dio();
   final res = await dio.post(
     'https://api.telegra.ph/createAccount',

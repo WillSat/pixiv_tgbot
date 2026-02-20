@@ -2,16 +2,16 @@ import 'package:dio/dio.dart';
 import '../utils.dart';
 import 'get_ranking_pages.dart';
 
-class RankingElement {
-  RankingElement({
+class PixivIllustrationElement {
+  PixivIllustrationElement({
     required this.title,
-    required this.author,
+    required this.artist,
     required this.pageCount,
     required this.illustId,
     required this.tags,
   });
 
-  final String title, author;
+  final String title, artist;
   final int illustId, pageCount;
   List<String> tags;
 
@@ -41,7 +41,7 @@ class RankingElement {
   String toString() {
     return 'RankingElement('
         'title: $title, '
-        'author: $author, '
+        'author: $artist, '
         'illustId: $illustId, '
         'pageCount: $pageCount, '
         'tags: $tags, '
@@ -50,7 +50,7 @@ class RankingElement {
   }
 }
 
-Future<(String, List<RankingElement>)?> fetchRanking(Dio dio) async {
+Future<(String, List<PixivIllustrationElement>)?> fetchRanking(Dio dio) async {
   try {
     final response = await dio.get(
       'https://www.pixiv.net/ranking.php?mode=daily_r18&p=1&format=json',
@@ -69,9 +69,6 @@ Future<(String, List<RankingElement>)?> fetchRanking(Dio dio) async {
 
     final List? eleList = response.data?['contents'];
 
-    // File('out/ranking.json').writeAsStringSync(jsonEncode(eleList));
-    // return;
-
     if (eleList == null || eleList.isEmpty) {
       wrn('Fetch ranking failed: empty ranking list!');
       return null;
@@ -83,14 +80,12 @@ Future<(String, List<RankingElement>)?> fetchRanking(Dio dio) async {
       // ranking elements
       eleList
           .map(
-            (e) => RankingElement(
+            (e) => PixivIllustrationElement(
               title: e['title'],
-              author: e['user_name'],
+              artist: e['user_name'],
               pageCount: int.parse(e['illust_page_count']),
               illustId: e['illust_id'],
-              tags: List<String>.from(
-                (e['tags'] as List).where((t) => t != 'R-18').map((t) => '#$t'),
-              ),
+              tags: [],
             ),
           )
           .toList(),

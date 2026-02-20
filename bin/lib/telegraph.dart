@@ -14,7 +14,7 @@ Future<String?> parseAndPublishTelegraph(
   final List<Map<String, dynamic>> nodes = [
     {
       'tag': 'p',
-      'children': ['共 ${urls.length} 张图片'],
+      'children': ['${urls.length} ${urls.length == 1 ? 'image' : 'images'}'],
     },
     ...urls.map(createImg),
   ];
