@@ -60,5 +60,6 @@ main() async {
     comment: '>$reason',
   );
 
+  cleanupTmpDirs();
   log('Done.');
 }
