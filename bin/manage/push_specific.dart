@@ -10,16 +10,13 @@ main() async {
   final artworksId = stdin.readLineSync()?.trim();
 
   stdout.write('请输入推荐理由: ');
-  final inputReason = stdin.readLineSync()?.trim();
+  final reason = stdin.readLineSync()?.trim();
 
   // 基础校验
   if (artworksId == null || artworksId.isEmpty) {
     print('错误：未输入 ID');
     return;
   }
-
-  // 将用户输入与固定的“欢迎投递”部分拼接
-  final reason = '$inputReason\n>欢迎投递：lachair50@icloud\\.com';
 
   final dio = Dio();
 
