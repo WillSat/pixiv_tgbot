@@ -53,7 +53,7 @@ class PixivIllustrationElement {
 Future<(String, List<PixivIllustrationElement>)?> fetchRanking(Dio dio) async {
   try {
     final response = await dio.get(
-      'https://www.pixiv.net/ranking.php?mode=daily_r18&p=1&format=json',
+      'https://www.pixiv.net/ranking.php?mode=male_r18&content=all&format=json&p=1',
       options: Options(
         method: 'GET',
         headers: {
