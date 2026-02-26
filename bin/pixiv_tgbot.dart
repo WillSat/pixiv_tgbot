@@ -354,14 +354,14 @@ String buildCaption({
 }) {
   final buffer = StringBuffer()
     ..write(rank == null ? '\\#${kind}\n' : '${kind} _`NO${rank}`_\n')
-    ..write('🆃 *${escapeMarkdownV2(title)}*\n')
-    ..write('🅰 \\#${escapeMarkdownV2(artist)}\n')
+    ..write('■ *${escapeMarkdownV2(title)}*\n')
+    ..write('■ \\#${escapeMarkdownV2(artist)}\n')
     ..write('>${tags.map(escapeMarkdownV2).join(' ')}\n');
 
   if (telegraphUrl != null) {
-    buffer.write('>🅻 *[Telegraph链接]($telegraphUrl)*\n');
+    buffer.write('>*[■ Telegraph链接]($telegraphUrl)*\n');
   }
-  buffer.write('>🅻 *[Pixiv链接](https://www.pixiv.net/artworks/$pixivId)*');
+  buffer.write('>*[■ Pixiv链接](https://www.pixiv.net/artworks/$pixivId)*');
 
   if (comment != null) {
     buffer.write('\n\n$comment');
