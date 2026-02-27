@@ -5,10 +5,13 @@ import 'package:dio/dio.dart';
 import '../utils.dart';
 
 final botToken = File('in/botToken.key').readAsStringSync();
+
+// !!! For test only !!!
+// final chatID = File('in/chatID-test.key').readAsStringSync();
+//
 final chatID = File('in/chatID.key').readAsStringSync();
 
-// For test
-// final chatID = File('in/chatID-test.key').readAsStringSync();
+const ifDisableNotification = false;
 
 final dio = Dio();
 
@@ -17,7 +20,12 @@ Future<void> sendTextMessage(text) async {
   try {
     final response = await dio.post(
       'https://api.telegram.org/bot$botToken/sendMessage',
-      data: {'chat_id': chatID, 'text': text, "parse_mode": "MarkdownV2"},
+      data: {
+        'chat_id': chatID,
+        'text': text,
+        'parse_mode': 'MarkdownV2',
+        'disable_notification': ifDisableNotification,
+      },
       options: Options(headers: {'Content-Type': 'application/json'}),
     );
 
@@ -44,7 +52,11 @@ Future<int> sendPhotoViaUrls(List<String> urls, {String? caption}) async {
     });
   }
 
-  final formMap = {'chat_id': chatID, 'media': jsonEncode(media)};
+  final formMap = {
+    'chat_id': chatID,
+    'media': jsonEncode(media),
+    'disable_notification': ifDisableNotification,
+  };
 
   try {
     final response = await dio.post(
@@ -89,7 +101,10 @@ Future<int> sendPhotoViaDownload(List<String> urls, {String? caption}) async {
   List<Map<String, dynamic>> media = [];
 
   try {
-    FormData formData = FormData.fromMap({'chat_id': chatID});
+    FormData formData = FormData.fromMap({
+      'chat_id': chatID,
+      'disable_notification': ifDisableNotification,
+    });
 
     for (int i = 0; i < urls.length; i++) {
       String fileName = 'photo_$i.jpg';
@@ -162,6 +177,7 @@ Future<int> sendVideo(String videoPath, {String? caption}) async {
 
   final formData = FormData.fromMap({
     'chat_id': chatID,
+    'disable_notification': ifDisableNotification,
     'video': await MultipartFile.fromFile(videoPath),
     if (caption != null) 'caption': caption,
     if (caption != null) "parse_mode": "MarkdownV2",

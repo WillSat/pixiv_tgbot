@@ -17,6 +17,7 @@ const aDelay = Duration(seconds: 4);
 const bDelay = Duration(seconds: 15);
 const cDelay = Duration(seconds: 2);
 
+// Cloudflare Proxy
 // https://******.workers.dev/?url=
 final proxy = File('in/imgProxy.key').readAsStringSync();
 
@@ -217,6 +218,8 @@ Future<void> fetchTagsInParallel(
     ')',
     '（',
     '）',
+    '〔',
+    '〕',
     '「',
     '」',
     '『',
@@ -235,6 +238,7 @@ Future<void> fetchTagsInParallel(
     '.',
     '、',
     '·',
+    '‧',
     '・',
     '&',
     '#',
