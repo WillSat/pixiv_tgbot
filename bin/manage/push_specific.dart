@@ -55,7 +55,7 @@ main() async {
 
   await uploadPhotoMessagesList(
     [r],
-    '推荐',
+    null,
     ifShowRankingNumber: false,
     comment: '>$reason',
   );

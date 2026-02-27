@@ -63,7 +63,7 @@ Future<void> handleIllustrationRanking() async {
 /// 上传插画排行榜
 Future<void> uploadPhotoMessagesList(
   List<PixivIllustrationElement> eles,
-  String kind, {
+  String? kind, {
   bool ifShowRankingNumber = true,
   String? comment,
 }) async {
@@ -343,7 +343,7 @@ Future<void> trySendVideo(String path, int rank, String caption) async {
 
 /// 构建 MarkdownV2 caption
 String buildCaption({
-  required String kind,
+  required String? kind,
   required String title,
   required String artist,
   required List<String> tags,
@@ -352,8 +352,13 @@ String buildCaption({
   String? telegraphUrl,
   String? comment,
 }) {
-  final buffer = StringBuffer()
-    ..write(rank == null ? '\\#${kind}\n' : '${kind} _`NO${rank}`_\n')
+  final buffer = StringBuffer();
+
+  if (kind != null) {
+    buffer.write(rank == null ? '\\#${kind}\n' : '${kind} _`NO${rank}`_\n');
+  }
+
+  buffer
     ..write('■ *${escapeMarkdownV2(title)}*\n')
     ..write('■ \\#${escapeMarkdownV2(artist)}\n')
     ..write('>${tags.map(escapeMarkdownV2).join(' ')}\n');
