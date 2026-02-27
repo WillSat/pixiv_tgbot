@@ -11,7 +11,7 @@ final botToken = File('in/botToken.key').readAsStringSync();
 //
 final chatID = File('in/chatID.key').readAsStringSync();
 
-const ifDisableNotification = false;
+const ifDisableNotification = true;
 
 final dio = Dio();
 
