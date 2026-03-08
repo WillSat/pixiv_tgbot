@@ -16,7 +16,7 @@ const ifDisableNotification = true;
 final dio = Dio();
 
 // Future<void> sendTextMessage(dynamic text)
-Future<int?> sendTextMessage(text) async {
+Future<int?> sendTextMessage(text, {bool isShowLinkPreview = true}) async {
   try {
     final response = await dio.post(
       'https://api.telegram.org/bot$botToken/sendMessage',
@@ -25,6 +25,7 @@ Future<int?> sendTextMessage(text) async {
         'text': text,
         'parse_mode': 'MarkdownV2',
         'disable_notification': ifDisableNotification,
+        'link_preview_options': {'is_disabled': !isShowLinkPreview},
       },
       options: Options(headers: {'Content-Type': 'application/json'}),
     );

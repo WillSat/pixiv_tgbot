@@ -6,12 +6,9 @@ version: 1.0.0
 environment:
   sdk: ^3.8.2
 
-# Add regular dependencies here.
 dependencies:
-  dio: ^5.9.0
-  archive: ^4.0.7
-  image: ^4.5.4
-  # path: ^1.8.0
+  dio: ^5.9.2
+  archive: ^4.0.9
 
 dev_dependencies:
   lints: ^5.0.0

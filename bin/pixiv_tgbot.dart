@@ -413,7 +413,7 @@ Future<void> pushShortcut(List<int?> msgIdList, List<String> nameList) async {
       s.write('\n');
     }
   }
-  await sendTextMessage(s.toString());
+  await sendTextMessage(s.toString(), isShowLinkPreview: false);
 }
 
 /// 清理临时目录
