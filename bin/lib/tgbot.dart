@@ -16,7 +16,7 @@ const ifDisableNotification = true;
 final dio = Dio();
 
 // Future<void> sendTextMessage(dynamic text)
-Future<void> sendTextMessage(text) async {
+Future<int?> sendTextMessage(text) async {
   try {
     final response = await dio.post(
       'https://api.telegram.org/bot$botToken/sendMessage',
@@ -33,9 +33,15 @@ Future<void> sendTextMessage(text) async {
       wrn(
         'Failed to send text message [${response.statusCode}:${response.statusMessage}]: ${response.data}',
       );
+      return null;
     }
+
+    // Success
+    // 返回消息id
+    return response.data['result']['message_id'] as int;
   } catch (e) {
     wrn('Failed to send text message: $e');
+    return null;
   }
 }
 

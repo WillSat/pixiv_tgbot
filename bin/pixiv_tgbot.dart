@@ -1,5 +1,3 @@
-// waitwill@2025-2026
-
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:path/path.dart' as p;
@@ -25,9 +23,14 @@ final dio = Dio();
 
 Future<void> main() async {
   // 插画
-  await handleIllustrationRanking();
+  final msgId1 = await handleIllustrationRanking();
   // 动图
-  await handleUgoiraRanking();
+  final msgId2 = await handleUgoiraRanking();
+
+  await pushShortcut(
+    [msgId1, msgId2],
+    ['今日插画榜 Illustration Shortcut', '今日动图榜 GIF Shortcut'],
+  );
 
   // 清理临时文件
   cleanupTmpDirs();
@@ -39,15 +42,20 @@ Future<void> main() async {
   处理插画排行榜
   -----------
 */
-Future<void> handleIllustrationRanking() async {
+Future<int?> handleIllustrationRanking() async {
   final rankingData = await fetchRanking(dio);
   if (rankingData == null) {
     wrn('Failed to fetch illustration ranking!');
     await barkFail();
-    return;
+    return null;
   }
 
   final (date, elements) = rankingData;
+
+  // for test
+  // var (date, elements) = rankingData;
+  // elements = elements.sublist(49);
+  // for test
 
   for (int i = 0; i < elements.length; i++) {
     final obj = elements[i];
@@ -56,9 +64,10 @@ Future<void> handleIllustrationRanking() async {
 
   await fetchTagsInParallel(elements);
 
-  await sendTextMessage('插画排行榜日期：$date');
+  final msgId = await sendTextMessage('插画排行榜日期：$date');
   await uploadPhotoMessagesList(elements, '插画');
   log('Ranking Done.');
+  return msgId;
 }
 
 /// 上传插画排行榜
@@ -173,15 +182,20 @@ Future<void> trySendPhotos(
   处理动图排行榜
   -----------
 */
-Future<void> handleUgoiraRanking() async {
+Future<int?> handleUgoiraRanking() async {
   final ugoiraData = await fetchUgoiraRanking(dio);
   if (ugoiraData == null) {
     wrn('Failed to fetch ugoira ranking!');
     await barkFail();
-    return;
+    return null;
   }
 
   final (date, elements) = ugoiraData;
+
+  // for test
+  // var (date, elements) = ugoiraData;
+  // elements = elements.sublist(49);
+  // for test
 
   await fetchTagsInParallel(elements);
 
@@ -200,7 +214,9 @@ Future<void> handleUgoiraRanking() async {
     paths.addAll(results);
   }
 
+  final msgId = await sendTextMessage('动图排行榜日期：$date');
   await UploadUgoiraRanking(date, elements, paths);
+  return msgId;
 }
 
 // 批量获取翻译标签（并行，并处理标签格式）
@@ -301,8 +317,6 @@ Future<void> UploadUgoiraRanking(
   List<UgoiraRankingElement> eles,
   List<String?> paths,
 ) async {
-  await sendTextMessage('动图排行榜日期：$date');
-
   for (int i = 0; i < eles.length; i++) {
     final obj = eles[i];
     final path = paths[i];
@@ -377,6 +391,29 @@ String buildCaption({
   }
 
   return buffer.toString();
+}
+
+Future<void> pushShortcut(List<int?> msgIdList, List<String> nameList) async {
+  final chatUrl = File('in/chatUrl.key').readAsStringSync();
+
+  final s = StringBuffer();
+
+  String timestamp = DateTime.now()
+      .toUtc()
+      .toString()
+      .replaceAll('-', '\\-')
+      .replaceAll('.', '\\.');
+  s.write('>UTC $timestamp\n');
+
+  for (var i = 0; i < msgIdList.length; i++) {
+    if (msgIdList[0] != null) {
+      s.write('*[⇪ ${nameList[i]}]($chatUrl${msgIdList[i]})*');
+    }
+    if (i + 1 < msgIdList.length) {
+      s.write('\n');
+    }
+  }
+  await sendTextMessage(s.toString());
 }
 
 /// 清理临时目录
