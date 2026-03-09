@@ -21,7 +21,9 @@ final proxy = File('in/imgProxy.key').readAsStringSync();
 
 final dio = Dio();
 
-const sign = '❑';
+const defaultSign = '▎';
+const linkSign = '■';
+const shortcutSign = '⇪';
 
 Future<void> main() async {
   // 插画
@@ -377,21 +379,23 @@ String buildCaption({
   final buffer = StringBuffer();
 
   if (kind != null) {
-    buffer.write(rank == null ? '\\#${kind}\n' : '${kind} _`NO${rank}`_\n');
+    buffer.write(rank == null ? '\\#${kind}\n' : '${kind} _`№${rank}`_\n');
   }
 
   buffer
-    ..write('$sign *${escapeMarkdownV2(title)}*\n')
-    ..write('$sign \\#${escapeMarkdownV2(artist)}\n');
+    ..write('$defaultSign*${escapeMarkdownV2(title)}*\n')
+    ..write('$defaultSign\\#${escapeMarkdownV2(artist)}\n');
 
   if (tags.length >= 0) {
     buffer.write('>${tags.map(escapeMarkdownV2).join(' ')}\n');
   }
 
   if (telegraphUrl != null) {
-    buffer.write('>*[$sign Telegraph链接]($telegraphUrl)*\n');
+    buffer.write('>*[$linkSign Telegraph链接]($telegraphUrl)*\n');
   }
-  buffer.write('>*[$sign Pixiv链接](https://www.pixiv.net/artworks/$pixivId)*');
+  buffer.write(
+    '>*[$linkSign Pixiv链接](https://www.pixiv.net/artworks/$pixivId)*',
+  );
 
   if (comment != null) {
     buffer.write('\n\n$comment');
@@ -407,7 +411,7 @@ Future<void> pushShortcut(List<int?> msgIdList, List<String> nameList) async {
 
   for (var i = 0; i < msgIdList.length; i++) {
     if (msgIdList[0] != null) {
-      s.write('*[⇪ ${nameList[i]}]($chatUrl${msgIdList[i]})*\n');
+      s.write('*[$shortcutSign ${nameList[i]}]($chatUrl${msgIdList[i]})*\n');
     }
   }
 
