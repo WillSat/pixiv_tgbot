@@ -21,6 +21,8 @@ final proxy = File('in/imgProxy.key').readAsStringSync();
 
 final dio = Dio();
 
+const sign = '■';
+
 Future<void> main() async {
   // 插画
   final msgId1 = await handleIllustrationRanking();
@@ -253,9 +255,11 @@ Future<void> fetchTagsInParallel(
     '。',
     '.',
     '、',
+    '•',
     '·',
     '‧',
     '・',
+    '※',
     '&',
     '#',
     '?',
@@ -377,14 +381,17 @@ String buildCaption({
   }
 
   buffer
-    ..write('■ *${escapeMarkdownV2(title)}*\n')
-    ..write('■ \\#${escapeMarkdownV2(artist)}\n')
-    ..write('>${tags.map(escapeMarkdownV2).join(' ')}\n');
+    ..write('$sign *${escapeMarkdownV2(title)}*\n')
+    ..write('$sign \\#${escapeMarkdownV2(artist)}\n');
+
+  if (tags.length >= 0) {
+    buffer.write('>${tags.map(escapeMarkdownV2).join(' ')}\n');
+  }
 
   if (telegraphUrl != null) {
-    buffer.write('>*[■ Telegraph链接]($telegraphUrl)*\n');
+    buffer.write('>*[$sign Telegraph链接]($telegraphUrl)*\n');
   }
-  buffer.write('>*[■ Pixiv链接](https://www.pixiv.net/artworks/$pixivId)*');
+  buffer.write('>*[$sign Pixiv链接](https://www.pixiv.net/artworks/$pixivId)*');
 
   if (comment != null) {
     buffer.write('\n\n$comment');
@@ -398,21 +405,18 @@ Future<void> pushShortcut(List<int?> msgIdList, List<String> nameList) async {
 
   final s = StringBuffer();
 
+  for (var i = 0; i < msgIdList.length; i++) {
+    if (msgIdList[0] != null) {
+      s.write('*[⇪ ${nameList[i]}]($chatUrl${msgIdList[i]})*\n');
+    }
+  }
+
   String timestamp = DateTime.now()
       .toUtc()
       .toString()
       .replaceAll('-', '\\-')
       .replaceAll('.', '\\.');
-  s.write('>UTC $timestamp\n');
-
-  for (var i = 0; i < msgIdList.length; i++) {
-    if (msgIdList[0] != null) {
-      s.write('*[⇪ ${nameList[i]}]($chatUrl${msgIdList[i]})*');
-    }
-    if (i + 1 < msgIdList.length) {
-      s.write('\n');
-    }
-  }
+  s.write('>UTC $timestamp');
   await sendTextMessage(s.toString(), isShowLinkPreview: false);
 }
 
