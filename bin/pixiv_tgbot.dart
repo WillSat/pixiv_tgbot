@@ -21,7 +21,7 @@ final proxy = File('in/imgProxy.key').readAsStringSync();
 
 final dio = Dio();
 
-const sign = '■';
+const sign = '❑';
 
 Future<void> main() async {
   // 插画
