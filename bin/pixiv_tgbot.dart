@@ -13,7 +13,7 @@ import 'lib/notify.dart';
 
 const aDelay = Duration(seconds: 4);
 const bDelay = Duration(seconds: 12);
-const cDelay = Duration(seconds: 4);
+const cDelay = Duration(seconds: 10);
 
 // Cloudflare Proxy
 // https://******.workers.dev/?url=
