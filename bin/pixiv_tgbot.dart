@@ -337,9 +337,6 @@ Future<void> UploadUgoiraRanking(
 <blockquote expandable>${currentEles.map((ele) => '$defaultSign<a href="https://pixiv.net/i/${ele.illustId}"><b>${escapeHTML(ele.title)}</b></a>\n$defaultSign#${escapeHTML(ele.artist)}').join('\n\n')}</blockquote>
 <blockquote expandable>${currentEles.map((ele) => ele.tags.join(' ')).join('|')}</blockquote>''';
 
-    print(caption);
-    print(caption.length);
-
     final List<String> validPaths = [];
     for (int j = 0; j < currentEles.length; j++) {
       final path = currentPaths[j];
