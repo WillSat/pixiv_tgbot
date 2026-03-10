@@ -57,7 +57,7 @@ main() async {
     [r],
     null,
     ifShowRankingNumber: false,
-    comment: '>$reason',
+    comment: '<blockquote>$reason</blockquote>',
   );
 
   cleanupTmpDirs();

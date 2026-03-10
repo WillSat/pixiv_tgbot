@@ -6,17 +6,17 @@ class UgoiraRankingElement {
     required this.title,
     required this.tags,
     required this.illustId,
-    required this.author,
+    required this.artist,
   });
 
   final String title;
-  final String author;
+  final String artist;
   List<String> tags;
   final int illustId;
 
   @override
   String toString() {
-    return 'UgoiraRankingElement(title: $title, tags: $tags, illustId: $illustId, userName: $author)';
+    return 'UgoiraRankingElement(title: $title, tags: $tags, illustId: $illustId, userName: $artist)';
   }
 }
 
@@ -60,7 +60,7 @@ Future<(String, List<UgoiraRankingElement>)?> fetchUgoiraRanking(
                   )
                 : <String>[],
             illustId: item['illust_id'] ?? 0,
-            author: item['user_name'] ?? '',
+            artist: item['user_name'] ?? '',
           );
         }).toList(),
       );

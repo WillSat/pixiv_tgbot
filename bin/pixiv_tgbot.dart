@@ -12,8 +12,8 @@ import 'lib/tgbot.dart';
 import 'lib/notify.dart';
 
 const aDelay = Duration(seconds: 4);
-const bDelay = Duration(seconds: 15);
-const cDelay = Duration(seconds: 2);
+const bDelay = Duration(seconds: 12);
+const cDelay = Duration(seconds: 4);
 
 // Cloudflare Proxy
 // https://******.workers.dev/?url=
@@ -58,7 +58,7 @@ Future<int?> handleIllustrationRanking() async {
 
   // for test
   // var (date, elements) = rankingData;
-  // elements = elements.sublist(49);
+  // elements = elements.sublist(48);
   // for test
 
   for (int i = 0; i < elements.length; i++) {
@@ -198,7 +198,7 @@ Future<int?> handleUgoiraRanking() async {
 
   // for test
   // var (date, elements) = ugoiraData;
-  // elements = elements.sublist(49);
+  // elements = elements.sublist(39);
   // for test
 
   await fetchTagsInParallel(elements);
@@ -238,6 +238,10 @@ Future<void> fetchTagsInParallel(
     ')',
     '（',
     '）',
+    // HTML
+    '<',
+    '>',
+    '&',
     '〔',
     '〕',
     '「',
@@ -262,12 +266,9 @@ Future<void> fetchTagsInParallel(
     '‧',
     '・',
     '※',
-    '&',
     '#',
     '?',
     '？',
-    '<',
-    '>',
     '*',
     '~',
     '❤',
@@ -317,29 +318,40 @@ Future<void> fetchTagsInParallel(
   }
 }
 
-/// 上传动图排行榜
+/// 上传动图排行榜（批量分组发送）
 Future<void> UploadUgoiraRanking(
   String date,
   List<UgoiraRankingElement> eles,
   List<String?> paths,
 ) async {
-  for (int i = 0; i < eles.length; i++) {
-    final obj = eles[i];
-    final path = paths[i];
+  const int groupSize = 5;
 
-    final mdCaption = buildCaption(
-      kind: '动图',
-      rank: i + 1,
-      title: obj.title,
-      artist: obj.author,
-      tags: obj.tags,
-      pixivId: obj.illustId,
-    );
+  for (int i = 0; i < eles.length; i += groupSize) {
+    // 获取当前分片
+    final int end = (i + groupSize < eles.length) ? i + groupSize : eles.length;
+    final List<UgoiraRankingElement> currentEles = eles.sublist(i, end);
+    final List<String?> currentPaths = paths.sublist(i, end);
 
-    if (path == null || !File(path).existsSync()) {
-      await sendTextMessage('（此动图无法上传）\n$mdCaption');
-    } else {
-      await trySendVideo(path, i + 1, mdCaption);
+    final caption =
+        '''动图组 <i>№${i + 1} - №${i + currentEles.length}</i>
+<blockquote expandable>${currentEles.map((ele) => '$defaultSign<a href="https://pixiv.net/i/${ele.illustId}"><b>${escapeHTML(ele.title)}</b></a>\n$defaultSign#${escapeHTML(ele.artist)}').join('\n\n')}</blockquote>
+<blockquote expandable>${currentEles.map((ele) => ele.tags.join(' ')).join('|')}</blockquote>''';
+
+    print(caption);
+    print(caption.length);
+
+    final List<String> validPaths = [];
+    for (int j = 0; j < currentEles.length; j++) {
+      final path = currentPaths[j];
+
+      if (path != null && File(path).existsSync()) {
+        validPaths.add(path);
+      }
+    }
+
+    // 执行批量发送
+    if (validPaths.isNotEmpty) {
+      await trySendMediaGroup(validPaths, caption);
     }
 
     await Future.delayed(cDelay);
@@ -348,57 +360,58 @@ Future<void> UploadUgoiraRanking(
   log('Ugoira Ranking Done.');
 }
 
-/// 尝试发送视频到 TG
-Future<void> trySendVideo(String path, int rank, String caption) async {
+/// 尝试发送媒体组到 TG
+Future<void> trySendMediaGroup(List<String> paths, String captions) async {
   const maxTries = 3;
   for (int attempt = 0; attempt < maxTries; attempt++) {
-    final resCode = await sendVideo(path, caption: caption);
+    final resCode = await sendMediaGroup(paths, caption: captions);
+
     if (resCode == 1) {
-      log('Video message sent. rank[$rank]');
+      log('Media group sent successfully. Count: ${paths.length}');
       return;
-    } else if (resCode == 400 && attempt < maxTries - 1) {
+    } else if (resCode == 400 || resCode == 429) {
+      // 429 是 Too Many Requests
       await Future.delayed(bDelay);
     } else {
-      await sendTextMessage('（动图无法上传）\n$caption');
+      log('Failed to send media group after $attempt tries.');
       return;
     }
   }
 }
 
-/// 构建 MarkdownV2 caption
+/// 构建 HTML caption
 String buildCaption({
-  required String? kind,
+  String? kind,
   required String title,
   required String artist,
   required List<String> tags,
   required int pixivId,
-  int? rank,
   String? telegraphUrl,
+  int? rank,
   String? comment,
 }) {
   final buffer = StringBuffer();
 
   if (kind != null) {
-    buffer.write(rank == null ? '\\#${kind}\n' : '${kind} _`№${rank}`_\n');
+    buffer.write(
+      rank == null
+          ? '#${kind}・<a href="$telegraphUrl"><b>Telegraph</b></a>\n'
+          : '${kind} <i>№${rank}</i>・<a href="$telegraphUrl"><b>Telegraph</b></a>\n',
+    );
   }
 
   buffer
-    ..write('$defaultSign*${escapeMarkdownV2(title)}*\n')
-    ..write('$defaultSign\\#${escapeMarkdownV2(artist)}\n');
+    ..write(
+      '$defaultSign<a href="https://pixiv.net/i/$pixivId"><b>${escapeHTML(title)}</b></a>\n',
+    )
+    ..write('$defaultSign#${escapeHTML(artist)}\n');
 
   if (tags.length >= 0) {
-    buffer.write('>${tags.map(escapeMarkdownV2).join(' ')}\n');
+    buffer.write('<blockquote>${tags.join(' ')}</blockquote>');
   }
-
-  if (telegraphUrl != null) {
-    buffer.write('>*[$linkSign Telegraph链接]($telegraphUrl)*\n');
-  }
-  buffer.write(
-    '>*[$linkSign Pixiv链接](https://www.pixiv.net/artworks/$pixivId)*',
-  );
 
   if (comment != null) {
-    buffer.write('\n\n$comment');
+    buffer.write('\n$comment');
   }
 
   return buffer.toString();
@@ -411,16 +424,14 @@ Future<void> pushShortcut(List<int?> msgIdList, List<String> nameList) async {
 
   for (var i = 0; i < msgIdList.length; i++) {
     if (msgIdList[0] != null) {
-      s.write('*[$shortcutSign ${nameList[i]}]($chatUrl${msgIdList[i]})*\n');
+      s.write(
+        '<a href="$chatUrl${msgIdList[i]}"><b>$shortcutSign ${nameList[i]}</b></a>\n',
+      );
     }
   }
 
-  String timestamp = DateTime.now()
-      .toUtc()
-      .toString()
-      .replaceAll('-', '\\-')
-      .replaceAll('.', '\\.');
-  s.write('>UTC $timestamp');
+  String timestamp = DateTime.now().toUtc().toString();
+  s.write('<blockquote><code>UTC $timestamp</code></blockquote>');
   await sendTextMessage(s.toString(), isShowLinkPreview: false);
 }
 

@@ -46,12 +46,12 @@ String getExt(List<int> bytes) {
   return ext;
 }
 
-String escapeMarkdownV2(String text) {
-  final specialChars = r'_*[]()~`>#+-=|{}.!';
-  return text.replaceAllMapped(
-    RegExp('([${RegExp.escape(specialChars)}])'),
-    (Match m) => '\\${m[0]}',
-  );
+String escapeHTML(String text) {
+  return text
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
 }
 
 bool isNumeric(String str) {

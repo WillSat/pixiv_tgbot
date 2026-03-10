@@ -4,7 +4,7 @@ import '../utils.dart';
 import 'package:path/path.dart' as p;
 import 'package:archive/archive_io.dart';
 
-const crf = 22;
+const crf = 23;
 
 final proxy = File('in/imgProxy.key').readAsStringSync();
 final cookie = File('in/phpsessid.key').readAsStringSync();
@@ -117,6 +117,11 @@ Future<String?> downloadUgoiraAsMp4(String pid) async {
     return null;
   }
 }
+
+// For test
+// Future<String?> downloadUgoiraAsMp4(String pid) async {
+//   return '${Directory('${Directory.current.path}/temp_$pid').path}/$pid-$crf.mp4';
+// }
 
 class FrameInfo {
   final String file;
