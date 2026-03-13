@@ -11,9 +11,9 @@ import 'lib/get_tags_translated.dart';
 import 'lib/tgbot.dart';
 import 'lib/notify.dart';
 
-const aDelay = Duration(seconds: 4);
-const bDelay = Duration(seconds: 12);
-const cDelay = Duration(seconds: 10);
+const aDelay = Duration(seconds: 5);
+const bDelay = Duration(seconds: 15);
+const cDelay = Duration(seconds: 15);
 
 // Cloudflare Proxy
 // https://******.workers.dev/?url=
@@ -30,6 +30,8 @@ Future<void> main() async {
   final msgId1 = await handleIllustrationRanking();
   // 动图
   final msgId2 = await handleUgoiraRanking();
+
+  log('$msgId1 $msgId2');
 
   await pushShortcut(
     [msgId1, msgId2],
