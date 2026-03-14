@@ -13,7 +13,7 @@ import 'lib/notify.dart';
 
 const aDelay = Duration(seconds: 5);
 const bDelay = Duration(seconds: 15);
-const cDelay = Duration(seconds: 15);
+const cDelay = Duration(seconds: 16);
 
 // Cloudflare Proxy
 // https://******.workers.dev/?url=
@@ -33,6 +33,7 @@ Future<void> main() async {
 
   log('$msgId1 $msgId2');
 
+  await Future.delayed(bDelay);
   await pushShortcut(
     [msgId1, msgId2],
     ['今日插画榜 Illustration Shortcut', '今日动图榜 GIF Shortcut'],
