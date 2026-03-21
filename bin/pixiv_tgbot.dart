@@ -36,7 +36,7 @@ Future<void> main() async {
   await Future.delayed(bDelay);
   await pushShortcut(
     [msgId1, msgId2],
-    ['今日插画榜 Illustration Shortcut', '今日动图榜 GIF Shortcut'],
+    ['插画排行 Illustration Shortcut', '动图排行 GIF Shortcut'],
   );
 
   // 清理临时文件
