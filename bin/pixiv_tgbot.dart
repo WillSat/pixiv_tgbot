@@ -25,6 +25,8 @@ const defaultSign = '▎';
 const linkSign = '■';
 const shortcutSign = '⇪';
 
+const illustrationType = [0, 1];
+
 Future<void> main() async {
   // 插画
   final msgId1 = await handleIllustrationRanking();
@@ -66,7 +68,9 @@ Future<int?> handleIllustrationRanking() async {
 
   for (int i = 0; i < elements.length; i++) {
     final obj = elements[i];
-    await obj.getPagesUri(dio);
+    if (illustrationType.contains(obj.illustType)) {
+      await obj.getPagesUri(dio);
+    }
   }
 
   await fetchTagsInParallel(elements);
@@ -87,30 +91,32 @@ Future<void> uploadPhotoMessagesList(
   for (int i = 0; i < eles.length; i++) {
     final obj = eles[i];
 
-    // 发布到 Telegraph 获取返回链接
-    final telegraphUrl = await parseAndPublishTelegraph(
-      '${obj.title} - ${obj.artist}',
-      obj.originalPageUriList.map((uri) => proxy + uri).toList(),
-    );
+    if (illustrationType.contains(obj.illustType)) {
+      // 发布到 Telegraph 获取返回链接
+      final telegraphUrl = await parseAndPublishTelegraph(
+        '${obj.title} - ${obj.artist}',
+        obj.originalPageUriList.map((uri) => proxy + uri).toList(),
+      );
 
-    // 构建文案
-    final mdCaption = buildCaption(
-      kind: kind,
-      rank: ifShowRankingNumber ? i + 1 : null,
-      title: obj.title,
-      artist: obj.artist,
-      tags: obj.tags,
-      telegraphUrl: telegraphUrl,
-      pixivId: obj.illustId,
-      comment: comment,
-    );
+      // 构建文案
+      final mdCaption = buildCaption(
+        kind: kind,
+        rank: ifShowRankingNumber ? i + 1 : null,
+        title: obj.title,
+        artist: obj.artist,
+        tags: obj.tags,
+        telegraphUrl: telegraphUrl,
+        pixivId: obj.illustId,
+        comment: comment,
+      );
 
-    // 发送图片消息
-    await trySendPhotos(obj, i + 1, mdCaption);
+      // 发送图片消息
+      await trySendPhotos(obj, i + 1, mdCaption);
 
-    // 如果列表中存在下一个执行 delay
-    if (i + 1 < eles.length) {
-      await Future.delayed(aDelay);
+      // 如果列表中存在下一个执行 delay
+      if (i + 1 < eles.length) {
+        await Future.delayed(aDelay);
+      }
     }
   }
 }
@@ -395,8 +401,8 @@ String buildCaption({
   if (kind != null) {
     buffer.write(
       rank == null
-          ? '#${kind}・<a href="$telegraphUrl"><b>Telegraph</b></a>\n'
-          : '${kind} <i>№${rank}</i>・<a href="$telegraphUrl"><b>Telegraph</b></a>\n',
+          ? '#${kind}\n<blockquote><a href="$telegraphUrl">Telegraph</a></blockquote>\n'
+          : '${kind} <i>№${rank}</i>\n<blockquote><a href="$telegraphUrl">Telegraph</a></blockquote>\n',
     );
   }
 

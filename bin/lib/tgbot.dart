@@ -7,9 +7,9 @@ import '../utils.dart';
 final botToken = File('in/botToken.key').readAsStringSync();
 
 // !!! For test only !!!
-// final chatID = File('in/chatID-test.key').readAsStringSync();
+final chatID = File('in/chatID-test.key').readAsStringSync();
 //
-final chatID = File('in/chatID.key').readAsStringSync();
+// final chatID = File('in/chatID.key').readAsStringSync();
 
 const ifDisableNotification = true;
 

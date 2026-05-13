@@ -47,6 +47,7 @@ main() async {
     artist: bodyMap['userName'],
     pageCount: bodyMap['pageCount'],
     illustId: int.tryParse(bodyMap['illustId'] ?? artworksId)!,
+    illustType: int.parse(bodyMap['illust_type']),
     tags: [],
   );
 

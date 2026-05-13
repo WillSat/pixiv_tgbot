@@ -8,11 +8,12 @@ class PixivIllustrationElement {
     required this.artist,
     required this.pageCount,
     required this.illustId,
+    required this.illustType,
     required this.tags,
   });
 
   final String title, artist;
-  final int illustId, pageCount;
+  final int illustId, pageCount, illustType;
   List<String> tags;
 
   List<String> originalPageUriList = [];
@@ -43,6 +44,7 @@ class PixivIllustrationElement {
         'title: $title, '
         'author: $artist, '
         'illustId: $illustId, '
+        'illustType: $illustType, '
         'pageCount: $pageCount, '
         'tags: $tags, '
         'gotPagesUri: $gotPagesUri'
@@ -85,6 +87,7 @@ Future<(String, List<PixivIllustrationElement>)?> fetchRanking(Dio dio) async {
               artist: e['user_name'],
               pageCount: int.parse(e['illust_page_count']),
               illustId: e['illust_id'],
+              illustType: int.parse(e['illust_type']),
               tags: [],
             ),
           )
