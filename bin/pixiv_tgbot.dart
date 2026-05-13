@@ -1,75 +1,66 @@
 import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:path/path.dart' as p;
 
 import 'utils.dart';
-import 'lib/fetch_ranking.dart';
-import 'lib/fetch_ugoira_ranking.dart';
-import 'lib/get_ugoira_ranking_mp4.dart';
-import 'lib/telegraph.dart';
-import 'lib/get_tags_translated.dart';
-import 'lib/tgbot.dart';
-import 'lib/notify.dart';
+import 'lib/config.dart';
+import 'lib/models.dart';
+import 'lib/pixiv_api.dart';
+import 'lib/ugoira.dart';
+import 'lib/telegraph_api.dart';
+import 'lib/telegram_api.dart';
+import 'lib/notifier.dart';
 
-const aDelay = Duration(seconds: 5);
-const bDelay = Duration(seconds: 15);
-const cDelay = Duration(seconds: 16);
+// ── Delays ──
 
-// Cloudflare Proxy
-// https://******.workers.dev/?url=
-final proxy = File('in/imgProxy.key').readAsStringSync();
+const _photoDelay = Duration(seconds: 5);
+const _rateLimitDelay = Duration(seconds: 15);
+const _ugoiraGroupDelay = Duration(seconds: 16);
 
-final dio = Dio();
+// ── Markers ──
 
-const defaultSign = '▎';
-const linkSign = '■';
-const shortcutSign = '⇪';
+const _defaultSign = '▎';
+const _shortcutSign = '⇪';
 
-const illustrationType = [0, 1];
+// ── Only illust types 0 and 1 are actual illustrations (not manga/ugoira) ──
+const _illustrationTypes = {0, 1};
+
+// ============================================================================
+//  Entry
+// ============================================================================
 
 Future<void> main() async {
-  // 插画
   final msgId1 = await handleIllustrationRanking();
-  // 动图
   final msgId2 = await handleUgoiraRanking();
 
-  log('$msgId1 $msgId2');
-
-  await Future.delayed(bDelay);
+  await Future.delayed(_rateLimitDelay);
   await pushShortcut(
     [msgId1, msgId2],
     ['插画排行 Illustration Shortcut', '动图排行 GIF Shortcut'],
   );
 
-  // 清理临时文件
   cleanupTmpDirs();
   await barkSuccess();
 }
 
-/*
-  -----------
-  处理插画排行榜
-  -----------
-*/
+// ============================================================================
+//  Illustration ranking
+// ============================================================================
+
 Future<int?> handleIllustrationRanking() async {
-  final rankingData = await fetchRanking(dio);
+  final rankingData = await fetchIllustrationRanking();
   if (rankingData == null) {
-    wrn('Failed to fetch illustration ranking!');
+    WRN('Failed to fetch illustration ranking!');
     await barkFail();
     return null;
   }
 
   final (date, elements) = rankingData;
 
-  // for test
-  // var (date, elements) = rankingData;
-  // elements = elements.sublist(48);
-  // for test
-
-  for (int i = 0; i < elements.length; i++) {
-    final obj = elements[i];
-    if (illustrationType.contains(obj.illustType)) {
-      await obj.getPagesUri(dio);
+  // Fetch page URLs for each illustration
+  for (final obj in elements) {
+    if (_illustrationTypes.contains(obj.illustType)) {
+      final pagesData = await getIllustPages(obj.illustId);
+      obj.parsePagesData(pagesData);
     }
   }
 
@@ -77,97 +68,99 @@ Future<int?> handleIllustrationRanking() async {
 
   final msgId = await sendTextMessage('插画排行榜日期：$date');
   await uploadPhotoMessagesList(elements, '插画');
-  log('Ranking Done.');
+  LOG('Ranking Done.');
   return msgId;
 }
 
-/// 上传插画排行榜
+/// Upload illustration ranking entries as photo messages.
 Future<void> uploadPhotoMessagesList(
   List<PixivIllustrationElement> eles,
   String? kind, {
-  bool ifShowRankingNumber = true,
+  bool showRank = true,
   String? comment,
 }) async {
-  for (int i = 0; i < eles.length; i++) {
+  for (var i = 0; i < eles.length; i++) {
     final obj = eles[i];
 
-    if (illustrationType.contains(obj.illustType)) {
-      // 发布到 Telegraph 获取返回链接
-      final telegraphUrl = await parseAndPublishTelegraph(
-        '${obj.title} - ${obj.artist}',
-        obj.originalPageUriList.map((uri) => proxy + uri).toList(),
-      );
+    if (!_illustrationTypes.contains(obj.illustType)) continue;
 
-      // 构建文案
-      final mdCaption = buildCaption(
-        kind: kind,
-        rank: ifShowRankingNumber ? i + 1 : null,
-        title: obj.title,
-        artist: obj.artist,
-        tags: obj.tags,
-        telegraphUrl: telegraphUrl,
-        pixivId: obj.illustId,
-        comment: comment,
-      );
+    // Publish to Telegraph and get the link back
+    final proxyUrls = obj.originalPageUriList
+        .map((uri) => Config.proxy + uri)
+        .toList();
+    final telegraphUrl = await publishToTelegraph(
+      '${obj.title} - ${obj.artist}',
+      proxyUrls,
+    );
 
-      // 发送图片消息
-      await trySendPhotos(obj, i + 1, mdCaption);
+    // Build HTML caption
+    final caption = buildCaption(
+      kind: kind,
+      rank: showRank ? i + 1 : null,
+      title: obj.title,
+      artist: obj.artist,
+      tags: obj.tags,
+      telegraphUrl: telegraphUrl,
+      pixivId: obj.illustId,
+      comment: comment,
+    );
 
-      // 如果列表中存在下一个执行 delay
-      if (i + 1 < eles.length) {
-        await Future.delayed(aDelay);
-      }
+    await trySendPhotos(obj, i + 1, caption);
+
+    if (i + 1 < eles.length) {
+      await Future.delayed(_photoDelay);
     }
   }
 }
 
-/// 发送图片
+/// Attempt to send photos to Telegram, falling back to Telegraph-only text.
 Future<void> trySendPhotos(
   PixivIllustrationElement obj,
   int rank,
   String caption,
 ) async {
-  // 作品拥有十张及以下照片，尝试将原图发送到 Telegram
+  // Only try sending photos if the work has ≤10 pages
   if (obj.originalPageUriList.length <= 10) {
-    // 发送 Telegram 逻辑
     final originalUrls = obj.originalPageUriList
-        .map((uri) => proxy + uri)
+        .map((u) => Config.proxy + u)
         .toList();
     final regularUrls = obj.regularPageUriList
-        .map((uri) => proxy + uri)
+        .map((u) => Config.proxy + u)
         .toList();
 
-    const knownFailCodes = [429, 400, -1, -2];
     const maxRetries = 5;
-    var sendFn = sendPhotoViaUrls;
+    final knownFailCodes = {429, 400, -1, -2};
+
+    var sendFn = sendPhotoGroupViaUrls;
     var currentUrls = originalUrls;
     final attemptResults = <int>[];
 
-    for (int attempt = 1; attempt <= maxRetries; attempt++) {
+    for (var attempt = 1; attempt <= maxRetries; attempt++) {
       final resCode = await sendFn(currentUrls, caption: caption);
       attemptResults.add(resCode);
 
-      if (resCode == 1) break;
+      if (resCode == 1) break; // success
 
       if (!knownFailCodes.contains(resCode)) {
-        wrn('Unknown resCode: $attemptResults, turn to Telegraph!');
+        WRN('Unknown resCode: $attemptResults, turn to Telegraph!');
         break;
       }
 
-      if (attemptResults.where((i) => i == -2).length == 2) {
-        wrn('Photos too big: $attemptResults, turn to Telegraph!');
+      if (attemptResults.where((c) => c == -2).length == 2) {
+        WRN('Photos too big: $attemptResults, turn to Telegraph!');
         break;
       }
 
+      // Apply the retry strategy
       switch (resCode) {
         case 429:
-          await Future.delayed(bDelay);
+          await Future.delayed(_rateLimitDelay);
           break;
         case 400:
-          await Future.delayed(aDelay);
+          await Future.delayed(_photoDelay);
           break;
         case -1:
-          sendFn = sendPhotoViaDownload;
+          sendFn = sendPhotoGroupViaDownload;
           break;
         case -2:
           currentUrls = regularUrls;
@@ -176,43 +169,36 @@ Future<void> trySendPhotos(
     }
 
     if (attemptResults.last == 1) {
-      // 成功
-      log('Photo message sent successfully. rank[$rank]');
-      return null;
-    } else {
-      // 发送失败，只发布到 Telegraph（if {} 外逻辑）
-      wrn('Failed to send photos to Telegram. rank[$rank]');
+      LOG('Photo message sent successfully. rank[$rank]');
+      return;
     }
+    WRN('Failed to send photos to Telegram. rank[$rank]');
   }
 
-  // 图片过多 or 发送失败
+  // Fallback: send caption as text (with Telegraph link)
   await sendTextMessage(caption);
-  log('Only Telegraph message sent. rank[$rank]');
+  LOG('Only Telegraph message sent. rank[$rank]');
 }
 
-/*
-  -----------
-  处理动图排行榜
-  -----------
-*/
+// ============================================================================
+//  Ugoira ranking
+// ============================================================================
+
 Future<int?> handleUgoiraRanking() async {
-  final ugoiraData = await fetchUgoiraRanking(dio);
+  final ugoiraData = await fetchUgoiraRanking();
   if (ugoiraData == null) {
-    wrn('Failed to fetch ugoira ranking!');
+    WRN('Failed to fetch ugoira ranking!');
     await barkFail();
     return null;
   }
 
-  final (date, elements) = ugoiraData;
+  var (date, elements) = ugoiraData;
 
-  // for test
-  // var (date, elements) = ugoiraData;
-  // elements = elements.sublist(39);
-  // for test
+  elements = elements.sublist(0, 5);
 
   await fetchTagsInParallel(elements);
 
-  // 同时下载动图（限制并发量）
+  // Download ugoira as MP4 (2 at a time to limit concurrency)
   final paths = <String?>[];
   const concurrency = 2;
   final queue = List.of(elements);
@@ -222,23 +208,81 @@ Future<int?> handleUgoiraRanking() async {
     queue.removeRange(0, batch.length);
 
     final results = await Future.wait(
-      batch.map((ure) => downloadUgoiraAsMp4(ure.illustId.toString())),
+      batch.map((e) => downloadUgoiraAsMp4(e.illustId)),
     );
     paths.addAll(results);
   }
 
   final msgId = await sendTextMessage('动图排行榜日期：$date');
-  await UploadUgoiraRanking(date, elements, paths);
+  await uploadUgoiraRanking(date, elements, paths);
   return msgId;
 }
 
-// 批量获取翻译标签（并行，并处理标签格式）
+/// Upload ugoira ranking as video groups (5 works per message).
+Future<void> uploadUgoiraRanking(
+  String date,
+  List<UgoiraRankingElement> eles,
+  List<String?> paths,
+) async {
+  const groupSize = 5;
+
+  for (var i = 0; i < eles.length; i += groupSize) {
+    final end = (i + groupSize < eles.length) ? i + groupSize : eles.length;
+    final currentEles = eles.sublist(i, end);
+    final currentPaths = paths.sublist(i, end);
+
+    final caption = [
+      '动图组 <i>№${i + 1} - №${i + currentEles.length}</i>',
+      '<blockquote expandable>${currentEles.map((ele) => '$_defaultSign<a href="https://pixiv.net/i/${ele.illustId}"><b>${escapeHTML(ele.title)}</b></a>\n$_defaultSign#${escapeHTML(ele.artist)}').join('\n\n')}</blockquote>\n',
+      '<blockquote expandable>${currentEles.map((ele) => ele.tags.join(' ')).join('\n\n')}</blockquote>',
+    ].join();
+
+    final validPaths = <String>[];
+    for (var j = 0; j < currentEles.length; j++) {
+      final path = currentPaths[j];
+      if (path != null && File(path).existsSync()) {
+        validPaths.add(path);
+      }
+    }
+
+    if (validPaths.isNotEmpty) {
+      await trySendVideoGroup(validPaths, caption);
+    }
+
+    await Future.delayed(_ugoiraGroupDelay);
+  }
+
+  LOG('Ugoira Ranking Done.');
+}
+
+/// Retry sending video group on rate-limit errors.
+Future<void> trySendVideoGroup(List<String> paths, String caption) async {
+  for (var attempt = 0; attempt < 3; attempt++) {
+    final resCode = await sendVideoGroup(paths, caption: caption);
+
+    if (resCode == 1) {
+      LOG('Media group sent successfully. Count: ${paths.length}');
+      return;
+    } else if (resCode == 400 || resCode == 429) {
+      await Future.delayed(_rateLimitDelay);
+    } else {
+      LOG('Failed to send media group after $attempt tries.');
+      return;
+    }
+  }
+}
+
+// ============================================================================
+//  Shared helpers
+// ============================================================================
+
+/// Fetch translated tags in parallel with concurrency control.
 Future<void> fetchTagsInParallel(
   List<dynamic> elements, {
   int concurrency = 10,
 }) async {
-  const Set<String> excludedTags = {'GIF', 'R18', 'R-18', '动图', 'Ugoira'};
-  const Set<String> excludedChars = {
+  const excludedTags = {'GIF', 'R18', 'R-18', '动图', 'Ugoira'};
+  const excludedChars = {
     "'",
     '"',
     '\\',
@@ -247,7 +291,6 @@ Future<void> fetchTagsInParallel(
     ')',
     '（',
     '）',
-    // HTML
     '<',
     '>',
     '&',
@@ -289,103 +332,39 @@ Future<void> fetchTagsInParallel(
   };
 
   final queue = List.of(elements);
-  final futures = <Future>[];
 
   while (queue.isNotEmpty) {
     final batch = queue.take(concurrency).toList();
     queue.removeRange(0, batch.length);
 
-    futures.clear();
+    final futures = <Future>[];
     for (final re in batch) {
       futures.add(() async {
-        final tags = await getTagsTranslated(dio, re.illustId);
-
+        final tags = await getIllustTags(re.illustId);
         if (tags != null) {
           re.tags = tags.where((t) => !excludedTags.contains(t)).map((input) {
             if (isNumeric(input)) {
-              // 纯数字
-              return '#TAG_${input.toString()}';
-            } else {
-              // 剔除特殊字符
-              final buffer = StringBuffer();
-              for (final char in input.runes) {
-                final charStr = String.fromCharCode(char);
-                if (charStr.trim().isEmpty || excludedChars.contains(charStr)) {
-                  buffer.write('_');
-                } else {
-                  buffer.write(charStr);
-                }
-              }
-              return '#${buffer.toString()}';
+              return '#TAG_$input';
             }
+            final buffer = StringBuffer();
+            for (final char in input.runes) {
+              final charStr = String.fromCharCode(char);
+              if (charStr.trim().isEmpty || excludedChars.contains(charStr)) {
+                buffer.write('_');
+              } else {
+                buffer.write(charStr);
+              }
+            }
+            return '#$buffer';
           }).toList();
         }
       }());
     }
-
     await Future.wait(futures);
   }
 }
 
-/// 上传动图排行榜（批量分组发送）
-Future<void> UploadUgoiraRanking(
-  String date,
-  List<UgoiraRankingElement> eles,
-  List<String?> paths,
-) async {
-  const int groupSize = 5;
-
-  for (int i = 0; i < eles.length; i += groupSize) {
-    // 获取当前分片
-    final int end = (i + groupSize < eles.length) ? i + groupSize : eles.length;
-    final List<UgoiraRankingElement> currentEles = eles.sublist(i, end);
-    final List<String?> currentPaths = paths.sublist(i, end);
-
-    final caption =
-        '''动图组 <i>№${i + 1} - №${i + currentEles.length}</i>
-<blockquote expandable>${currentEles.map((ele) => '$defaultSign<a href="https://pixiv.net/i/${ele.illustId}"><b>${escapeHTML(ele.title)}</b></a>\n$defaultSign#${escapeHTML(ele.artist)}').join('\n\n')}</blockquote>
-<blockquote expandable>${currentEles.map((ele) => ele.tags.join(' ')).join('|')}</blockquote>''';
-
-    final List<String> validPaths = [];
-    for (int j = 0; j < currentEles.length; j++) {
-      final path = currentPaths[j];
-
-      if (path != null && File(path).existsSync()) {
-        validPaths.add(path);
-      }
-    }
-
-    // 执行批量发送
-    if (validPaths.isNotEmpty) {
-      await trySendMediaGroup(validPaths, caption);
-    }
-
-    await Future.delayed(cDelay);
-  }
-
-  log('Ugoira Ranking Done.');
-}
-
-/// 尝试发送媒体组到 TG
-Future<void> trySendMediaGroup(List<String> paths, String captions) async {
-  const maxTries = 3;
-  for (int attempt = 0; attempt < maxTries; attempt++) {
-    final resCode = await sendMediaGroup(paths, caption: captions);
-
-    if (resCode == 1) {
-      log('Media group sent successfully. Count: ${paths.length}');
-      return;
-    } else if (resCode == 400 || resCode == 429) {
-      // 429 是 Too Many Requests
-      await Future.delayed(bDelay);
-    } else {
-      log('Failed to send media group after $attempt tries.');
-      return;
-    }
-  }
-}
-
-/// 构建 HTML caption
+/// Build HTML caption for an illustration post.
 String buildCaption({
   String? kind,
   required String title,
@@ -399,20 +378,24 @@ String buildCaption({
   final buffer = StringBuffer();
 
   if (kind != null) {
-    buffer.write(
-      rank == null
-          ? '#${kind}\n<blockquote><a href="$telegraphUrl">Telegraph</a></blockquote>\n'
-          : '${kind} <i>№${rank}</i>\n<blockquote><a href="$telegraphUrl">Telegraph</a></blockquote>\n',
-    );
+    if (rank == null) {
+      buffer.write(
+        '#$kind\n<blockquote><a href="$telegraphUrl">Telegraph</a></blockquote>\n',
+      );
+    } else {
+      buffer.write(
+        '$kind <i>№$rank</i>\n<blockquote><a href="$telegraphUrl">Telegraph</a></blockquote>\n',
+      );
+    }
   }
 
   buffer
     ..write(
-      '$defaultSign<a href="https://pixiv.net/i/$pixivId"><b>${escapeHTML(title)}</b></a>\n',
+      '$_defaultSign<a href="https://pixiv.net/i/$pixivId"><b>${escapeHTML(title)}</b></a>\n',
     )
-    ..write('$defaultSign#${escapeHTML(artist)}\n');
+    ..write('$_defaultSign#${escapeHTML(artist)}\n');
 
-  if (tags.length >= 0) {
+  if (tags.isNotEmpty) {
     buffer.write('<blockquote>${tags.join(' ')}</blockquote>');
   }
 
@@ -423,34 +406,33 @@ String buildCaption({
   return buffer.toString();
 }
 
-Future<void> pushShortcut(List<int?> msgIdList, List<String> nameList) async {
-  final chatUrl = File('in/chatUrl.key').readAsStringSync();
+/// Send shortcut-links pointing at the two ranking messages.
+Future<void> pushShortcut(List<int?> msgIds, List<String> names) async {
+  final buffer = StringBuffer();
 
-  final s = StringBuffer();
-
-  for (var i = 0; i < msgIdList.length; i++) {
-    if (msgIdList[0] != null) {
-      s.write(
-        '<a href="$chatUrl${msgIdList[i]}"><b>$shortcutSign ${nameList[i]}</b></a>\n',
+  for (var i = 0; i < msgIds.length; i++) {
+    if (msgIds[i] != null) {
+      buffer.write(
+        '<a href="${Config.chatUrl}${msgIds[i]}"><b>$_shortcutSign ${names[i]}</b></a>\n',
       );
     }
   }
 
-  String timestamp = DateTime.now().toUtc().toString();
-  s.write('<blockquote><code>UTC $timestamp</code></blockquote>');
-  await sendTextMessage(s.toString(), isShowLinkPreview: false);
+  final timestamp = DateTime.now().toUtc().toString();
+  buffer.write('<blockquote><code>UTC $timestamp</code></blockquote>');
+  await sendTextMessage(buffer.toString(), showLinkPreview: false);
 }
 
-/// 清理临时目录
+/// Clean up temporary directories from previous runs.
 void cleanupTmpDirs() {
-  for (var entity in Directory.current.listSync()) {
-    if (p.basename(entity.path).startsWith('temp_') ||
-        p.basename(entity.path).startsWith('PixivRanking_')) {
+  for (final entity in Directory.current.listSync()) {
+    final name = p.basename(entity.path);
+    if (name.startsWith('temp_') || name.startsWith('PixivRanking_')) {
       try {
         entity.deleteSync(recursive: true);
-        log('Temp deleted: ${entity.path}');
+        LOG('Temp deleted: ${entity.path}');
       } catch (e) {
-        wrn('Failed to delete temp: ${entity.path}\n$e');
+        WRN('Failed to delete temp: ${entity.path}\n$e');
       }
     }
   }
