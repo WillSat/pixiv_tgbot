@@ -192,9 +192,7 @@ Future<int?> handleUgoiraRanking() async {
     return null;
   }
 
-  var (date, elements) = ugoiraData;
-
-  elements = elements.sublist(0, 5);
+  final (date, elements) = ugoiraData;
 
   await fetchTagsInParallel(elements);
 
