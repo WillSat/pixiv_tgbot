@@ -18,7 +18,7 @@ const _ugoiraGroupDelay = Duration(seconds: 16);
 
 // ── Markers ──
 
-const _defaultSign = '▎';
+const _defaultSign = '■ ';
 const _shortcutSign = '⇪';
 
 // ── Only illust types 0 and 1 are actual illustrations (not manga/ugoira) ──
@@ -35,7 +35,7 @@ Future<void> main() async {
   await Future.delayed(_rateLimitDelay);
   await pushShortcut(
     [msgId1, msgId2],
-    ['插画排行 Illustration Shortcut', '动图排行 GIF Shortcut'],
+    ['插/漫画排行 Illustration/Comic', '动图排行 Looping Animation'],
   );
 
   cleanupTmpDirs();
@@ -66,8 +66,8 @@ Future<int?> handleIllustrationRanking() async {
 
   await fetchTagsInParallel(elements);
 
-  final msgId = await sendTextMessage('插画排行榜日期：$date');
-  await uploadPhotoMessagesList(elements, '插画');
+  final msgId = await sendTextMessage('插/漫画 $date');
+  await uploadPhotoMessagesList(elements, '插/漫画');
   LOG('Ranking Done.');
   return msgId;
 }
@@ -211,7 +211,7 @@ Future<int?> handleUgoiraRanking() async {
     paths.addAll(results);
   }
 
-  final msgId = await sendTextMessage('动图排行榜日期：$date');
+  final msgId = await sendTextMessage('动图 $date');
   await uploadUgoiraRanking(date, elements, paths);
   return msgId;
 }
@@ -389,12 +389,12 @@ String buildCaption({
 
   buffer
     ..write(
-      '$_defaultSign<a href="https://pixiv.net/i/$pixivId"><b>${escapeHTML(title)}</b></a>\n',
+      '<blockquote>$_defaultSign<a href="https://pixiv.net/i/$pixivId"><b>${escapeHTML(title)}</b></a>\n',
     )
-    ..write('$_defaultSign#${escapeHTML(artist)}\n');
+    ..write('$_defaultSign#${escapeHTML(artist)}</blockquote>\n');
 
   if (tags.isNotEmpty) {
-    buffer.write('<blockquote>${tags.join(' ')}</blockquote>');
+    buffer.write('<blockquote expandable>${tags.join(' ')}</blockquote>');
   }
 
   if (comment != null) {
@@ -408,7 +408,7 @@ String buildCaption({
 Future<void> pushShortcut(List<int?> msgIds, List<String> names) async {
   final buffer = StringBuffer();
 
-  for (var i = 0; i < msgIds.length; i++) {
+  for (int i = 0; i < msgIds.length; i++) {
     if (msgIds[i] != null) {
       buffer.write(
         '<a href="${Config.chatUrl}${msgIds[i]}"><b>$_shortcutSign ${names[i]}</b></a>\n',
@@ -416,8 +416,11 @@ Future<void> pushShortcut(List<int?> msgIds, List<String> names) async {
     }
   }
 
-  final timestamp = DateTime.now().toUtc().toString();
-  buffer.write('<blockquote><code>UTC $timestamp</code></blockquote>');
+  final timestamp = DateTime.now()
+      .toUtc()
+      .add(const Duration(hours: 8))
+      .toString();
+  buffer.write('<blockquote><code>UTC+8 $timestamp</code></blockquote>');
   await sendTextMessage(buffer.toString(), showLinkPreview: false);
 }
 
