@@ -3,7 +3,7 @@ import '../utils.dart';
 import 'config.dart';
 import 'models.dart';
 
-final _dio = Dio(BaseOptions(
+final pixivDio = Dio(BaseOptions(
   headers: {
     'User-Agent':
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0',
@@ -19,7 +19,7 @@ final _dio = Dio(BaseOptions(
 Future<(String, List<PixivIllustrationElement>)?>
     fetchIllustrationRanking() async {
   try {
-    final response = await _dio.get(
+    final response = await pixivDio.get(
       'https://www.pixiv.net/ranking.php?mode=male_r18&content=all&format=json&p=1',
       options: Options(headers: {
         'Referer': 'https://www.pixiv.net/ranking.php?mode=daily_r18',
@@ -47,6 +47,9 @@ Future<(String, List<PixivIllustrationElement>)?>
   } on DioException catch (e) {
     WRN('Failed to fetch ranking: ${e.response?.statusCode}');
     return null;
+  } catch (e) {
+    WRN('Unhandled exception in fetchIllustrationRanking: $e');
+    return null;
   }
 }
 
@@ -55,7 +58,7 @@ Future<(String, List<PixivIllustrationElement>)?>
 /// Returns (date, elements) or null on failure.
 Future<(String, List<UgoiraRankingElement>)?> fetchUgoiraRanking() async {
   try {
-    final response = await _dio.get(
+    final response = await pixivDio.get(
       'https://www.pixiv.net/ranking.php?mode=daily_r18&content=ugoira&format=json',
       options: Options(headers: {
         'Referer': 'https://www.pixiv.net/ranking.php?mode=daily_r18',
@@ -99,7 +102,7 @@ Future<(String, List<UgoiraRankingElement>)?> fetchUgoiraRanking() async {
 /// Get page URLs for an illustration.
 Future<Map?> getIllustPages(int illustId) async {
   try {
-    final response = await _dio.get(
+    final response = await pixivDio.get(
       'https://www.pixiv.net/ajax/illust/$illustId/pages?lang=zh',
       options: Options(headers: {'Referer': 'https://www.pixiv.net'}),
     );
@@ -113,7 +116,7 @@ Future<Map?> getIllustPages(int illustId) async {
 /// Get translated tags for an illustration.
 Future<List<String>?> getIllustTags(int illustId) async {
   try {
-    final response = await _dio.get(
+    final response = await pixivDio.get(
       'https://www.pixiv.net/ajax/illust/$illustId?lang=zh',
       options: Options(headers: {
         'Referer': 'https://www.pixiv.net/artworks/$illustId',
@@ -159,7 +162,7 @@ Future<List<String>?> getIllustTags(int illustId) async {
 Future<({String zipUrl, List<FrameInfo> frames})?> getUgoiraMeta(
     int illustId) async {
   try {
-    final response = await _dio.get(
+    final response = await pixivDio.get(
       'https://www.pixiv.net/ajax/illust/$illustId/ugoira_meta',
       options: Options(headers: {'Referer': 'https://www.pixiv.net'}),
     );

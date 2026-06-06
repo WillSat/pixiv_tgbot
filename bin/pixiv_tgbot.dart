@@ -29,17 +29,26 @@ const _illustrationTypes = {0, 1};
 // ============================================================================
 
 Future<void> main() async {
-  final msgId1 = await handleIllustrationRanking();
-  final msgId2 = await handleUgoiraRanking();
-
-  await Future.delayed(_rateLimitDelay);
-  await pushShortcut(
-    [msgId1, msgId2],
-    ['插/漫画排行 Illustration/Comic', '动图排行 Looping Animation'],
-  );
-
+  // Clean up leftovers from a previous crashed run
   cleanupTmpDirs();
-  await barkSuccess();
+
+  try {
+    final msgId1 = await handleIllustrationRanking();
+    final msgId2 = await handleUgoiraRanking();
+
+    await Future.delayed(_rateLimitDelay);
+    await pushShortcut(
+      [msgId1, msgId2],
+      ['插/漫画排行 Illustration/Comic', '动图排行 Looping Animation'],
+    );
+
+    await barkSuccess();
+  } catch (e, st) {
+    ERR('Unhandled exception in main: $e\n$st');
+    await barkFail();
+  } finally {
+    cleanupTmpDirs();
+  }
 }
 
 // ============================================================================
@@ -56,12 +65,21 @@ Future<int?> handleIllustrationRanking() async {
 
   final (date, elements) = rankingData;
 
-  // Fetch page URLs for each illustration
-  for (final obj in elements) {
-    if (_illustrationTypes.contains(obj.illustType)) {
+  // Fetch page URLs in parallel (concurrency 5)
+  final illustElements = elements
+      .where((e) => _illustrationTypes.contains(e.illustType))
+      .toList();
+  const pageConcurrency = 5;
+  final queue = List.of(illustElements);
+
+  while (queue.isNotEmpty) {
+    final batch = queue.take(pageConcurrency).toList();
+    queue.removeRange(0, batch.length);
+
+    await Future.wait(batch.map((obj) async {
       final pagesData = await getIllustPages(obj.illustId);
       obj.parsePagesData(pagesData);
-    }
+    }));
   }
 
   await fetchTagsInParallel(elements);
@@ -129,7 +147,7 @@ Future<void> trySendPhotos(
         .toList();
 
     const maxRetries = 5;
-    final knownFailCodes = {429, 400, -1, -2};
+    final knownFailCodes = {429, 400, -1, -2, -3};
 
     var sendFn = sendPhotoGroupViaUrls;
     var currentUrls = originalUrls;
@@ -165,6 +183,9 @@ Future<void> trySendPhotos(
         case -2:
           currentUrls = regularUrls;
           break;
+        case -3: // PHOTO_INVALID_DIMENSIONS — permanent, no point retrying
+          WRN('Photo has invalid dimensions, fallback to Telegraph.');
+          break;
       }
     }
 
@@ -194,63 +215,73 @@ Future<int?> handleUgoiraRanking() async {
 
   final (date, elements) = ugoiraData;
 
-  await fetchTagsInParallel(elements);
-
-  // Download ugoira as MP4 (2 at a time to limit concurrency)
-  final paths = <String?>[];
-  const concurrency = 2;
-  final queue = List.of(elements);
-
-  while (queue.isNotEmpty) {
-    final batch = queue.take(concurrency).toList();
-    queue.removeRange(0, batch.length);
-
-    final results = await Future.wait(
-      batch.map((e) => downloadUgoiraAsMp4(e.illustId)),
-    );
-    paths.addAll(results);
-  }
+  // Tags already come from the ranking data — no need for per-illust AJAX calls
 
   final msgId = await sendTextMessage('动图 $date');
-  await uploadUgoiraRanking(date, elements, paths);
-  return msgId;
-}
 
-/// Upload ugoira ranking as video groups (5 works per message).
-Future<void> uploadUgoiraRanking(
-  String date,
-  List<UgoiraRankingElement> eles,
-  List<String?> paths,
-) async {
+  // Process in upload-group-sized batches to limit peak disk usage
   const groupSize = 5;
+  const concurrency = 2;
 
-  for (var i = 0; i < eles.length; i += groupSize) {
-    final end = (i + groupSize < eles.length) ? i + groupSize : eles.length;
-    final currentEles = eles.sublist(i, end);
-    final currentPaths = paths.sublist(i, end);
+  for (var i = 0; i < elements.length; i += groupSize) {
+    final end = (i + groupSize < elements.length) ? i + groupSize : elements.length;
+    final batch = elements.sublist(i, end);
 
+    // Download & convert this batch
+    final paths = <String?>[];
+    final queue = List.of(batch);
+
+    while (queue.isNotEmpty) {
+      final sub = queue.take(concurrency).toList();
+      queue.removeRange(0, sub.length);
+
+      final results = await Future.wait(
+        sub.map((e) => downloadUgoiraAsMp4(e.illustId)),
+      );
+      paths.addAll(results);
+    }
+
+    // Build caption
     final caption = [
-      '动图组 <i>№${i + 1} - №${i + currentEles.length}</i>',
-      '<blockquote expandable>${currentEles.map((ele) => '$_defaultSign<a href="https://pixiv.net/i/${ele.illustId}"><b>${escapeHTML(ele.title)}</b></a>\n$_defaultSign#${escapeHTML(ele.artist)}').join('\n\n')}</blockquote>\n',
-      '<blockquote expandable>${currentEles.map((ele) => ele.tags.join(' ')).join('\n\n')}</blockquote>',
+      '动图组 <i>№${i + 1} - №${i + batch.length}</i>',
+      '<blockquote expandable>${batch.map((ele) => '$_defaultSign<a href="https://pixiv.net/i/${ele.illustId}"><b>${escapeHTML(ele.title)}</b></a>\n$_defaultSign#${escapeHTML(ele.artist)}').join('\n\n')}</blockquote>\n',
+      '<blockquote expandable>${batch.map((ele) => ele.tags.join(' ')).join('\n\n')}</blockquote>',
     ].join();
 
+    // Collect valid MP4 paths
     final validPaths = <String>[];
-    for (var j = 0; j < currentEles.length; j++) {
-      final path = currentPaths[j];
+    for (var j = 0; j < batch.length; j++) {
+      final path = paths[j];
       if (path != null && File(path).existsSync()) {
         validPaths.add(path);
       }
     }
 
+    // Upload
     if (validPaths.isNotEmpty) {
       await trySendVideoGroup(validPaths, caption);
     }
 
-    await Future.delayed(_ugoiraGroupDelay);
+    // Clean up temp dirs for this batch immediately
+    for (final path in paths) {
+      if (path != null) {
+        final tempDirPath = p.dirname(path);
+        try {
+          Directory(tempDirPath).deleteSync(recursive: true);
+          LOG('Temp deleted: $tempDirPath');
+        } catch (e) {
+          WRN('Failed to delete temp: $tempDirPath\n$e');
+        }
+      }
+    }
+
+    if (end < elements.length) {
+      await Future.delayed(_ugoiraGroupDelay);
+    }
   }
 
   LOG('Ugoira Ranking Done.');
+  return msgId;
 }
 
 /// Retry sending video group on rate-limit errors.
@@ -376,14 +407,13 @@ String buildCaption({
   final buffer = StringBuffer();
 
   if (kind != null) {
+    final telegraphBlock = telegraphUrl != null
+        ? '<blockquote><a href="$telegraphUrl">Telegraph</a></blockquote>\n'
+        : '';
     if (rank == null) {
-      buffer.write(
-        '#$kind\n<blockquote><a href="$telegraphUrl">Telegraph</a></blockquote>\n',
-      );
+      buffer.write('#$kind\n$telegraphBlock');
     } else {
-      buffer.write(
-        '$kind <i>№$rank</i>\n<blockquote><a href="$telegraphUrl">Telegraph</a></blockquote>\n',
-      );
+      buffer.write('$kind <i>№$rank</i>\n$telegraphBlock');
     }
   }
 
@@ -415,6 +445,8 @@ Future<void> pushShortcut(List<int?> msgIds, List<String> names) async {
       );
     }
   }
+
+  if (buffer.isEmpty) return; // both rankings failed — nothing to link
 
   final timestamp = DateTime.now()
       .toUtc()

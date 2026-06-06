@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:archive/archive_io.dart';
@@ -46,6 +47,11 @@ Future<String?> downloadUgoiraAsMp4(int illustId) async {
       }
     }
 
+    // ZIP no longer needed — frames are extracted
+    try {
+      File(zipPath).deleteSync();
+    } catch (_) {}
+
     // 4. Generate concat file for ffmpeg
     final concatFile = File(p.join(tmpDir.path, 'concat.txt'));
     final sb = StringBuffer();
@@ -65,15 +71,15 @@ Future<String?> downloadUgoiraAsMp4(int illustId) async {
     );
     concatFile.writeAsStringSync(sb.toString());
 
-    // 5. Run ffmpeg: concat frames → H.265 MP4
+    // 5. Run ffmpeg: concat frames → H.265 MP4 (with 5-minute timeout)
     final outputPath = '${tmpDir.path}/$illustId-$_crf.mp4';
-    final result = await Process.run('ffmpeg', [
+    final process = await Process.start('ffmpeg', [
       '-y',
       '-f', 'concat',
       '-safe', '0',
       '-i', concatFile.path,
       '-vsync', 'vfr',
-      '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2', // ensure even dimensions
+      '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2',
       '-c:v', 'libx265',
       '-preset', 'fast',
       '-crf', _crf.toString(),
@@ -81,11 +87,32 @@ Future<String?> downloadUgoiraAsMp4(int illustId) async {
       outputPath,
     ]);
 
-    if (result.exitCode == 0) {
+    // Drain stdout to prevent pipe buffer deadlock
+    process.stdout.drain();
+    final stderrFuture = process.stderr.transform(utf8.decoder).join();
+    final exitCode = await process.exitCode.timeout(
+      const Duration(minutes: 5),
+      onTimeout: () {
+        process.kill();
+        return -1;
+      },
+    );
+    final stderrStr = await stderrFuture;
+
+    if (exitCode == 0) {
       LOG('MP4 file created: $outputPath');
+
+      // Intermediate files no longer needed — only the MP4 remains
+      try {
+        if (concatFile.existsSync()) concatFile.deleteSync();
+      } catch (_) {}
+      try {
+        if (extractDir.existsSync()) extractDir.deleteSync(recursive: true);
+      } catch (_) {}
+
       return outputPath;
     } else {
-      WRN('ffmpeg error:\n${result.stderr}');
+      WRN('ffmpeg error:\n$stderrStr');
       return null;
     }
   } catch (e) {

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 
-import '../lib/config.dart';
 import '../lib/models.dart';
 import '../lib/pixiv_api.dart';
 import '../utils.dart';
@@ -19,20 +18,10 @@ Future<void> main() async {
     return;
   }
 
-  final dio = Dio();
-
-  final response = await dio.get(
+  final response = await pixivDio.get(
     'https://www.pixiv.net/ajax/illust/$artworksId?lang=zh',
     options: Options(
-      method: 'GET',
-      headers: {
-        'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:143.0) Gecko/20100101 Firefox/143.0',
-        'Accept': 'application/json, text/javascript, */*; q=0.01',
-        'Accept-Language': 'zh-CN,zh;q=0.7,en-US;q=0.3',
-        'Referer': 'https://www.pixiv.net/artworks/$artworksId',
-        'Cookie': Config.cookie,
-      },
+      headers: {'Referer': 'https://www.pixiv.net/artworks/$artworksId'},
     ),
   );
 

@@ -37,7 +37,9 @@ Future<int?> sendTextMessage(String text, {bool showLinkPreview = true}) async {
 /// Send photos via URL (Telegram downloads them from the URLs).
 ///
 /// Return codes: 1 = success, 400 = general failure,
-/// -1 = WEBPAGE_MEDIA_EMPTY (retry via download), -2 = over 10MB (retry with regular quality).
+/// -1 = WEBPAGE_MEDIA_EMPTY (retry via download),
+/// -2 = over 10MB (retry with regular quality),
+/// -3 = PHOTO_INVALID_DIMENSIONS (permanent — do not retry).
 Future<int> sendPhotoGroupViaUrls(List<String> urls, {String? caption}) async {
   final media = <Map<String, dynamic>>[];
   for (var i = 0; i < urls.length; i++) {
@@ -72,6 +74,8 @@ Future<int> sendPhotoGroupViaUrls(List<String> urls, {String? caption}) async {
     final desc = e.response?.data['description'] as String? ?? '';
     if (desc.contains('WEBPAGE_MEDIA_EMPTY')) return -1;
     if (desc.contains('10485760')) return -2;
+    if (desc.contains('PHOTO_INVALID_DIMENSIONS')) return -3;
+    if (e.response?.statusCode == 413) return -2; // too large → try regular quality
     return e.response?.statusCode ?? 0;
   } catch (e) {
     WRN('Unhandled exception: $e');
@@ -90,17 +94,22 @@ Future<int> sendPhotoGroupViaDownload(List<String> urls, {String? caption}) asyn
   });
 
   try {
-    for (var i = 0; i < urls.length; i++) {
+    // Download all images in parallel
+    final downloadResults = await Future.wait(
+      List.generate(urls.length, (i) async {
+        final resp = await _dio.get<List<int>>(
+          urls[i],
+          options: Options(responseType: ResponseType.bytes),
+        );
+        if (resp.statusCode != 200) {
+          throw Exception('Failed to download photo $i: ${resp.statusCode}');
+        }
+        return (i, resp.data!);
+      }),
+    );
+
+    for (final (i, data) in downloadResults) {
       final fileName = 'photo_$i.jpg';
-
-      final downloadResp = await _dio.get<List<int>>(
-        urls[i],
-        options: Options(responseType: ResponseType.bytes),
-      );
-
-      if (downloadResp.statusCode != 200) {
-        throw Exception('Failed to download photo $i: ${downloadResp.statusCode}');
-      }
 
       final entry = <String, dynamic>{
         'type': 'photo',
@@ -114,7 +123,7 @@ Future<int> sendPhotoGroupViaDownload(List<String> urls, {String? caption}) asyn
 
       formData.files.add(MapEntry(
         fileName,
-        MultipartFile.fromBytes(downloadResp.data!, filename: fileName),
+        MultipartFile.fromBytes(data, filename: fileName),
       ));
     }
 
