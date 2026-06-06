@@ -9,9 +9,9 @@ import 'pixiv_api.dart';
 
 final _downloadDio = Dio();
 
-const _crf = 18;
+const _crf = 18; // visually lossless for H.264
 
-/// Download a Pixiv ugoira ZIP, extract frames, and convert to MP4 (H.265).
+/// Download a Pixiv ugoira ZIP, extract frames, and convert to MP4 (H.264).
 ///
 /// Returns the path to the MP4 file, or null on failure.
 Future<String?> downloadUgoiraAsMp4(int illustId) async {
@@ -71,50 +71,62 @@ Future<String?> downloadUgoiraAsMp4(int illustId) async {
     );
     concatFile.writeAsStringSync(sb.toString());
 
-    // 5. Run ffmpeg: concat frames → H.265 MP4 (with 5-minute timeout)
+    // 5. Encode with ffmpeg: concat frames → H.264 MP4
+    //    x264 veryfast is ~200x faster than x265 fast on single-core CPUs
     final outputPath = '${tmpDir.path}/$illustId-$_crf.mp4';
-    final process = await Process.start('ffmpeg', [
-      '-y',
-      '-f', 'concat',
-      '-safe', '0',
-      '-i', concatFile.path,
-      '-vsync', 'vfr',
-      '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2',
-      '-c:v', 'libx265',
-      '-preset', 'fast',
-      '-crf', _crf.toString(),
-      '-pix_fmt', 'yuv420p',
-      outputPath,
-    ]);
 
-    // Drain stdout to prevent pipe buffer deadlock
-    process.stdout.drain();
-    final stderrFuture = process.stderr.transform(utf8.decoder).join();
-    final exitCode = await process.exitCode.timeout(
-      const Duration(minutes: 5),
-      onTimeout: () {
-        process.kill();
-        return -1;
-      },
-    );
-    final stderrStr = await stderrFuture;
+    Future<int> runFfmpeg(String preset, String crf) async {
+      final process = await Process.start('ffmpeg', [
+        '-y',
+        '-f', 'concat',
+        '-safe', '0',
+        '-i', concatFile.path,
+        '-vsync', 'vfr',
+        '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2',
+        '-c:v', 'libx264',
+        '-preset', preset,
+        '-crf', crf,
+        '-pix_fmt', 'yuv420p',
+        outputPath,
+      ]);
 
+      process.stdout.drain();
+      final stderrFuture = process.stderr.transform(utf8.decoder).join();
+      final code = await process.exitCode.timeout(
+        const Duration(minutes: 5),
+        onTimeout: () {
+          process.kill();
+          return -1;
+        },
+      );
+      final stderrStr = await stderrFuture;
+
+      if (code != 0) {
+        WRN('ffmpeg exit=$code preset=$preset crf=$crf for $illustId:\n$stderrStr');
+      }
+      return code;
+    }
+
+    final exitCode = await runFfmpeg('veryfast', _crf.toString());
     if (exitCode == 0) {
       LOG('MP4 file created: $outputPath');
-
-      // Intermediate files no longer needed — only the MP4 remains
-      try {
-        if (concatFile.existsSync()) concatFile.deleteSync();
-      } catch (_) {}
-      try {
-        if (extractDir.existsSync()) extractDir.deleteSync(recursive: true);
-      } catch (_) {}
-
-      return outputPath;
     } else {
-      WRN('ffmpeg error:\n$stderrStr');
-      return null;
+      // Retry with ultrafast for problematic files
+      LOG('Retrying with ultrafast for $illustId');
+      final retryCode = await runFfmpeg('ultrafast', '28');
+      if (retryCode != 0) return null;
+      LOG('MP4 file created (ultrafast fallback): $outputPath');
     }
+
+    // Clean up intermediate files — only the MP4 remains
+    try {
+      if (concatFile.existsSync()) concatFile.deleteSync();
+    } catch (_) {}
+    try {
+      if (extractDir.existsSync()) extractDir.deleteSync(recursive: true);
+    } catch (_) {}
+
+    return outputPath;
   } catch (e) {
     WRN('Error in downloadUgoiraAsMp4: $e');
     return null;

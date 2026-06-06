@@ -1,0 +1,834 @@
+[06/06 11:55:08] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 11:55:14] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 11:55:31] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 33, parameters: {retry_after: 33}}]
+[06/06 11:55:55] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 9, parameters: {retry_after: 9}}]
+[06/06 11:56:18] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 11:56:23] [WRN] Failed to send photos to Telegram. rank[1]
+[06/06 11:56:24] [LOG] Only Telegraph message sent. rank[1]
+[06/06 11:56:32] [LOG] Photo message sent successfully. rank[2]
+[06/06 11:56:42] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 11:56:47] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 11:56:53] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #3 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 11:57:04] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 11:57:18] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 11:57:23] [WRN] Failed to send photos to Telegram. rank[3]
+[06/06 11:57:24] [LOG] Only Telegraph message sent. rank[3]
+[06/06 11:57:32] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 11:57:38] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 11:57:43] [LOG] Photo message sent successfully. rank[4]
+[06/06 11:57:56] [LOG] Photo message sent successfully. rank[5]
+[06/06 11:58:06] [LOG] Photo message sent successfully. rank[6]
+[06/06 11:58:18] [LOG] Photo message sent successfully. rank[7]
+[06/06 11:58:26] [LOG] Photo message sent successfully. rank[8]
+[06/06 11:58:33] [LOG] Only Telegraph message sent. rank[9]
+[06/06 11:58:42] [LOG] Photo message sent successfully. rank[10]
+[06/06 11:58:51] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 11:58:56] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 11:59:03] [LOG] Photo message sent successfully. rank[11]
+[06/06 11:59:11] [LOG] Photo message sent successfully. rank[12]
+[06/06 11:59:20] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 11:59:25] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 11:59:39] [WRN] Failed to send photos! [413: {ok: false, error_code: 413, description: Request Entity Too Large}]
+[06/06 11:59:39] [WRN] Unknown resCode: [400, -1, 413], turn to Telegraph!
+[06/06 11:59:39] [WRN] Failed to send photos to Telegram. rank[13]
+[06/06 11:59:40] [LOG] Only Telegraph message sent. rank[13]
+[06/06 11:59:52] [LOG] Photo message sent successfully. rank[14]
+[06/06 12:00:01] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 12:00:07] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 16, parameters: {retry_after: 16}}]
+[06/06 12:00:25] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 12:00:32] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: file of size 10853881 bytes is too big for a photo; the maximum size is 10485760 bytes}]
+[06/06 12:00:35] [LOG] Photo message sent successfully. rank[15]
+[06/06 12:00:49] [LOG] Photo message sent successfully. rank[16]
+[06/06 12:00:58] [LOG] Photo message sent successfully. rank[18]
+[06/06 12:01:06] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 12:01:12] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 12:01:20] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: file of size 12381718 bytes is too big for a photo; the maximum size is 10485760 bytes}]
+[06/06 12:01:24] [LOG] Photo message sent successfully. rank[19]
+[06/06 12:01:31] [LOG] Only Telegraph message sent. rank[20]
+[06/06 12:01:39] [LOG] Photo message sent successfully. rank[21]
+[06/06 12:01:48] [LOG] Photo message sent successfully. rank[22]
+[06/06 12:02:02] [LOG] Photo message sent successfully. rank[23]
+[06/06 12:02:13] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 17, parameters: {retry_after: 17}}]
+[06/06 12:02:36] [LOG] Photo message sent successfully. rank[24]
+[06/06 12:02:49] [LOG] Photo message sent successfully. rank[25]
+[06/06 12:03:02] [LOG] Photo message sent successfully. rank[26]
+[06/06 12:03:08] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 24, parameters: {retry_after: 24}}]
+[06/06 12:03:38] [LOG] Photo message sent successfully. rank[27]
+[06/06 12:03:51] [LOG] Photo message sent successfully. rank[28]
+[06/06 12:04:00] [LOG] Photo message sent successfully. rank[29]
+[06/06 12:04:06] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 26, parameters: {retry_after: 26}}]
+[06/06 12:04:22] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 11, parameters: {retry_after: 11}}]
+[06/06 12:04:43] [LOG] Photo message sent successfully. rank[30]
+[06/06 12:04:49] [LOG] Only Telegraph message sent. rank[31]
+[06/06 12:04:59] [LOG] Photo message sent successfully. rank[32]
+[06/06 12:05:05] [LOG] Only Telegraph message sent. rank[33]
+[06/06 12:05:14] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 12:05:19] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 12:05:25] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 12, parameters: {retry_after: 12}}]
+[06/06 12:05:48] [LOG] Photo message sent successfully. rank[34]
+[06/06 12:05:59] [LOG] Photo message sent successfully. rank[35]
+[06/06 12:06:07] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 12:06:13] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 12:06:18] [LOG] Photo message sent successfully. rank[36]
+[06/06 12:06:26] [LOG] Photo message sent successfully. rank[37]
+[06/06 12:06:33] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #8 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 12:06:36] [LOG] Photo message sent successfully. rank[38]
+[06/06 12:06:45] [LOG] Photo message sent successfully. rank[39]
+[06/06 12:06:54] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 12:06:59] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 12:07:04] [LOG] Photo message sent successfully. rank[40]
+[06/06 12:07:13] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 12:07:18] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 12:07:24] [LOG] Photo message sent successfully. rank[41]
+[06/06 12:07:39] [LOG] Photo message sent successfully. rank[42]
+[06/06 12:07:54] [LOG] Photo message sent successfully. rank[43]
+[06/06 12:08:04] [LOG] Photo message sent successfully. rank[44]
+[06/06 12:08:12] [LOG] Photo message sent successfully. rank[45]
+[06/06 12:08:20] [LOG] Photo message sent successfully. rank[46]
+[06/06 12:08:30] [LOG] Photo message sent successfully. rank[47]
+[06/06 12:08:37] [LOG] Only Telegraph message sent. rank[48]
+[06/06 12:08:45] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
+[06/06 12:08:51] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 12:08:54] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 12:09:04] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 12:09:13] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 12:09:18] [WRN] Failed to send photos to Telegram. rank[49]
+[06/06 12:09:19] [LOG] Only Telegraph message sent. rank[49]
+[06/06 12:09:28] [LOG] Photo message sent successfully. rank[50]
+[06/06 12:09:28] [LOG] Ranking Done.
+[06/06 12:09:32] [LOG] Downloading ugoira 145581875: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/06/09/53/145581875_ugoira1920x1080.zip
+[06/06 12:09:32] [LOG] Downloading ugoira 145574546: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/00/14/42/145574546_ugoira1920x1080.zip
+[06/06 12:09:40] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145581875/145581875-18.mp4
+[06/06 12:09:47] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145574546/145574546-18.mp4
+[06/06 12:09:47] [LOG] Downloading ugoira 145645659: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/22/46/59/145645659_ugoira1920x1080.zip
+[06/06 12:09:47] [LOG] Downloading ugoira 145601080: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/20/35/41/145601080-64a40919a4984f1502bb4b33792562b9_ugoira1920x1080.zip
+[06/06 12:09:55] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145601080/145601080-18.mp4
+[06/06 12:09:59] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145645659/145645659-18.mp4
+[06/06 12:09:59] [LOG] Downloading ugoira 145624272: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/11/35/07/145624272_ugoira1920x1080.zip
+[06/06 12:10:03] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145624272/145624272-18.mp4
+[06/06 12:10:15] [LOG] Media group sent successfully. Count: 5
+[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145574546
+[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145581875
+[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145645659
+[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145601080
+[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145624272
+[06/06 12:10:31] [LOG] Downloading ugoira 145595045: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/18/00/03/145595045_ugoira1920x1080.zip
+[06/06 12:10:31] [LOG] Downloading ugoira 145618735: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/06/05/43/145618735_ugoira1920x1080.zip
+[06/06 12:10:32] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145618735/145618735-18.mp4
+[06/06 12:10:36] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145595045/145595045-18.mp4
+[06/06 12:10:36] [LOG] Downloading ugoira 145634316: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/18/45/07/145634316-3941dabb8b7012633a40736f36d19086_ugoira1920x1080.zip
+[06/06 12:10:36] [LOG] Downloading ugoira 145587358: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/11/52/50/145587358-f4ef7ece72376109087abdc5458fd0c0_ugoira1920x1080.zip
+[06/06 12:10:43] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145587358/145587358-18.mp4
+[06/06 12:11:01] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145634316/145634316-18.mp4
+[06/06 12:11:02] [LOG] Downloading ugoira 145616528: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/03/32/14/145616528_ugoira1920x1080.zip
+[06/06 12:11:27] [WRN] ffmpeg error:
+ffmpeg version 8.0.1-3ubuntu2 Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 15 (Ubuntu 15.2.0-13ubuntu3)
+  configuration: --prefix=/usr --extra-version=3ubuntu2 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --disable-pocketsphinx --disable-libcaca --disable-libmfx --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --enable-libvpl --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libdvdnav --enable-libdvdread --enable-libjack --enable-libjxl --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-librsvg --enable-shared
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+-vsync is deprecated. Use -fps_mode
+Input #0, concat, from '/home/pixiv_tgbot/temp_145616528/concat.txt':
+  Duration: N/A, start: 0.000000, bitrate: N/A
+  Stream #0:0: Video: mjpeg (Baseline), yuvj444p(pc, bt470bg/unknown/unknown), 1920x1080 [SAR 1:1 DAR 16:9], 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (mjpeg (native) -> hevc (libx265))
+Press [q] to stop, [?] for help
+[swscaler @ 0x71abbc011280] deprecated pixel format used, make sure you did set range correctly
+x265 [info]: HEVC encoder version 4.1+1-1d117be
+x265 [info]: build info [Linux][GCC 15.2.0][64 bit] 8bit+10bit+12bit
+x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+x265 [info]: Main profile, Level-4 (Main tier)
+x265 [info]: Thread pool created using 1 threads
+x265 [info]: Slices                              : 1
+x265 [info]: frame threads / pool features       : 1 / wpp(17 rows)
+x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
+x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
+x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
+x265 [info]: Keyframe min / max / scenecut / bias  : 25 / 250 / 40 / 5.00 
+x265 [info]: Lookahead / bframes / badapt        : 15 / 4 / 0
+x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
+x265 [info]: References / ref-limit  cu / depth  : 3 / on / on
+x265 [info]: AQ: mode / str / qg-size / cu-tree  : 2 / 1.0 / 32 / 1
+x265 [info]: Rate Control / qCompress            : CRF-18.0 / 0.60
+x265 [info]: tools: rd=2 psy-rd=2.00 rskip mode=1 signhide tmvp fast-intra
+x265 [info]: tools: strong-intra-smoothing lslices=6 deblock sao
+Output #0, mp4, to '/home/pixiv_tgbot/temp_145616528/145616528-18.mp4':
+  Metadata:
+    encoder         : Lavf62.3.100
+  Stream #0:0: Video: hevc (hev1 / 0x31766568), yuv420p(pc, bt470bg/unknown/unknown, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 25 fps, 12800 tbn
+    Metadata:
+      encoder         : Lavc62.11.100 libx265
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=7 speed=N/A elapsed=0:00:00.50    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=12 speed=N/A elapsed=0:00:01.00    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=12 speed=N/A elapsed=0:00:01.50    
+frame=    1 fps=0.5 q=16.3 size=       0KiB time=-00:00:00.04 bitrate=N/A dup=0 drop=12 speed=N/A elapsed=0:00:02.00    
+frame=    3 fps=1.2 q=23.5 size=     256KiB time=00:00:00.04 bitrate=52437.6kbits/s dup=0 drop=13 speed=0.0159x elapsed=0:00:02.51    
+frame=    6 fps=2.0 q=24.9 size=     256KiB time=00:00:00.16 bitrate=13109.4kbits/s dup=0 drop=14 speed=0.0531x elapsed=0:00:03.01    
+frame=    6 fps=1.7 q=16.8 size=     256KiB time=00:00:00.20 bitrate=10487.5kbits/s dup=0 drop=14 speed=0.0566x elapsed=0:00:03.53    
+frame=    7 fps=1.7 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=14 speed=0.0471x elapsed=0:00:04.24    
+frame=    7 fps=1.5 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=14 speed=0.0415x elapsed=0:00:04.81    
+frame=    7 fps=1.3 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0366x elapsed=0:00:05.46    
+frame=    7 fps=1.2 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0331x elapsed=0:00:06.04    
+frame=    7 fps=1.1 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0304x elapsed=0:00:06.57    
+frame=    7 fps=1.0 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.028x elapsed=0:00:07.14    
+frame=    7 fps=0.9 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.026x elapsed=0:00:07.69    
+frame=    7 fps=0.9 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0243x elapsed=0:00:08.23    
+frame=    7 fps=0.8 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0228x elapsed=0:00:08.78    
+frame=    7 fps=0.7 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0213x elapsed=0:00:09.36    
+frame=    7 fps=0.7 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0202x elapsed=0:00:09.90    
+frame=    7 fps=0.7 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0191x elapsed=0:00:10.47    
+frame=    8 fps=0.7 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0215x elapsed=0:00:11.14    
+frame=    8 fps=0.7 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0205x elapsed=0:00:11.70    
+frame=    8 fps=0.7 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0196x elapsed=0:00:12.22    
+frame=    8 fps=0.6 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0187x elapsed=0:00:12.82    
+frame=    8 fps=0.6 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0179x elapsed=0:00:13.40    
+frame=    8 fps=0.6 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0172x elapsed=0:00:13.94    
+frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0165x elapsed=0:00:14.55    
+frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0159x elapsed=0:00:15.10    
+frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0153x elapsed=0:00:15.67    
+frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0148x elapsed=0:00:16.20    
+frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0143x elapsed=0:00:16.75    
+frame=    9 fps=0.5 q=24.4 size=     512KiB time=00:00:00.28 bitrate=14980.9kbits/s dup=0 drop=15 speed=0.0162x elapsed=0:00:17.32    
+frame=    9 fps=0.5 q=24.4 size=     512KiB time=00:00:00.28 bitrate=14980.9kbits/s dup=0 drop=15 speed=0.0157x elapsed=0:00:17.83    
+[06/06 12:11:34] [LOG] Media group sent successfully. Count: 4
+[06/06 12:11:34] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145618735
+[06/06 12:11:34] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145595045
+[06/06 12:11:34] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145634316
+[06/06 12:11:34] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145587358
+[06/06 12:11:50] [LOG] Downloading ugoira 145595435: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/18/04/19/145595435_ugoira1920x1080.zip
+[06/06 12:11:50] [LOG] Downloading ugoira 145629992: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/16/18/01/145629992_ugoira1920x1080.zip
+[06/06 15:39:01] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145616528
+[06/06 15:39:01] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145595435
+[06/06 15:39:01] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145629992
+[06/06 15:39:05] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 15:39:30] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:39:43] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:39:57] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:40:18] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:40:23] [WRN] Failed to send photos to Telegram. rank[1]
+[06/06 15:40:24] [LOG] Only Telegraph message sent. rank[1]
+[06/06 15:40:30] [LOG] Photo message sent successfully. rank[2]
+[06/06 15:40:36] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #3 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 15:41:02] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:41:14] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:41:25] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:41:47] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:41:52] [WRN] Failed to send photos to Telegram. rank[3]
+[06/06 15:41:53] [LOG] Only Telegraph message sent. rank[3]
+[06/06 15:41:59] [LOG] Photo message sent successfully. rank[4]
+[06/06 15:42:06] [LOG] Photo message sent successfully. rank[5]
+[06/06 15:42:12] [LOG] Photo message sent successfully. rank[6]
+[06/06 15:42:18] [LOG] Photo message sent successfully. rank[7]
+[06/06 15:42:24] [LOG] Photo message sent successfully. rank[8]
+[06/06 15:42:31] [LOG] Only Telegraph message sent. rank[9]
+[06/06 15:42:37] [LOG] Photo message sent successfully. rank[10]
+[06/06 15:42:43] [LOG] Photo message sent successfully. rank[11]
+[06/06 15:42:49] [LOG] Photo message sent successfully. rank[12]
+[06/06 15:43:01] [LOG] Photo message sent successfully. rank[13]
+[06/06 15:43:07] [LOG] Photo message sent successfully. rank[14]
+[06/06 15:43:13] [LOG] Photo message sent successfully. rank[15]
+[06/06 15:43:20] [LOG] Photo message sent successfully. rank[16]
+[06/06 15:43:26] [LOG] Photo message sent successfully. rank[18]
+[06/06 15:43:32] [LOG] Photo message sent successfully. rank[19]
+[06/06 15:43:38] [LOG] Only Telegraph message sent. rank[20]
+[06/06 15:43:45] [LOG] Photo message sent successfully. rank[21]
+[06/06 15:43:51] [LOG] Photo message sent successfully. rank[22]
+[06/06 15:43:57] [LOG] Photo message sent successfully. rank[23]
+[06/06 15:44:04] [LOG] Photo message sent successfully. rank[24]
+[06/06 15:44:10] [LOG] Photo message sent successfully. rank[25]
+[06/06 15:44:16] [LOG] Photo message sent successfully. rank[26]
+[06/06 15:44:22] [LOG] Photo message sent successfully. rank[27]
+[06/06 15:44:29] [LOG] Photo message sent successfully. rank[28]
+[06/06 15:44:35] [LOG] Photo message sent successfully. rank[29]
+[06/06 15:44:41] [LOG] Photo message sent successfully. rank[30]
+[06/06 15:44:47] [LOG] Only Telegraph message sent. rank[31]
+[06/06 15:44:54] [LOG] Photo message sent successfully. rank[32]
+[06/06 15:45:00] [LOG] Only Telegraph message sent. rank[33]
+[06/06 15:45:06] [LOG] Photo message sent successfully. rank[34]
+[06/06 15:45:12] [LOG] Photo message sent successfully. rank[35]
+[06/06 15:45:19] [LOG] Photo message sent successfully. rank[36]
+[06/06 15:45:25] [LOG] Photo message sent successfully. rank[37]
+[06/06 15:45:31] [LOG] Photo message sent successfully. rank[38]
+[06/06 15:45:37] [LOG] Photo message sent successfully. rank[39]
+[06/06 15:45:44] [LOG] Photo message sent successfully. rank[40]
+[06/06 15:45:50] [LOG] Photo message sent successfully. rank[41]
+[06/06 15:45:56] [LOG] Photo message sent successfully. rank[42]
+[06/06 15:46:03] [LOG] Photo message sent successfully. rank[43]
+[06/06 15:46:09] [LOG] Photo message sent successfully. rank[44]
+[06/06 15:46:15] [LOG] Photo message sent successfully. rank[45]
+[06/06 15:46:21] [LOG] Photo message sent successfully. rank[46]
+[06/06 15:46:28] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 10, parameters: {retry_after: 10}}]
+[06/06 15:46:43] [LOG] Photo message sent successfully. rank[47]
+[06/06 15:46:51] [LOG] Only Telegraph message sent. rank[48]
+[06/06 15:46:57] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
+[06/06 15:47:01] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:47:10] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:47:20] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:47:28] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
+[06/06 15:47:33] [WRN] Failed to send photos to Telegram. rank[49]
+[06/06 15:47:34] [LOG] Only Telegraph message sent. rank[49]
+[06/06 15:47:40] [LOG] Photo message sent successfully. rank[50]
+[06/06 15:47:40] [LOG] Ranking Done.
+[06/06 15:47:41] [LOG] Downloading ugoira 145574546: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/00/14/42/145574546_ugoira1920x1080.zip
+[06/06 15:47:41] [LOG] Downloading ugoira 145581875: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/06/09/53/145581875_ugoira1920x1080.zip
+[06/06 15:47:48] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145581875/145581875-18.mp4
+[06/06 15:47:55] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145574546/145574546-18.mp4
+[06/06 15:47:55] [LOG] Downloading ugoira 145645659: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/22/46/59/145645659_ugoira1920x1080.zip
+[06/06 15:47:55] [LOG] Downloading ugoira 145601080: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/20/35/41/145601080-64a40919a4984f1502bb4b33792562b9_ugoira1920x1080.zip
+[06/06 15:48:03] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145601080/145601080-18.mp4
+[06/06 15:48:06] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145645659/145645659-18.mp4
+[06/06 15:48:07] [LOG] Downloading ugoira 145624272: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/11/35/07/145624272_ugoira1920x1080.zip
+[06/06 15:48:11] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145624272/145624272-18.mp4
+[06/06 15:48:21] [LOG] Media group sent successfully. Count: 5
+[06/06 15:48:21] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145574546
+[06/06 15:48:21] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145581875
+[06/06 15:48:21] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145645659
+[06/06 15:48:21] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145601080
+[06/06 15:48:21] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145624272
+[06/06 15:48:37] [LOG] Downloading ugoira 145618735: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/06/05/43/145618735_ugoira1920x1080.zip
+[06/06 15:48:37] [LOG] Downloading ugoira 145595045: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/18/00/03/145595045_ugoira1920x1080.zip
+[06/06 15:48:41] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145618735/145618735-18.mp4
+[06/06 15:48:43] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145595045/145595045-18.mp4
+[06/06 15:48:43] [LOG] Downloading ugoira 145634316: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/18/45/07/145634316-3941dabb8b7012633a40736f36d19086_ugoira1920x1080.zip
+[06/06 15:48:43] [LOG] Downloading ugoira 145587358: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/11/52/50/145587358-f4ef7ece72376109087abdc5458fd0c0_ugoira1920x1080.zip
+[06/06 15:48:45] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145587358/145587358-18.mp4
+[06/06 15:49:15] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145634316/145634316-18.mp4
+[06/06 15:49:15] [LOG] Downloading ugoira 145616528: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/03/32/14/145616528_ugoira1920x1080.zip
+[06/06 15:51:49] [WRN] ffmpeg error:
+ffmpeg version 8.0.1-3ubuntu2 Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 15 (Ubuntu 15.2.0-13ubuntu3)
+  configuration: --prefix=/usr --extra-version=3ubuntu2 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --disable-pocketsphinx --disable-libcaca --disable-libmfx --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --enable-libvpl --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libdvdnav --enable-libdvdread --enable-libjack --enable-libjxl --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-librsvg --enable-shared
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+-vsync is deprecated. Use -fps_mode
+Input #0, concat, from '/home/pixiv_tgbot/temp_145616528/concat.txt':
+  Duration: N/A, start: 0.000000, bitrate: N/A
+  Stream #0:0: Video: mjpeg (Baseline), yuvj444p(pc, bt470bg/unknown/unknown), 1920x1080 [SAR 1:1 DAR 16:9], 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (mjpeg (native) -> hevc (libx265))
+Press [q] to stop, [?] for help
+[swscaler @ 0x737108011280] deprecated pixel format used, make sure you did set range correctly
+x265 [info]: HEVC encoder version 4.1+1-1d117be
+x265 [info]: build info [Linux][GCC 15.2.0][64 bit] 8bit+10bit+12bit
+x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+x265 [info]: Main profile, Level-4 (Main tier)
+x265 [info]: Thread pool created using 1 threads
+x265 [info]: Slices                              : 1
+x265 [info]: frame threads / pool features       : 1 / wpp(17 rows)
+x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
+x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
+x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
+x265 [info]: Keyframe min / max / scenecut / bias  : 25 / 250 / 40 / 5.00 
+x265 [info]: Lookahead / bframes / badapt        : 15 / 4 / 0
+x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
+x265 [info]: References / ref-limit  cu / depth  : 3 / on / on
+x265 [info]: AQ: mode / str / qg-size / cu-tree  : 2 / 1.0 / 32 / 1
+x265 [info]: Rate Control / qCompress            : CRF-18.0 / 0.60
+x265 [info]: tools: rd=2 psy-rd=2.00 rskip mode=1 signhide tmvp fast-intra
+x265 [info]: tools: strong-intra-smoothing lslices=6 deblock sao
+Output #0, mp4, to '/home/pixiv_tgbot/temp_145616528/145616528-18.mp4':
+  Metadata:
+    encoder         : Lavf62.3.100
+  Stream #0:0: Video: hevc (hev1 / 0x31766568), yuv420p(pc, bt470bg/unknown/unknown, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 25 fps, 12800 tbn
+    Metadata:
+      encoder         : Lavc62.11.100 libx265
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=6 speed=N/A elapsed=0:00:00.50    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=12 speed=N/A elapsed=0:00:01.00    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=12 speed=N/A elapsed=0:00:01.50    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=12 speed=N/A elapsed=0:00:02.00    
+frame=    2 fps=0.8 q=17.1 size=       0KiB time=00:00:00.00 bitrate=N/A dup=0 drop=12 speed=   0x elapsed=0:00:02.50    
+frame=    4 fps=1.3 q=24.9 size=     256KiB time=00:00:00.08 bitrate=26218.8kbits/s dup=0 drop=13 speed=0.0266x elapsed=0:00:03.00    
+frame=    5 fps=1.4 q=24.8 size=     256KiB time=00:00:00.12 bitrate=17479.2kbits/s dup=0 drop=14 speed=0.0342x elapsed=0:00:03.50    
+frame=    6 fps=1.5 q=24.9 size=     256KiB time=00:00:00.16 bitrate=13109.4kbits/s dup=0 drop=14 speed=0.0399x elapsed=0:00:04.00    
+frame=    7 fps=1.5 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=14 speed=0.0442x elapsed=0:00:04.52    
+frame=    7 fps=1.4 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0397x elapsed=0:00:05.03    
+frame=    7 fps=1.2 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0349x elapsed=0:00:05.73    
+frame=    7 fps=1.1 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0319x elapsed=0:00:06.27    
+frame=    7 fps=1.0 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0293x elapsed=0:00:06.82    
+frame=    7 fps=1.0 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0272x elapsed=0:00:07.36    
+frame=    8 fps=1.0 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0304x elapsed=0:00:07.90    
+frame=    8 fps=0.9 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0283x elapsed=0:00:08.46    
+frame=    8 fps=0.9 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0267x elapsed=0:00:09.00    
+frame=    8 fps=0.8 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0252x elapsed=0:00:09.52    
+frame=    8 fps=0.8 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0239x elapsed=0:00:10.04    
+frame=    9 fps=0.8 q=24.4 size=     512KiB time=00:00:00.28 bitrate=14980.9kbits/s dup=0 drop=15 speed=0.0264x elapsed=0:00:10.58    
+frame=    9 fps=0.8 q=24.4 size=     512KiB time=00:00:00.28 bitrate=14980.9kbits/s dup=0 drop=15 speed=0.0252x elapsed=0:00:11.12    
+frame=    9 fps=0.8 q=24.4 size=     512KiB time=00:00:00.28 bitrate=14980.9kbits/s dup=0 drop=15 speed=0.024x elapsed=0:00:11.66    
+frame=    9 fps=0.7 q=24.4 size=     512KiB time=00:00:00.28 bitrate=14980.9kbits/s dup=0 drop=15 speed=0.0229x elapsed=0:00:12.20    
+frame=    9 fps=0.7 q=24.4 size=     512KiB time=00:00:00.28 bitrate=14980.9kbits/s dup=0 drop=15 speed=0.022x elapsed=0:00:12.72    
+frame=   10 fps=0.8 q=24.5 size=     768KiB time=00:00:00.32 bitrate=19661.9kbits/s dup=0 drop=15 speed=0.0241x elapsed=0:00:13.25    
+frame=   10 fps=0.7 q=24.5 size=     768KiB time=00:00:00.32 bitrate=19661.9kbits/s dup=0 drop=16 speed=0.0232x elapsed=0:00:13.80    
+frame=   10 fps=0.7 q=24.5 size=     768KiB time=00:00:00.32 bitrate=19661.9kbits/s dup=0 drop=16 speed=0.0223x elapsed=0:00:14.37    
+frame=   10 fps=0.7 q=24.5 size=     768KiB time=00:00:00.32 bitrate=19661.9kbits/s dup=0 drop=16 speed=0.0214x elapsed=0:00:14.95    
+frame=   10 fps=0.6 q=24.5 size=     768KiB time=00:00:00.32 bitrate=19661.9kbits/s dup=0 drop=16 speed=0.0207x elapsed=0:00:15.47    
+frame=   10 fps=0.6 q=24.5 size=     768KiB time=00:00:00.32 bitrate=19661.9kbits/s dup=0 drop=16 speed=0.02x elapsed=0:00:16.02    
+frame=   10 fps=0.6 q=24.5 size=     768KiB time=00:00:00.32 bitrate=19661.9kbits/s dup=0 drop=16 speed=0.0193x elapsed=0:00:16.55    
+frame=   11 fps=0.6 q=24.5 size=     768KiB time=00:00:00.36 bitrate=17477.2kbits/s dup=0 drop=16 speed=0.021x elapsed=0:00:17.16    
+frame=   11 fps=0.6 q=24.5 size=     768KiB time=00:00:00.36 bitrate=17477.2kbits/s dup=0 drop=16 speed=0.0203x elapsed=0:00:17.69    
+frame=   11 fps=0.6 q=24.5 size=     768KiB time=00:00:00.36 bitrate=17477.2kbits/s dup=0 drop=16 speed=0.0197x elapsed=0:00:18.23    
+frame=   11 fps=0.6 q=24.5 size=     768KiB time=00:00:00.36 bitrate=17477.2kbits/s dup=0 drop=16 speed=0.0192x elapsed=0:00:18.77    
+frame=   11 fps=0.6 q=24.5 size=     768KiB time=00:00:00.36 bitrate=17477.2kbits/s dup=0 drop=16 speed=0.0187x elapsed=0:00:19.29    
+frame=   11 fps=0.6 q=24.5 size=     768KiB time=00:00:00.36 bitrate=17477.2kbits/s dup=0 drop=16 speed=0.0182x elapsed=0:00:19.81    
+frame=   12 fps=0.6 q=16.8 size=     768KiB time=00:00:00.40 bitrate=15729.5kbits/s dup=0 drop=16 speed=0.0196x elapsed=0:00:20.36    
+frame=   12 fps=0.6 q=16.8 size=     768KiB time=00:00:00.40 bitrate=15729.5kbits/s dup=0 drop=16 speed=0.0191x elapsed=0:00:20.91    
+frame=   12 fps=0.6 q=16.8 size=     768KiB time=00:00:00.40 bitrate=15729.5kbits/s dup=0 drop=16 speed=0.0186x elapsed=0:00:21.46    
+frame=   12 fps=0.5 q=16.8 size=     768KiB time=00:00:00.40 bitrate=15729.5kbits/s dup=0 drop=17 speed=0.0182x elapsed=0:00:21.98    
+frame=   12 fps=0.5 q=16.8 size=     768KiB time=00:00:00.40 bitrate=15729.5kbits/s dup=0 drop=17 speed=0.0177x elapsed=0:00:22.60    
+frame=   12 fps=0.5 q=16.8 size=     768KiB time=00:00:00.40 bitrate=15729.5kbits/s dup=0 drop=17 speed=0.0173x elapsed=0:00:23.14    
+frame=   12 fps=0.5 q=16.8 size=     768KiB time=00:00:00.40 bitrate=15729.5kbits/s dup=0 drop=17 speed=0.0169x elapsed=0:00:23.71    
+frame=   13 fps=0.5 q=23.1 size=    1024KiB time=00:00:00.44 bitrate=19065.8kbits/s dup=0 drop=17 speed=0.0182x elapsed=0:00:24.23    
+frame=   13 fps=0.5 q=23.1 size=    1024KiB time=00:00:00.44 bitrate=19065.8kbits/s dup=0 drop=17 speed=0.0178x elapsed=0:00:24.77    
+frame=   13 fps=0.5 q=23.1 size=    1024KiB time=00:00:00.44 bitrate=19065.8kbits/s dup=0 drop=17 speed=0.0174x elapsed=0:00:25.29    
+frame=   13 fps=0.5 q=23.1 size=    1024KiB time=00:00:00.44 bitrate=19065.8kbits/s dup=0 drop=17 speed=0.017x elapsed=0:00:25.85    
+frame=   14 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.48 bitrate=17477.0kbits/s dup=0 drop=17 speed=0.0182x elapsed=0:00:26.39    
+frame=   14 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.48 bitrate=17477.0kbits/s dup=0 drop=17 speed=0.0178x elapsed=0:00:26.93    
+frame=   14 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.48 bitrate=17477.0kbits/s dup=0 drop=17 speed=0.0174x elapsed=0:00:27.56    
+frame=   14 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.48 bitrate=17477.0kbits/s dup=0 drop=18 speed=0.0171x elapsed=0:00:28.10    
+frame=   14 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.48 bitrate=17477.0kbits/s dup=0 drop=18 speed=0.0168x elapsed=0:00:28.61    
+frame=   14 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.48 bitrate=17477.0kbits/s dup=0 drop=18 speed=0.0165x elapsed=0:00:29.13    
+frame=   14 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.48 bitrate=17477.0kbits/s dup=0 drop=18 speed=0.0162x elapsed=0:00:29.66    
+frame=   14 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.48 bitrate=17477.0kbits/s dup=0 drop=18 speed=0.0159x elapsed=0:00:30.19    
+frame=   14 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.48 bitrate=17477.0kbits/s dup=0 drop=18 speed=0.0156x elapsed=0:00:30.72    
+frame=   15 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.52 bitrate=16132.6kbits/s dup=0 drop=18 speed=0.0166x elapsed=0:00:31.24    
+frame=   15 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.52 bitrate=16132.6kbits/s dup=0 drop=18 speed=0.0163x elapsed=0:00:31.81    
+frame=   15 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.52 bitrate=16132.6kbits/s dup=0 drop=18 speed=0.0161x elapsed=0:00:32.34    
+frame=   15 fps=0.5 q=24.5 size=    1024KiB time=00:00:00.52 bitrate=16132.6kbits/s dup=0 drop=18 speed=0.0158x elapsed=0:00:32.87    
+frame=   15 fps=0.4 q=24.5 size=    1024KiB time=00:00:00.52 bitrate=16132.6kbits/s dup=0 drop=18 speed=0.0156x elapsed=0:00:33.39    
+frame=   15 fps=0.4 q=24.7 size=    1024KiB time=00:00:00.52 bitrate=16132.6kbits/s dup=0 drop=18 speed=0.0153x elapsed=0:00:33.91    
+frame=   16 fps=0.5 q=24.7 size=    1280KiB time=00:00:00.56 bitrate=18725.2kbits/s dup=0 drop=18 speed=0.0162x elapsed=0:00:34.49    
+frame=   16 fps=0.5 q=24.7 size=    1280KiB time=00:00:00.56 bitrate=18725.2kbits/s dup=0 drop=18 speed=0.016x elapsed=0:00:35.05    
+frame=   16 fps=0.4 q=24.7 size=    1280KiB time=00:00:00.56 bitrate=18725.2kbits/s dup=0 drop=18 speed=0.0157x elapsed=0:00:35.57    
+frame=   16 fps=0.4 q=24.7 size=    1280KiB time=00:00:00.56 bitrate=18725.2kbits/s dup=0 drop=18 speed=0.0155x elapsed=0:00:36.10    
+frame=   16 fps=0.4 q=24.7 size=    1280KiB time=00:00:00.56 bitrate=18725.2kbits/s dup=0 drop=18 speed=0.0153x elapsed=0:00:36.65    
+frame=   17 fps=0.5 q=16.8 size=    1280KiB time=00:00:00.60 bitrate=17476.9kbits/s dup=0 drop=18 speed=0.0161x elapsed=0:00:37.17    
+frame=   17 fps=0.5 q=16.8 size=    1280KiB time=00:00:00.60 bitrate=17476.9kbits/s dup=0 drop=19 speed=0.0159x elapsed=0:00:37.73    
+frame=   17 fps=0.4 q=16.8 size=    1280KiB time=00:00:00.60 bitrate=17476.9kbits/s dup=0 drop=19 speed=0.0157x elapsed=0:00:38.26    
+frame=   17 fps=0.4 q=16.8 size=    1280KiB time=00:00:00.60 bitrate=17476.9kbits/s dup=0 drop=19 speed=0.0155x elapsed=0:00:38.79    
+frame=   17 fps=0.4 q=16.8 size=    1280KiB time=00:00:00.60 bitrate=17476.9kbits/s dup=0 drop=19 speed=0.0153x elapsed=0:00:39.29    
+frame=   17 fps=0.4 q=16.8 size=    1280KiB time=00:00:00.60 bitrate=17476.9kbits/s dup=0 drop=19 speed=0.0151x elapsed=0:00:39.84    
+frame=   17 fps=0.4 q=16.8 size=    1280KiB time=00:00:00.60 bitrate=17476.9kbits/s dup=0 drop=19 speed=0.0149x elapsed=0:00:40.37    
+frame=   18 fps=0.4 q=23.3 size=    1280KiB time=00:00:00.64 bitrate=16384.5kbits/s dup=0 drop=19 speed=0.0156x elapsed=0:00:40.90    
+frame=   18 fps=0.4 q=23.3 size=    1280KiB time=00:00:00.64 bitrate=16384.5kbits/s dup=0 drop=19 speed=0.0154x elapsed=0:00:41.44    
+frame=   18 fps=0.4 q=23.3 size=    1280KiB time=00:00:00.64 bitrate=16384.5kbits/s dup=0 drop=19 speed=0.0152x elapsed=0:00:42.01    
+frame=   18 fps=0.4 q=23.3 size=    1280KiB time=00:00:00.64 bitrate=16384.5kbits/s dup=0 drop=19 speed=0.015x elapsed=0:00:42.54    
+frame=   18 fps=0.4 q=23.3 size=    1280KiB time=00:00:00.64 bitrate=16384.5kbits/s dup=0 drop=19 speed=0.0149x elapsed=0:00:43.09    
+frame=   18 fps=0.4 q=23.3 size=    1280KiB time=00:00:00.64 bitrate=16384.5kbits/s dup=0 drop=19 speed=0.0147x elapsed=0:00:43.63    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=19 speed=0.0154x elapsed=0:00:44.18    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.0152x elapsed=0:00:44.78    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.015x elapsed=0:00:45.29    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.0148x elapsed=0:00:45.82    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.0147x elapsed=0:00:46.36    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.0145x elapsed=0:00:46.89    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.0143x elapsed=0:00:47.41    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.0142x elapsed=0:00:47.96    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.014x elapsed=0:00:48.55    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.0138x elapsed=0:00:49.09    
+frame=   19 fps=0.4 q=24.8 size=    1536KiB time=00:00:00.68 bitrate=18504.8kbits/s dup=0 drop=20 speed=0.0137x elapsed=0:00:49.61    
+frame=   20 fps=0.4 q=24.7 size=    1536KiB time=00:00:00.72 bitrate=17476.8kbits/s dup=0 drop=20 speed=0.0143x elapsed=0:00:50.17    
+frame=   20 fps=0.4 q=24.7 size=    1536KiB time=00:00:00.72 bitrate=17476.8kbits/s dup=0 drop=20 speed=0.0142x elapsed=0:00:50.84    
+frame=   20 fps=0.4 q=24.7 size=    1536KiB time=00:00:00.72 bitrate=17476.8kbits/s dup=0 drop=20 speed=0.014x elapsed=0:00:51.39    
+frame=   20 fps=0.4 q=24.7 size=    1536KiB time=00:00:00.72 bitrate=17476.8kbits/s dup=0 drop=20 speed=0.0139x elapsed=0:00:51.93    
+frame=   20 fps=0.4 q=24.7 size=    1536KiB time=00:00:00.72 bitrate=17476.8kbits/s dup=0 drop=20 speed=0.0137x elapsed=0:00:52.45    
+frame=   20 fps=0.4 q=24.7 size=    1536KiB time=00:00:00.72 bitrate=17476.8kbits/s dup=0 drop=20 speed=0.0136x elapsed=0:00:52.97    
+frame=   20 fps=0.4 q=24.7 size=    1536KiB time=00:00:00.72 bitrate=17476.8kbits/s dup=0 drop=20 speed=0.0135x elapsed=0:00:53.49    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=20 speed=0.0141x elapsed=0:00:54.03    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=20 speed=0.0139x elapsed=0:00:54.70    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=20 speed=0.0137x elapsed=0:00:55.31    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=20 speed=0.0136x elapsed=0:00:55.89    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=21 speed=0.0135x elapsed=0:00:56.41    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=21 speed=0.0133x elapsed=0:00:56.95    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=21 speed=0.0132x elapsed=0:00:57.52    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=21 speed=0.0131x elapsed=0:00:58.03    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=21 speed=0.013x elapsed=0:00:58.56    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=21 speed=0.0129x elapsed=0:00:59.08    
+frame=   21 fps=0.4 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=21 speed=0.0127x elapsed=0:00:59.61    
+frame=   21 fps=0.3 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=21 speed=0.0126x elapsed=0:01:00.14    
+frame=   21 fps=0.3 q=24.6 size=    1536KiB time=00:00:00.76 bitrate=16556.9kbits/s dup=0 drop=21 speed=0.0125x elapsed=0:01:00.68    
+frame=   22 fps=0.4 q=16.9 size=    1536KiB time=00:00:00.80 bitrate=15729.1kbits/s dup=0 drop=21 speed=0.0131x elapsed=0:01:01.20    
+frame=   22 fps=0.4 q=16.9 size=    1536KiB time=00:00:00.80 bitrate=15729.1kbits/s dup=0 drop=21 speed=0.0129x elapsed=0:01:01.79    
+frame=   22 fps=0.4 q=16.9 size=    1536KiB time=00:00:00.80 bitrate=15729.1kbits/s dup=0 drop=21 speed=0.0128x elapsed=0:01:02.43    
+frame=   22 fps=0.3 q=16.9 size=    1536KiB time=00:00:00.80 bitrate=15729.1kbits/s dup=0 drop=21 speed=0.0127x elapsed=0:01:03.01    
+frame=   22 fps=0.3 q=16.9 size=    1536KiB time=00:00:00.80 bitrate=15729.1kbits/s dup=0 drop=21 speed=0.0126x elapsed=0:01:03.57    
+frame=   22 fps=0.3 q=16.9 size=    1536KiB time=00:00:00.80 bitrate=15729.1kbits/s dup=0 drop=21 speed=0.0125x elapsed=0:01:04.11    
+frame=   22 fps=0.3 q=16.9 size=    1536KiB time=00:00:00.80 bitrate=15729.1kbits/s dup=0 drop=21 speed=0.0124x elapsed=0:01:04.63    
+frame=   22 fps=0.3 q=16.9 size=    1536KiB time=00:00:00.80 bitrate=15729.1kbits/s dup=0 drop=21 speed=0.0123x elapsed=0:01:05.16    
+frame=   23 fps=0.4 q=23.2 size=    1792KiB time=00:00:00.84 bitrate=17476.7kbits/s dup=0 drop=21 speed=0.0128x elapsed=0:01:05.67    
+frame=   23 fps=0.3 q=23.2 size=    1792KiB time=00:00:00.84 bitrate=17476.7kbits/s dup=0 drop=21 speed=0.0127x elapsed=0:01:06.24    
+frame=   23 fps=0.3 q=23.2 size=    1792KiB time=00:00:00.84 bitrate=17476.7kbits/s dup=0 drop=21 speed=0.0126x elapsed=0:01:06.82    
+frame=   23 fps=0.3 q=23.2 size=    1792KiB time=00:00:00.84 bitrate=17476.7kbits/s dup=0 drop=21 speed=0.0125x elapsed=0:01:07.37    
+frame=   23 fps=0.3 q=23.2 size=    1792KiB time=00:00:00.84 bitrate=17476.7kbits/s dup=0 drop=21 speed=0.0124x elapsed=0:01:07.92    
+frame=   23 fps=0.3 q=23.2 size=    1792KiB time=00:00:00.84 bitrate=17476.7kbits/s dup=0 drop=21 speed=0.0123x elapsed=0:01:08.47    
+frame=   23 fps=0.3 q=23.2 size=    1792KiB time=00:00:00.84 bitrate=17476.7kbits/s dup=0 drop=21 speed=0.0122x elapsed=0:01:09.02    
+frame=   23 fps=0.3 q=23.2 size=    1792KiB time=00:00:00.84 bitrate=17476.7kbits/s dup=0 drop=21 speed=0.0121x elapsed=0:01:09.55    
+frame=   23 fps=0.3 q=23.2 size=    1792KiB time=00:00:00.84 bitrate=17476.7kbits/s dup=0 drop=21 speed=0.012x elapsed=0:01:10.09    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=21 speed=0.0125x elapsed=0:01:10.61    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=21 speed=0.0124x elapsed=0:01:11.22    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=21 speed=0.0123x elapsed=0:01:11.76    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=21 speed=0.0122x elapsed=0:01:12.33    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=22 speed=0.0121x elapsed=0:01:12.86    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=22 speed=0.012x elapsed=0:01:13.44    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=22 speed=0.0119x elapsed=0:01:13.95    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=22 speed=0.0118x elapsed=0:01:14.47    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=22 speed=0.0117x elapsed=0:01:15.05    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=22 speed=0.0116x elapsed=0:01:15.57    
+frame=   24 fps=0.3 q=24.7 size=    1792KiB time=00:00:00.88 bitrate=16682.3kbits/s dup=0 drop=22 speed=0.0116x elapsed=0:01:16.11    
+frame=   25 fps=0.3 q=24.5 size=    1792KiB time=00:00:00.92 bitrate=15957.0kbits/s dup=0 drop=22 speed=0.012x elapsed=0:01:16.64    
+frame=   25 fps=0.3 q=24.5 size=    1792KiB time=00:00:00.92 bitrate=15957.0kbits/s dup=0 drop=22 speed=0.0119x elapsed=0:01:17.24    
+frame=   25 fps=0.3 q=24.5 size=    1792KiB time=00:00:00.92 bitrate=15957.0kbits/s dup=0 drop=22 speed=0.0118x elapsed=0:01:17.78    
+frame=   25 fps=0.3 q=24.5 size=    1792KiB time=00:00:00.92 bitrate=15957.0kbits/s dup=0 drop=22 speed=0.0117x elapsed=0:01:18.30    
+frame=   25 fps=0.3 q=24.5 size=    1792KiB time=00:00:00.92 bitrate=15957.0kbits/s dup=0 drop=22 speed=0.0117x elapsed=0:01:18.84    
+frame=   25 fps=0.3 q=24.5 size=    1792KiB time=00:00:00.92 bitrate=15957.0kbits/s dup=0 drop=22 speed=0.0116x elapsed=0:01:19.36    
+frame=   25 fps=0.3 q=24.5 size=    1792KiB time=00:00:00.92 bitrate=15957.0kbits/s dup=0 drop=22 speed=0.0115x elapsed=0:01:19.87    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=22 speed=0.0119x elapsed=0:01:20.40    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=22 speed=0.0119x elapsed=0:01:20.97    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=22 speed=0.0118x elapsed=0:01:21.52    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=23 speed=0.0117x elapsed=0:01:22.24    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=23 speed=0.0116x elapsed=0:01:22.86    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=23 speed=0.0115x elapsed=0:01:23.41    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=23 speed=0.0114x elapsed=0:01:23.97    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=23 speed=0.0114x elapsed=0:01:24.52    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=23 speed=0.0113x elapsed=0:01:25.08    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=23 speed=0.0112x elapsed=0:01:25.62    
+frame=   26 fps=0.3 q=24.6 size=    2048KiB time=00:00:00.96 bitrate=17476.6kbits/s dup=0 drop=23 speed=0.0111x elapsed=0:01:26.16    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0115x elapsed=0:01:26.70    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0115x elapsed=0:01:27.26    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0114x elapsed=0:01:27.82    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0113x elapsed=0:01:28.61    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0112x elapsed=0:01:29.19    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0111x elapsed=0:01:29.79    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0111x elapsed=0:01:30.35    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.011x elapsed=0:01:31.16    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0109x elapsed=0:01:31.69    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0108x elapsed=0:01:32.26    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0108x elapsed=0:01:32.82    
+frame=   27 fps=0.3 q=16.9 size=    2048KiB time=00:00:01.00 bitrate=16777.6kbits/s dup=0 drop=23 speed=0.0107x elapsed=0:01:33.35    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=23 speed=0.0111x elapsed=0:01:33.87    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=23 speed=0.011x elapsed=0:01:34.46    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=23 speed=0.0109x elapsed=0:01:35.25    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=23 speed=0.0109x elapsed=0:01:35.83    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=24 speed=0.0108x elapsed=0:01:36.44    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=24 speed=0.0107x elapsed=0:01:37.01    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=24 speed=0.0107x elapsed=0:01:37.57    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=24 speed=0.0106x elapsed=0:01:38.14    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=24 speed=0.0105x elapsed=0:01:38.65    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=24 speed=0.0105x elapsed=0:01:39.21    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=24 speed=0.0104x elapsed=0:01:39.72    
+frame=   28 fps=0.3 q=23.2 size=    2304KiB time=00:00:01.04 bitrate=18148.8kbits/s dup=0 drop=24 speed=0.0104x elapsed=0:01:40.27    
+frame=   29 fps=0.3 q=24.7 size=    2304KiB time=00:00:01.08 bitrate=17476.6kbits/s dup=0 drop=24 speed=0.0107x elapsed=0:01:40.79    
+frame=   29 fps=0.3 q=24.7 size=    2304KiB time=00:00:01.08 bitrate=17476.6kbits/s dup=0 drop=24 speed=0.0107x elapsed=0:01:41.33    
+frame=   29 fps=0.3 q=24.7 size=    2304KiB time=00:00:01.08 bitrate=17476.6kbits/s dup=0 drop=24 speed=0.0106x elapsed=0:01:41.88    
+frame=   29 fps=0.3 q=24.7 size=    2304KiB time=00:00:01.08 bitrate=17476.6kbits/s dup=0 drop=24 speed=0.0105x elapsed=0:01:42.43    
+frame=   29 fps=0.3 q=24.7 size=    2304KiB time=00:00:01.08 bitrate=17476.6kbits/s dup=0 drop=24 speed=0.0105x elapsed=0:01:42.98    
+frame=   29 fps=0.3 q=24.7 size=    2304KiB time=00:00:01.08 bitrate=17476.6kbits/s dup=0 drop=24 speed=0.0104x elapsed=0:01:43.51    
+frame=   29 fps=0.3 q=24.7 size=    2304KiB time=00:00:01.08 bitrate=17476.6kbits/s dup=0 drop=24 speed=0.0104x elapsed=0:01:44.06    
+frame=   30 fps=0.3 q=24.6 size=    2304KiB time=00:00:01.12 bitrate=16852.4kbits/s dup=0 drop=24 speed=0.0107x elapsed=0:01:44.62    
+frame=   30 fps=0.3 q=24.6 size=    2304KiB time=00:00:01.12 bitrate=16852.4kbits/s dup=0 drop=24 speed=0.0106x elapsed=0:01:45.16    
+frame=   30 fps=0.3 q=24.6 size=    2304KiB time=00:00:01.12 bitrate=16852.4kbits/s dup=0 drop=24 speed=0.0106x elapsed=0:01:45.77    
+frame=   30 fps=0.3 q=24.6 size=    2304KiB time=00:00:01.12 bitrate=16852.4kbits/s dup=0 drop=24 speed=0.0105x elapsed=0:01:46.30    
+frame=   30 fps=0.3 q=24.6 size=    2304KiB time=00:00:01.12 bitrate=16852.4kbits/s dup=0 drop=24 speed=0.0105x elapsed=0:01:46.89    
+frame=   30 fps=0.3 q=24.6 size=    2304KiB time=00:00:01.12 bitrate=16852.4kbits/s dup=0 drop=24 speed=0.0104x elapsed=0:01:47.45    
+frame=   30 fps=0.3 q=24.6 size=    2304KiB time=00:00:01.12 bitrate=16852.4kbits/s dup=0 drop=24 speed=0.0104x elapsed=0:01:47.96    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=24 speed=0.0107x elapsed=0:01:48.49    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=24 speed=0.0106x elapsed=0:01:49.07    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=24 speed=0.0106x elapsed=0:01:49.65    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.0105x elapsed=0:01:50.25    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.0105x elapsed=0:01:50.83    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.0104x elapsed=0:01:51.52    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.0103x elapsed=0:01:52.50    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.0103x elapsed=0:01:53.16    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.0102x elapsed=0:01:54.01    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.0101x elapsed=0:01:54.93    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.01x elapsed=0:01:55.92    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00994x elapsed=0:01:56.70    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00986x elapsed=0:01:57.67    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00974x elapsed=0:01:59.04    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00969x elapsed=0:01:59.69    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00963x elapsed=0:02:00.40    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00958x elapsed=0:02:01.04    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00953x elapsed=0:02:01.71    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00948x elapsed=0:02:02.36    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00944x elapsed=0:02:02.90    
+frame=   31 fps=0.3 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00938x elapsed=0:02:03.72    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00932x elapsed=0:02:04.43    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00927x elapsed=0:02:05.08    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00923x elapsed=0:02:05.66    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00918x elapsed=0:02:06.30    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00914x elapsed=0:02:06.89    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00909x elapsed=0:02:07.55    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00905x elapsed=0:02:08.20    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00901x elapsed=0:02:08.79    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00897x elapsed=0:02:09.36    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00893x elapsed=0:02:09.90    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00889x elapsed=0:02:10.44    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00886x elapsed=0:02:10.99    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00882x elapsed=0:02:11.53    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00878x elapsed=0:02:12.05    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00875x elapsed=0:02:12.59    
+frame=   31 fps=0.2 q=24.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00871x elapsed=0:02:13.16    
+frame=   31 fps=0.2 q=16.8 size=    2304KiB time=00:00:01.16 bitrate=16271.3kbits/s dup=0 drop=25 speed=0.00867x elapsed=0:02:13.80    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00891x elapsed=0:02:14.71    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00884x elapsed=0:02:15.66    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.0088x elapsed=0:02:16.34    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00874x elapsed=0:02:17.23    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00865x elapsed=0:02:18.76    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.0086x elapsed=0:02:19.47    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00857x elapsed=0:02:20.08    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00852x elapsed=0:02:20.80    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00847x elapsed=0:02:21.62    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00844x elapsed=0:02:22.25    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.0084x elapsed=0:02:22.84    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00836x elapsed=0:02:23.49    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00832x elapsed=0:02:24.24    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00829x elapsed=0:02:24.83    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00824x elapsed=0:02:25.56    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00821x elapsed=0:02:26.24    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00816x elapsed=0:02:26.99    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00812x elapsed=0:02:27.70    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00809x elapsed=0:02:28.35    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00806x elapsed=0:02:28.95    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00802x elapsed=0:02:29.54    
+frame=   32 fps=0.2 q=16.8 size=    2560KiB time=00:00:01.20 bitrate=17476.6kbits/s dup=0 drop=25 speed=0.00799x elapsed=0:02:30.12    
+[06/06 15:51:52] [LOG] Media group sent successfully. Count: 4
+[06/06 15:51:52] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145618735
+[06/06 15:51:52] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145595045
+[06/06 15:51:52] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145634316
+[06/06 15:51:52] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145587358
+[06/06 15:52:08] [LOG] Downloading ugoira 145595435: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/18/04/19/145595435_ugoira1920x1080.zip
+[06/06 15:52:08] [LOG] Downloading ugoira 145629992: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/16/18/01/145629992_ugoira1920x1080.zip
+[06/06 15:52:37] [WRN] ffmpeg error:
+ffmpeg version 8.0.1-3ubuntu2 Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 15 (Ubuntu 15.2.0-13ubuntu3)
+  configuration: --prefix=/usr --extra-version=3ubuntu2 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --disable-pocketsphinx --disable-libcaca --disable-libmfx --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --enable-libvpl --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libdvdnav --enable-libdvdread --enable-libjack --enable-libjxl --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-librsvg --enable-shared
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+-vsync is deprecated. Use -fps_mode
+Input #0, concat, from '/home/pixiv_tgbot/temp_145595435/concat.txt':
+  Duration: N/A, start: 0.000000, bitrate: N/A
+  Stream #0:0: Video: mjpeg (Baseline), yuvj444p(pc, bt470bg/unknown/unknown), 1920x1080 [SAR 1:1 DAR 16:9], 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (mjpeg (native) -> hevc (libx265))
+Press [q] to stop, [?] for help
+[swscaler @ 0x75d0c0011280] deprecated pixel format used, make sure you did set range correctly
+x265 [info]: HEVC encoder version 4.1+1-1d117be
+x265 [info]: build info [Linux][GCC 15.2.0][64 bit] 8bit+10bit+12bit
+x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+x265 [info]: Main profile, Level-4 (Main tier)
+x265 [info]: Thread pool created using 1 threads
+x265 [info]: Slices                              : 1
+x265 [info]: frame threads / pool features       : 1 / wpp(17 rows)
+x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
+x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
+x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
+x265 [info]: Keyframe min / max / scenecut / bias  : 25 / 250 / 40 / 5.00 
+x265 [info]: Lookahead / bframes / badapt        : 15 / 4 / 0
+x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
+x265 [info]: References / ref-limit  cu / depth  : 3 / on / on
+x265 [info]: AQ: mode / str / qg-size / cu-tree  : 2 / 1.0 / 32 / 1
+x265 [info]: Rate Control / qCompress            : CRF-18.0 / 0.60
+x265 [info]: tools: rd=2 psy-rd=2.00 rskip mode=1 signhide tmvp fast-intra
+x265 [info]: tools: strong-intra-smoothing lslices=6 deblock sao
+Output #0, mp4, to '/home/pixiv_tgbot/temp_145595435/145595435-18.mp4':
+  Metadata:
+    encoder         : Lavf62.3.100
+  Stream #0:0: Video: hevc (hev1 / 0x31766568), yuv420p(pc, bt470bg/unknown/unknown, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 25 fps, 12800 tbn
+    Metadata:
+      encoder         : Lavc62.11.100 libx265
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:00.50    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:01.00    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:01.51    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:02.01    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:02.51    
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:03.01    
+frame=    1 fps=0.3 q=18.0 size=       0KiB time=-00:00:00.04 bitrate=N/A speed=N/A elapsed=0:00:03.52    
+frame=    1 fps=0.2 q=18.0 size=       0KiB time=-00:00:00.04 bitrate=N/A speed=N/A elapsed=0:00:04.02    
+frame=    2 fps=0.4 q=20.2 size=       0KiB time=00:00:00.00 bitrate=N/A speed=   0x elapsed=0:00:04.52    
+frame=    3 fps=0.6 q=21.6 size=       0KiB time=00:00:00.04 bitrate=   8.8kbits/s speed=0.00789x elapsed=0:00:05.06    
+frame=    4 fps=0.7 q=24.1 size=       0KiB time=00:00:00.08 bitrate=   4.4kbits/s speed=0.0143x elapsed=0:00:05.58    
+frame=    5 fps=0.8 q=23.3 size=       0KiB time=00:00:00.12 bitrate=   2.9kbits/s speed=0.0196x elapsed=0:00:06.10    
+frame=    6 fps=0.9 q=19.6 size=       0KiB time=00:00:00.16 bitrate=   2.2kbits/s speed=0.024x elapsed=0:00:06.68    
+frame=    6 fps=0.8 q=19.6 size=       0KiB time=00:00:00.16 bitrate=   2.2kbits/s speed=0.0222x elapsed=0:00:07.19    
+frame=    7 fps=0.9 q=21.2 size=     256KiB time=00:00:00.20 bitrate=10487.5kbits/s speed=0.026x elapsed=0:00:07.70    
+frame=    7 fps=0.9 q=21.2 size=     256KiB time=00:00:00.20 bitrate=10487.5kbits/s speed=0.0243x elapsed=0:00:08.21    
+frame=    8 fps=0.9 q=22.5 size=     256KiB time=00:00:00.24 bitrate=8739.6kbits/s speed=0.0274x elapsed=0:00:08.75    
+frame=    8 fps=0.9 q=22.5 size=     256KiB time=00:00:00.24 bitrate=8739.6kbits/s speed=0.0259x elapsed=0:00:09.28    
+frame=    8 fps=0.8 q=22.5 size=     256KiB time=00:00:00.24 bitrate=8739.6kbits/s speed=0.0245x elapsed=0:00:09.81    
+frame=    8 fps=0.8 q=22.5 size=     256KiB time=00:00:00.24 bitrate=8739.6kbits/s speed=0.0232x elapsed=0:00:10.33    
+frame=    8 fps=0.7 q=22.5 size=     256KiB time=00:00:00.24 bitrate=8739.6kbits/s speed=0.0221x elapsed=0:00:10.86    
+frame=    8 fps=0.7 q=22.5 size=     256KiB time=00:00:00.24 bitrate=8739.6kbits/s speed=0.0209x elapsed=0:00:11.50    
+frame=    9 fps=0.7 q=22.6 size=     256KiB time=00:00:00.28 bitrate=7491.1kbits/s speed=0.0233x elapsed=0:00:12.02    
+frame=    9 fps=0.7 q=22.6 size=     256KiB time=00:00:00.28 bitrate=7491.1kbits/s speed=0.0223x elapsed=0:00:12.57    
+frame=    9 fps=0.7 q=22.6 size=     256KiB time=00:00:00.28 bitrate=7491.1kbits/s speed=0.0213x elapsed=0:00:13.14    
+frame=    9 fps=0.7 q=22.6 size=     256KiB time=00:00:00.28 bitrate=7491.1kbits/s speed=0.0204x elapsed=0:00:13.72    
+frame=   10 fps=0.7 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0224x elapsed=0:00:14.31    
+frame=   10 fps=0.7 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0215x elapsed=0:00:14.88    
+frame=   10 fps=0.6 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0207x elapsed=0:00:15.45    
+frame=   10 fps=0.6 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.02x elapsed=0:00:16.00    
+frame=   10 fps=0.6 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0193x elapsed=0:00:16.55    
+frame=   10 fps=0.6 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0187x elapsed=0:00:17.09    
+frame=   10 fps=0.6 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0181x elapsed=0:00:17.64    
+frame=   10 fps=0.6 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0176x elapsed=0:00:18.18    
+frame=   10 fps=0.5 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0171x elapsed=0:00:18.72    
+frame=   10 fps=0.5 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0166x elapsed=0:00:19.27    
+frame=   10 fps=0.5 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0161x elapsed=0:00:19.83    
+frame=   10 fps=0.5 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0157x elapsed=0:00:20.38    
+frame=   10 fps=0.5 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0153x elapsed=0:00:20.92    
+frame=   10 fps=0.5 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0148x elapsed=0:00:21.55    
+frame=   10 fps=0.5 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0145x elapsed=0:00:22.09    
+frame=   10 fps=0.4 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0141x elapsed=0:00:22.68    
+frame=   10 fps=0.4 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0138x elapsed=0:00:23.26    
+frame=   10 fps=0.4 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0134x elapsed=0:00:23.80    
+frame=   10 fps=0.4 q=22.8 size=     512KiB time=00:00:00.32 bitrate=13108.3kbits/s speed=0.0131x elapsed=0:00:24.34    
+frame=   11 fps=0.4 q=20.5 size=     512KiB time=00:00:00.36 bitrate=11651.8kbits/s speed=0.0145x elapsed=0:00:24.87    
+frame=   11 fps=0.4 q=20.5 size=     512KiB time=00:00:00.36 bitrate=11651.8kbits/s speed=0.0142x elapsed=0:00:25.38    
+[06/06 15:52:39] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145629992/145629992-18.mp4
+[06/06 15:52:39] [LOG] Downloading ugoira 145610371: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/00/10/20/145610371_ugoira1920x1080.zip
+[06/06 15:52:39] [LOG] Downloading ugoira 145637854: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/20/06/29/145637854_ugoira1920x1080.zip
+[06/06 15:53:52] [WRN] Error in downloadUgoiraAsMp4: DioException [connection error]: The connection errored: Connection reset by peer This indicates an error which most likely cannot be solved by the library.
+Error: SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = pixiv.waitwill.workers.dev, port = 44214
+[06/06 15:54:00] [WRN] Error in downloadUgoiraAsMp4: DioException [connection error]: The connection errored: Connection reset by peer This indicates an error which most likely cannot be solved by the library.
+Error: SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = pixiv.waitwill.workers.dev, port = 34264
+[06/06 15:54:00] [LOG] Downloading ugoira 145605632: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/22/14/24/145605632_ugoira1920x1080.zip
+[06/06 15:54:05] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145605632/145605632-18.mp4
+[06/06 15:54:11] [LOG] Media group sent successfully. Count: 2
+[06/06 15:54:11] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145629992
+[06/06 15:54:11] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145605632
+[06/06 15:54:27] [LOG] Downloading ugoira 145593638: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/17/02/16/145593638_ugoira1920x1080.zip
+[06/06 15:54:27] [LOG] Downloading ugoira 145639840: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/20/54/02/145639840_ugoira1920x1080.zip
+[06/06 15:54:36] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145639840/145639840-18.mp4
+[06/06 15:54:39] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145593638/145593638-18.mp4
+[06/06 15:54:39] [LOG] Downloading ugoira 145637843: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/20/06/18/145637843_ugoira1920x1080.zip
+[06/06 15:54:39] [LOG] Downloading ugoira 145597994: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/19/22/17/145597994_ugoira1920x1080.zip
+[06/06 15:54:42] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145637843/145637843-18.mp4
+[06/06 15:55:30] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145597994/145597994-18.mp4
+[06/06 15:55:30] [LOG] Downloading ugoira 145632287: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/17/48/56/145632287_ugoira1920x1080.zip
+[06/06 15:55:48] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145632287/145632287-18.mp4
+[06/06 15:56:19] [LOG] Media group sent successfully. Count: 5
+[06/06 15:56:19] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145639840
+[06/06 15:56:19] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145593638
+[06/06 15:56:20] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145597994
+[06/06 15:56:20] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145637843
+[06/06 15:56:20] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145632287
+[06/06 15:56:36] [LOG] Downloading ugoira 145625198: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/12/14/06/145625198-f16ae8d608432bc9ee022998b0c4013a_ugoira1920x1080.zip
+[06/06 15:56:41] [LOG] Downloading ugoira 145626490: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/13/16/46/145626490_ugoira1920x1080.zip
+[06/06 15:57:48] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145625198/145625198-18.mp4
+[06/06 15:58:35] [WRN] Error in downloadUgoiraAsMp4: DioException [connection error]: The connection errored: Connection reset by peer This indicates an error which most likely cannot be solved by the library.
+Error: SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = pixiv.waitwill.workers.dev, port = 39794
+[06/06 15:58:35] [LOG] Downloading ugoira 145636936: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/19/51/55/145636936_ugoira1920x1080.zip
+[06/06 15:58:35] [LOG] Downloading ugoira 145610910: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/00/03/50/145610910_ugoira1920x1080.zip
+[06/06 15:58:38] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145610910/145610910-18.mp4
+[06/06 15:58:42] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145636936/145636936-18.mp4
+[06/06 15:58:42] [LOG] Downloading ugoira 145630933: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/17/00/00/145630933_ugoira1920x1080.zip
+[06/06 15:58:46] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145630933/145630933-18.mp4
+[06/06 15:58:48] [LOG] Media group sent successfully. Count: 4
+[06/06 15:58:48] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145625198
+[06/06 15:58:48] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145610910
+[06/06 15:58:48] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145636936
+[06/06 15:58:48] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145630933
+[06/06 15:59:04] [LOG] Downloading ugoira 145636910: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/19/51/24/145636910_ugoira1920x1080.zip
+[06/06 15:59:04] [LOG] Downloading ugoira 145618889: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/06/15/05/145618889_ugoira1920x1080.zip
+[06/06 15:59:17] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145636910/145636910-18.mp4
+[06/06 15:59:32] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145618889/145618889-18.mp4
+[06/06 15:59:32] [LOG] Downloading ugoira 145608834: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/23/26/11/145608834_ugoira1920x1080.zip
+[06/06 15:59:32] [LOG] Downloading ugoira 145611122: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/00/07/29/145611122_ugoira1920x1080.zip
+[06/06 15:59:35] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145611122/145611122-18.mp4
+[06/06 15:59:45] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145608834/145608834-18.mp4
+[06/06 15:59:45] [LOG] Downloading ugoira 145591889: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/15/43/58/145591889_ugoira1920x1080.zip
+[06/06 15:59:54] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145591889/145591889-18.mp4
+[06/06 16:00:06] [LOG] Media group sent successfully. Count: 5
+[06/06 16:00:06] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145636910
+[06/06 16:00:06] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145618889
+[06/06 16:00:06] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145608834
+[06/06 16:00:06] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145611122
+[06/06 16:00:06] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145591889
+[06/06 16:00:22] [LOG] Downloading ugoira 145627069: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/13/51/10/145627069_ugoira1920x1080.zip
+[06/06 16:00:22] [LOG] Downloading ugoira 145625481: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/12/29/46/145625481_ugoira1920x1080.zip
+[06/06 16:00:33] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145627069/145627069-18.mp4
+[06/06 16:00:34] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145625481/145625481-18.mp4
+[06/06 16:00:34] [LOG] Downloading ugoira 145635426: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/19/11/18/145635426_ugoira1920x1080.zip
+[06/06 16:00:34] [LOG] Downloading ugoira 145628300: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/14/55/45/145628300-255c0c919b2c1651b8248d64f5645bc6_ugoira1920x1080.zip
+[06/06 16:00:50] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145635426/145635426-18.mp4
+[06/06 16:00:56] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145628300/145628300-18.mp4
+[06/06 16:00:57] [LOG] Downloading ugoira 145590890: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/14/50/18/145590890_ugoira1920x1080.zip
+[06/06 16:01:03] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145590890/145590890-18.mp4
+[06/06 16:01:14] [LOG] Media group sent successfully. Count: 5
+[06/06 16:01:14] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145627069
+[06/06 16:01:14] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145625481
+[06/06 16:01:14] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145628300
+[06/06 16:01:14] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145635426
+[06/06 16:01:14] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145590890
+[06/06 16:01:31] [LOG] Downloading ugoira 145613572: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/01/12/10/145613572_ugoira1920x1080.zip
+[06/06 16:01:33] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145613572/145613572-18.mp4
+[06/06 16:01:36] [LOG] Downloading ugoira 145633656: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/18/25/03/145633656_ugoira1920x1080.zip
+[06/06 16:01:42] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145633656/145633656-18.mp4
+[06/06 16:01:43] [LOG] Downloading ugoira 145642689: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/21/48/22/145642689_ugoira1920x1080.zip
+[06/06 16:01:43] [LOG] Downloading ugoira 145645623: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/22/46/03/145645623_ugoira1920x1080.zip
+[06/06 16:01:53] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145642689/145642689-18.mp4
+[06/06 16:01:56] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145645623/145645623-18.mp4
+[06/06 16:01:56] [LOG] Downloading ugoira 145604497: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/21/51/54/145604497_ugoira1920x1080.zip
+[06/06 16:02:14] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145604497/145604497-18.mp4
+[06/06 16:02:26] [LOG] Media group sent successfully. Count: 5
+[06/06 16:02:26] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145633656
+[06/06 16:02:26] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145613572
+[06/06 16:02:26] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145645623
+[06/06 16:02:26] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145642689
+[06/06 16:02:26] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145604497
+[06/06 16:02:42] [LOG] Downloading ugoira 145604818: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/21/59/33/145604818_ugoira1920x1080.zip
+[06/06 16:02:42] [LOG] Downloading ugoira 145644670: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/22/25/50/145644670_ugoira1920x1080.zip
+[06/06 16:02:46] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145644670/145644670-18.mp4
+[06/06 16:02:52] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145604818/145604818-18.mp4
+[06/06 16:02:52] [LOG] Downloading ugoira 145598117: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/19/25/52/145598117_ugoira1920x1080.zip
+[06/06 16:02:52] [LOG] Downloading ugoira 145603004: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/21/16/42/145603004_ugoira1920x1080.zip
+[06/06 16:03:04] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145598117/145598117-18.mp4
+[06/06 16:03:08] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145603004/145603004-18.mp4
+[06/06 16:03:08] [LOG] Downloading ugoira 145601937: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/20/57/32/145601937-7035322162bb31575f1abf73468c01e7_ugoira1920x1080.zip
+[06/06 16:03:12] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145601937/145601937-18.mp4
+[06/06 16:03:24] [LOG] Media group sent successfully. Count: 5
+[06/06 16:03:24] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145604818
+[06/06 16:03:24] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145644670
+[06/06 16:03:24] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145603004
+[06/06 16:03:24] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145598117
+[06/06 16:03:24] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145601937
+[06/06 16:03:40] [LOG] Downloading ugoira 145645378: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/22/39/57/145645378_ugoira1920x1080.zip
+[06/06 16:03:40] [LOG] Downloading ugoira 145591249: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/15/08/13/145591249-87e3a580a959baa4a1ccac6447122bdf_ugoira1920x1080.zip
+[06/06 16:04:04] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145591249/145591249-18.mp4
+[06/06 16:04:16] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145645378/145645378-18.mp4
+[06/06 16:04:17] [LOG] Downloading ugoira 145604000: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/21/39/27/145604000_ugoira1920x1080.zip
+[06/06 16:04:17] [LOG] Downloading ugoira 145647187: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/23/20/52/145647187_ugoira1920x1080.zip
+[06/06 16:04:33] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145604000/145604000-18.mp4
+[06/06 16:04:37] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145647187/145647187-18.mp4
+[06/06 16:04:37] [LOG] Downloading ugoira 145639533: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/20/46/14/145639533_ugoira1920x1080.zip
+[06/06 16:04:41] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145639533/145639533-18.mp4
+[06/06 16:04:49] [LOG] Media group sent successfully. Count: 5
+[06/06 16:04:49] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145645378
+[06/06 16:04:49] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145591249
+[06/06 16:04:49] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145647187
+[06/06 16:04:49] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145604000
+[06/06 16:04:49] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145639533
+[06/06 16:04:49] [LOG] Ugoira Ranking Done.
+[06/06 16:05:05] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145616528
+[06/06 16:05:05] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145595435
+[06/06 16:05:05] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145637854
+[06/06 16:05:05] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145626490
+[06/06 16:05:05] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145610371

@@ -1,176 +1,0 @@
-[06/06 11:55:08] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 11:55:14] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 11:55:31] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 33, parameters: {retry_after: 33}}]
-[06/06 11:55:55] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 9, parameters: {retry_after: 9}}]
-[06/06 11:56:18] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
-[06/06 11:56:23] [WRN] Failed to send photos to Telegram. rank[1]
-[06/06 11:56:24] [LOG] Only Telegraph message sent. rank[1]
-[06/06 11:56:32] [LOG] Photo message sent successfully. rank[2]
-[06/06 11:56:42] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 11:56:47] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 11:56:53] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #3 with the error message "PHOTO_INVALID_DIMENSIONS"}]
-[06/06 11:57:04] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
-[06/06 11:57:18] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "PHOTO_INVALID_DIMENSIONS"}]
-[06/06 11:57:23] [WRN] Failed to send photos to Telegram. rank[3]
-[06/06 11:57:24] [LOG] Only Telegraph message sent. rank[3]
-[06/06 11:57:32] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 11:57:38] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 11:57:43] [LOG] Photo message sent successfully. rank[4]
-[06/06 11:57:56] [LOG] Photo message sent successfully. rank[5]
-[06/06 11:58:06] [LOG] Photo message sent successfully. rank[6]
-[06/06 11:58:18] [LOG] Photo message sent successfully. rank[7]
-[06/06 11:58:26] [LOG] Photo message sent successfully. rank[8]
-[06/06 11:58:33] [LOG] Only Telegraph message sent. rank[9]
-[06/06 11:58:42] [LOG] Photo message sent successfully. rank[10]
-[06/06 11:58:51] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 11:58:56] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 11:59:03] [LOG] Photo message sent successfully. rank[11]
-[06/06 11:59:11] [LOG] Photo message sent successfully. rank[12]
-[06/06 11:59:20] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 11:59:25] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 11:59:39] [WRN] Failed to send photos! [413: {ok: false, error_code: 413, description: Request Entity Too Large}]
-[06/06 11:59:39] [WRN] Unknown resCode: [400, -1, 413], turn to Telegraph!
-[06/06 11:59:39] [WRN] Failed to send photos to Telegram. rank[13]
-[06/06 11:59:40] [LOG] Only Telegraph message sent. rank[13]
-[06/06 11:59:52] [LOG] Photo message sent successfully. rank[14]
-[06/06 12:00:01] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 12:00:07] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 16, parameters: {retry_after: 16}}]
-[06/06 12:00:25] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 12:00:32] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: file of size 10853881 bytes is too big for a photo; the maximum size is 10485760 bytes}]
-[06/06 12:00:35] [LOG] Photo message sent successfully. rank[15]
-[06/06 12:00:49] [LOG] Photo message sent successfully. rank[16]
-[06/06 12:00:58] [LOG] Photo message sent successfully. rank[18]
-[06/06 12:01:06] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 12:01:12] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 12:01:20] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: file of size 12381718 bytes is too big for a photo; the maximum size is 10485760 bytes}]
-[06/06 12:01:24] [LOG] Photo message sent successfully. rank[19]
-[06/06 12:01:31] [LOG] Only Telegraph message sent. rank[20]
-[06/06 12:01:39] [LOG] Photo message sent successfully. rank[21]
-[06/06 12:01:48] [LOG] Photo message sent successfully. rank[22]
-[06/06 12:02:02] [LOG] Photo message sent successfully. rank[23]
-[06/06 12:02:13] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 17, parameters: {retry_after: 17}}]
-[06/06 12:02:36] [LOG] Photo message sent successfully. rank[24]
-[06/06 12:02:49] [LOG] Photo message sent successfully. rank[25]
-[06/06 12:03:02] [LOG] Photo message sent successfully. rank[26]
-[06/06 12:03:08] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 24, parameters: {retry_after: 24}}]
-[06/06 12:03:38] [LOG] Photo message sent successfully. rank[27]
-[06/06 12:03:51] [LOG] Photo message sent successfully. rank[28]
-[06/06 12:04:00] [LOG] Photo message sent successfully. rank[29]
-[06/06 12:04:06] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 26, parameters: {retry_after: 26}}]
-[06/06 12:04:22] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 11, parameters: {retry_after: 11}}]
-[06/06 12:04:43] [LOG] Photo message sent successfully. rank[30]
-[06/06 12:04:49] [LOG] Only Telegraph message sent. rank[31]
-[06/06 12:04:59] [LOG] Photo message sent successfully. rank[32]
-[06/06 12:05:05] [LOG] Only Telegraph message sent. rank[33]
-[06/06 12:05:14] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 12:05:19] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 12:05:25] [WRN] Failed to send photos! [429: {ok: false, error_code: 429, description: Too Many Requests: retry after 12, parameters: {retry_after: 12}}]
-[06/06 12:05:48] [LOG] Photo message sent successfully. rank[34]
-[06/06 12:05:59] [LOG] Photo message sent successfully. rank[35]
-[06/06 12:06:07] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 12:06:13] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 12:06:18] [LOG] Photo message sent successfully. rank[36]
-[06/06 12:06:26] [LOG] Photo message sent successfully. rank[37]
-[06/06 12:06:33] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #8 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 12:06:36] [LOG] Photo message sent successfully. rank[38]
-[06/06 12:06:45] [LOG] Photo message sent successfully. rank[39]
-[06/06 12:06:54] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 12:06:59] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 12:07:04] [LOG] Photo message sent successfully. rank[40]
-[06/06 12:07:13] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #2 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 12:07:18] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 12:07:24] [LOG] Photo message sent successfully. rank[41]
-[06/06 12:07:39] [LOG] Photo message sent successfully. rank[42]
-[06/06 12:07:54] [LOG] Photo message sent successfully. rank[43]
-[06/06 12:08:04] [LOG] Photo message sent successfully. rank[44]
-[06/06 12:08:12] [LOG] Photo message sent successfully. rank[45]
-[06/06 12:08:20] [LOG] Photo message sent successfully. rank[46]
-[06/06 12:08:30] [LOG] Photo message sent successfully. rank[47]
-[06/06 12:08:37] [LOG] Only Telegraph message sent. rank[48]
-[06/06 12:08:45] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_CURL_FAILED"}]
-[06/06 12:08:51] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "WEBPAGE_MEDIA_EMPTY"}]
-[06/06 12:08:54] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
-[06/06 12:09:04] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
-[06/06 12:09:13] [WRN] Failed to send photos! [400: {ok: false, error_code: 400, description: Bad Request: failed to send message #1 with the error message "PHOTO_INVALID_DIMENSIONS"}]
-[06/06 12:09:18] [WRN] Failed to send photos to Telegram. rank[49]
-[06/06 12:09:19] [LOG] Only Telegraph message sent. rank[49]
-[06/06 12:09:28] [LOG] Photo message sent successfully. rank[50]
-[06/06 12:09:28] [LOG] Ranking Done.
-[06/06 12:09:32] [LOG] Downloading ugoira 145581875: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/06/09/53/145581875_ugoira1920x1080.zip
-[06/06 12:09:32] [LOG] Downloading ugoira 145574546: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/00/14/42/145574546_ugoira1920x1080.zip
-[06/06 12:09:40] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145581875/145581875-18.mp4
-[06/06 12:09:47] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145574546/145574546-18.mp4
-[06/06 12:09:47] [LOG] Downloading ugoira 145645659: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/22/46/59/145645659_ugoira1920x1080.zip
-[06/06 12:09:47] [LOG] Downloading ugoira 145601080: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/20/35/41/145601080-64a40919a4984f1502bb4b33792562b9_ugoira1920x1080.zip
-[06/06 12:09:55] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145601080/145601080-18.mp4
-[06/06 12:09:59] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145645659/145645659-18.mp4
-[06/06 12:09:59] [LOG] Downloading ugoira 145624272: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/11/35/07/145624272_ugoira1920x1080.zip
-[06/06 12:10:03] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145624272/145624272-18.mp4
-[06/06 12:10:15] [LOG] Media group sent successfully. Count: 5
-[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145574546
-[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145581875
-[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145645659
-[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145601080
-[06/06 12:10:15] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145624272
-[06/06 12:10:31] [LOG] Downloading ugoira 145595045: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/18/00/03/145595045_ugoira1920x1080.zip
-[06/06 12:10:31] [LOG] Downloading ugoira 145618735: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/06/05/43/145618735_ugoira1920x1080.zip
-[06/06 12:10:32] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145618735/145618735-18.mp4
-[06/06 12:10:36] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145595045/145595045-18.mp4
-[06/06 12:10:36] [LOG] Downloading ugoira 145634316: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/18/45/07/145634316-3941dabb8b7012633a40736f36d19086_ugoira1920x1080.zip
-[06/06 12:10:36] [LOG] Downloading ugoira 145587358: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/11/52/50/145587358-f4ef7ece72376109087abdc5458fd0c0_ugoira1920x1080.zip
-[06/06 12:10:43] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145587358/145587358-18.mp4
-[06/06 12:11:01] [LOG] MP4 file created: /home/pixiv_tgbot/temp_145634316/145634316-18.mp4
-[06/06 12:11:02] [LOG] Downloading ugoira 145616528: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/03/32/14/145616528_ugoira1920x1080.zip
-[06/06 12:11:27] [WRN] ffmpeg error:
-ffmpeg version 8.0.1-3ubuntu2 Copyright (c) 2000-2025 the FFmpeg developers
-  built with gcc 15 (Ubuntu 15.2.0-13ubuntu3)
-  configuration: --prefix=/usr --extra-version=3ubuntu2 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --disable-pocketsphinx --disable-libcaca --disable-libmfx --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --enable-libvpl --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libdvdnav --enable-libdvdread --enable-libjack --enable-libjxl --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-librsvg --enable-shared
-  libavutil      60.  8.100 / 60.  8.100
-  libavcodec     62. 11.100 / 62. 11.100
-  libavformat    62.  3.100 / 62.  3.100
-  libavdevice    62.  1.100 / 62.  1.100
-  libavfilter    11.  4.100 / 11.  4.100
-  libswscale      9.  1.100 /  9.  1.100
-  libswresample   6.  1.100 /  6.  1.100
--vsync is deprecated. Use -fps_mode
-Input #0, concat, from '/home/pixiv_tgbot/temp_145616528/concat.txt':
-  Duration: N/A, start: 0.000000, bitrate: N/A
-  Stream #0:0: Video: mjpeg (Baseline), yuvj444p(pc, bt470bg/unknown/unknown), 1920x1080 [SAR 1:1 DAR 16:9], 25 fps, 25 tbr, 25 tbn
-Stream mapping:
-  Stream #0:0 -> #0:0 (mjpeg (native) -> hevc (libx265))
-Press [q] to stop, [?] for help
-[swscaler @ 0x71abbc011280] deprecated pixel format used, make sure you did set range correctly
-x265 [info]: HEVC encoder version 4.1+1-1d117be
-x265 [info]: build info [Linux][GCC 15.2.0][64 bit] 8bit+10bit+12bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [info]: Main profile, Level-4 (Main tier)
-x265 [info]: Thread pool created using 1 threads
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / wpp(17 rows)
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut / bias  : 25 / 250 / 40 / 5.00 
-x265 [info]: Lookahead / bframes / badapt        : 15 / 4 / 0
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 3 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 2 / 1.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : CRF-18.0 / 0.60
-x265 [info]: tools: rd=2 psy-rd=2.00 rskip mode=1 signhide tmvp fast-intra
-x265 [info]: tools: strong-intra-smoothing lslices=6 deblock sao
-Output #0, mp4, to '/home/pixiv_tgbot/temp_145616528/145616528-18.mp4':
-  Metadata:
-    encoder         : Lavf62.3.100
-  Stream #0:0: Video: hevc (hev1 / 0x31766568), yuv420p(pc, bt470bg/unknown/unknown, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 25 fps, 12800 tbn
-    Metadata:
-      encoder         : Lavc62.11.100 libx265
-    Side data:
-      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=7 speed=N/A elapsed=0:00:00.50    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=12 speed=N/A elapsed=0:00:01.00    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A dup=0 drop=12 speed=N/A elapsed=0:00:01.50    frame=    1 fps=0.5 q=16.3 size=       0KiB time=-00:00:00.04 bitrate=N/A dup=0 drop=12 speed=N/A elapsed=0:00:02.00    frame=    3 fps=1.2 q=23.5 size=     256KiB time=00:00:00.04 bitrate=52437.6kbits/s dup=0 drop=13 speed=0.0159x elapsed=0:00:02.51    frame=    6 fps=2.0 q=24.9 size=     256KiB time=00:00:00.16 bitrate=13109.4kbits/s dup=0 drop=14 speed=0.0531x elapsed=0:00:03.01    frame=    6 fps=1.7 q=16.8 size=     256KiB time=00:00:00.20 bitrate=10487.5kbits/s dup=0 drop=14 speed=0.0566x elapsed=0:00:03.53    frame=    7 fps=1.7 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=14 speed=0.0471x elapsed=0:00:04.24    frame=    7 fps=1.5 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=14 speed=0.0415x elapsed=0:00:04.81    frame=    7 fps=1.3 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0366x elapsed=0:00:05.46    frame=    7 fps=1.2 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0331x elapsed=0:00:06.04    frame=    7 fps=1.1 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0304x elapsed=0:00:06.57    frame=    7 fps=1.0 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.028x elapsed=0:00:07.14    frame=    7 fps=0.9 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.026x elapsed=0:00:07.69    frame=    7 fps=0.9 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0243x elapsed=0:00:08.23    frame=    7 fps=0.8 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0228x elapsed=0:00:08.78    frame=    7 fps=0.7 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0213x elapsed=0:00:09.36    frame=    7 fps=0.7 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0202x elapsed=0:00:09.90    frame=    7 fps=0.7 q=16.8 size=     512KiB time=00:00:00.20 bitrate=20973.3kbits/s dup=0 drop=15 speed=0.0191x elapsed=0:00:10.47    frame=    8 fps=0.7 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0215x elapsed=0:00:11.14    frame=    8 fps=0.7 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0205x elapsed=0:00:11.70    frame=    8 fps=0.7 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0196x elapsed=0:00:12.22    frame=    8 fps=0.6 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0187x elapsed=0:00:12.82    frame=    8 fps=0.6 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0179x elapsed=0:00:13.40    frame=    8 fps=0.6 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0172x elapsed=0:00:13.94    frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0165x elapsed=0:00:14.55    frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0159x elapsed=0:00:15.10    frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0153x elapsed=0:00:15.67    frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0148x elapsed=0:00:16.20    frame=    8 fps=0.5 q=23.0 size=     512KiB time=00:00:00.24 bitrate=17477.7kbits/s dup=0 drop=15 speed=0.0143x elapsed=0:00:16.75    frame=    9 fps=0.5 q=24.4 size=     512KiB time=00:00:00.28 bitrate=14980.9kbits/s dup=0 drop=15 speed=0.0162x elapsed=0:00:17.32    frame=    9 fps=0.5 q=24.4 size=     512KiB time=00:00:00.28 bitrate=14980.9kbits/s dup=0 drop=15 speed=0.0157x elapsed=0:00:17.83    
-[06/06 12:11:34] [LOG] Media group sent successfully. Count: 4
-[06/06 12:11:34] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145618735
-[06/06 12:11:34] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145595045
-[06/06 12:11:34] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145634316
-[06/06 12:11:34] [LOG] Temp deleted: /home/pixiv_tgbot/temp_145587358
-[06/06 12:11:50] [LOG] Downloading ugoira 145595435: https://i.pximg.net/img-zip-ugoira/img/2026/06/04/18/04/19/145595435_ugoira1920x1080.zip
-[06/06 12:11:50] [LOG] Downloading ugoira 145629992: https://i.pximg.net/img-zip-ugoira/img/2026/06/05/16/18/01/145629992_ugoira1920x1080.zip
